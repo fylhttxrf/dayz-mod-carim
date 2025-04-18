@@ -1,0 +1,37 @@
+class CarimManagerPartyPositionServer extends Managed {
+    void CarimManagerPartyPositionServer() {
+        // TODO: stagger this so it doesn't send to everyone at once
+        GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(this.Send, 10000, true);
+    }
+
+    void ~CarimManagerPartyPositionServer() {
+        GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).Remove(this.Send);
+    }
+
+    void Send() {
+        map<string, PlayerBase> idMap = CarimUtil.GetServerIdPlayerMap();
+        map<string, ref CarimModelPartyPlayer> players = new map<string, ref CarimModelPartyPlayer>;
+
+        // Harvest the relevant information
+        foreach(string id, PlayerBase player : idMap) {
+            players.Insert(id, new CarimModelPartyPlayer(id, player.GetPosition(), player.GetHealthLevel()));
+        }
+
+        // Send the information to each recipient's mutual party members
+        auto parties = CarimManagerPartyRegistrationServerSingleton.Get().parties;
+        foreach(string recipient : parties.mutuals.GetKeyArray()) {
+            if (parties.mutuals.Contains(recipient)) {
+                array<CarimModelPartyPlayer> sharedInfo = new array<CarimModelPartyPlayer>;
+                foreach(string mutual : parties.mutuals.Get(recipient)) {
+                    if (players.Contains(mutual)) {
+                        sharedInfo.Insert(players.Get(mutual));
+                    }
+                }
+                Param1<array<CarimModelPartyPlayer>> params = new Param1<array<CarimModelPartyPlayer>>(sharedInfo);
+                CarimRPCPartyPositions.Send(idMap.Get(recipient), params, true, idMap.Get(recipient).GetIdentity());
+            }
+        }
+    }
+}
+
+typedef CarimSingleton<CarimManagerPartyPositionServer> CarimManagerPartyPositionServerSingleton;

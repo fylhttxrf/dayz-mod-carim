@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<modded_inputs>
+    <inputs>
+        <actions>
+            <input name="UACarimChatChannel"
+                   loc="Switch Chat Channel"
+                   />
+            <input name="UACarimChatSizeDown"
+                   loc="Decrease Font Size"
+                   />
+            <input name="UACarimChatSizeUp"
+                   loc="Increase Font Size"
+                   />
+            <input name="UACarimCompassToggle"
+                   loc="Compass Toggle"
+                   />
+            <input name="UACarimAutorunToggle"
+                   loc="Autorun Toggle"
+                   />
+            <input name="UACarimPartyMenu"
+                   loc="Party Menu"
+                   />
+            <input name="UACarimPartyPing"
+                   loc="Party Ping"
+                   />
+            <input name="UACarimPartyPingClear"
+                   loc="Party Ping Clear"
+                   />
+        </actions>
+    </inputs>
+    <preset>
+        <input name="UACarimChatChannel">
+            <btn name="kZ" />
+        </input>
+        <input name="UACarimChatSizeDown">
+            <btn name="kLBracket" />
+        </input>
+        <input name="UACarimChatSizeUp">
+            <btn name="kRBracket" />
+        </input>
+        <input name="UACarimCompassToggle">
+            <btn name="kH" />
+        </input>
+        <input name="UACarimAutorunToggle">
+            <btn name="kAdd" />
+        </input>
+        <input name="UACarimPartyMenu">
+            <btn name="kP" />
+        </input>
+        <input name="UACarimPartyPing">
+            <btn name="kT" />
+        </input>
+        <input name="UACarimPartyPingClear">
+            <btn name="kY" />
+        </input>
+    </preset>
+</modded_inputs>

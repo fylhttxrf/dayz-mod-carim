@@ -1,0 +1,14 @@
+{
+    "files.associations": {
+        "*.cpp": "java",
+        "*.c": "java"
+    },
+    "[java]": {
+        "editor.defaultFormatter": "xaver.clang-format"
+    },
+    "editor.formatOnSave": true,
+    "clang-format.language.java.enable": true,
+    "clang-format.assumeFilename": "a.java",
+    "clang-format.style": "file",
+    "clang-format.executable": "C:/Program Files/LLVM/bin/clang-format.exe"
+}

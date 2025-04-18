@@ -1,0 +1,37 @@
+modded class ChatLine {
+    void ChatLine(Widget root_widget) {
+        m_RootWidget = GetGame().GetWorkspace().CreateWidgets("Carim/GUI/layouts/chatline.layout", root_widget);
+        m_NameWidget = TextWidget.Cast(m_RootWidget.FindAnyWidget("ChatItemSenderWidget"));
+        m_TextWidget = TextWidget.Cast(m_RootWidget.FindAnyWidget("ChatItemTextWidget"));
+        m_NameWidget.SetTextExactSize(CarimModelChatSettingsDAL.Get().size);
+        m_TextWidget.SetTextExactSize(CarimModelChatSettingsDAL.Get().size);
+    }
+
+    void CarimUpdateSize() {
+        m_NameWidget.SetTextExactSize(CarimModelChatSettingsDAL.Get().size);
+        m_TextWidget.SetTextExactSize(CarimModelChatSettingsDAL.Get().size);
+    }
+
+    override void Set(ChatMessageEventParams params) {
+        super.Set(params);
+        int channel = params.param1;
+        if (channel & CCSystem) {
+            if (params.param2 == "" && params.param3.IndexOf(" : ") > 0) {
+                CarimSetColour(CarimModelChatSettingsDAL.Get().color_global);
+            } else {
+                SetColour(CarimModelChatSettingsDAL.Get().color_alert);
+            }
+        } else if (channel & CCAdmin) {
+            SetColour(CarimModelChatSettingsDAL.Get().color_server);
+        } else if (channel == 0 || channel & CCDirect) {
+            CarimSetColour(CarimModelChatSettingsDAL.Get().color_direct);
+        } else {
+            SetColour(CarimModelChatSettingsDAL.Get().color_server);
+        }
+    }
+
+    void CarimSetColour(int colour) {
+        m_NameWidget.SetColor(colour);
+        m_TextWidget.SetColor(colour);
+    }
+}
