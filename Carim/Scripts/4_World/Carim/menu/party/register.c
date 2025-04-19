@@ -1,19 +1,33 @@
 class CarimMenuPartyRegister extends UIScriptedMenu {
+    bool carimInitialized;
     TextListboxWidget carimPlayers;
     TextListboxWidget carimRegistered;
     ButtonWidget carimAdd;
     ButtonWidget carimRemove;
 
-    void CarimMenuPartyRegister() {
-        layoutRoot = GetGame().GetWorkspace().CreateWidgets("Carim/GUI/layouts/party/register.layout");
-        carimPlayers = TextListboxWidget.Cast(layoutRoot.FindAnyWidget("players"));
-        carimRegistered = TextListboxWidget.Cast(layoutRoot.FindAnyWidget("registered"));
-        carimAdd = ButtonWidget.Cast(layoutRoot.FindAnyWidget("add"));
-        carimRemove = ButtonWidget.Cast(layoutRoot.FindAnyWidget("remove"));
-    }
-
     void ~CarimMenuPartyRegister() {
         GetGame().GetCallQueue(CALL_CATEGORY_GUI).Remove(this.CarimUpdateLists);
+        GetGame().GetUIManager().Back();
+        GetGame().GetUIManager().ShowCursor(true);
+        GetGame().GetUIManager().ShowUICursor(false);
+        GetGame().GetInput().ResetGameFocus();
+        if (layoutRoot) {
+            layoutRoot.Unlink();
+        }
+    }
+
+    override Widget Init() {
+        if (!carimInitialized) {
+            layoutRoot = GetGame().GetWorkspace().CreateWidgets("Carim/GUI/layouts/party/register.layout");
+            carimPlayers = TextListboxWidget.Cast(layoutRoot.FindAnyWidget("players"));
+            carimRegistered = TextListboxWidget.Cast(layoutRoot.FindAnyWidget("registered"));
+            carimAdd = ButtonWidget.Cast(layoutRoot.FindAnyWidget("add"));
+            carimRemove = ButtonWidget.Cast(layoutRoot.FindAnyWidget("remove"));
+
+            carimInitialized = true;
+        }
+
+        return layoutRoot;
     }
 
     override void OnShow() {
@@ -24,6 +38,11 @@ class CarimMenuPartyRegister extends UIScriptedMenu {
     override void OnHide() {
         super.OnHide();
         GetGame().GetCallQueue(CALL_CATEGORY_GUI).Remove(this.CarimUpdateLists);
+        GetGame().GetUIManager().Back();
+        GetGame().GetUIManager().ShowCursor(true);
+        GetGame().GetUIManager().ShowUICursor(false);
+        GetGame().GetInput().ResetGameFocus();
+        Close();
     }
 
     override bool OnClick(Widget w, int x, int y, int button) {
