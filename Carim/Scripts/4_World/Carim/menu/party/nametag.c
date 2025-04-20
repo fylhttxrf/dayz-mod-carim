@@ -7,6 +7,9 @@ class CarimMenuPartyNametag extends CarimMenuPartyMarker {
     ref array<ref ImageWidget> carimListHealths = new array<ref ImageWidget>;
     TextWidget carimListText;
 
+    // TODO: double-check that this relates to the correct levels to show
+    // as the hud shown to the player is different than the icon. Maybe
+    // there are more granular levels in the hud?
     int carimHealthLevel = CARIM_HEALTH_LEVELS[0];
     int carimListIndex = 0;
 

@@ -5,6 +5,7 @@ class CarimMenuCompass extends UIScriptedMenu {
     bool carimIsVisible;
 
     void CarimMenuCompass() {
+        // TODO: make this not show up before player is loaded
         carimRoot = GetGame().GetWorkspace().CreateWidgets("Carim/gui/layouts/compass.layout");
         carimFrame = carimRoot.FindAnyWidget("FrameCompass");
         carimImage = ImageWidget.Cast(carimRoot.FindAnyWidget("ImageCompass"));

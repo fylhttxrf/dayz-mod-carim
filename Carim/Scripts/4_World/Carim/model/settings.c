@@ -7,6 +7,10 @@ class CarimModelSettings extends CarimModelBase {
     ref array<string> adminIds = new array<string>;
 
     // TODO: allow disabling pieces of mod
+    // not sure if this should be done here or by having all the
+    // functionality in this mod wrapped in ifdefs, with additional
+    // mods to selectively enable the feature solely by doing the define.
+    // go go monorepo design
     bool enableAutorun = false;
     bool enableChat = false;
     bool enableCompass = false;

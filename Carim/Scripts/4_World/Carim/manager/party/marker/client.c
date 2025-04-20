@@ -19,6 +19,8 @@ class CarimManagerPartyMarkerClient extends Managed {
     }
 
     void SyncMenus() {
+        // TODO: get the markers from the server and/or locally and show them right
+        // away instead of delaying until a marker has been placed
         string name = "null";
         if (GetGame().GetPlayer() && GetGame().GetPlayer().GetIdentity()) {
             name = GetGame().GetPlayer().GetIdentity().GetName();
@@ -26,6 +28,7 @@ class CarimManagerPartyMarkerClient extends Managed {
 
         int menuIndex = 0;
         foreach(int index, vector position : CarimModelPartyMarkersDAL.Get().markers) {
+            // TODO: make the most recent marker index 0
             string markerName = name + " " + (index).ToString();
             if (menus.Count() <= menuIndex) {
                 menus.Insert(new CarimMenuPartyMarker(markerName, position));

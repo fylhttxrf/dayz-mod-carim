@@ -6,6 +6,9 @@ class CarimMenuPartyRegister extends UIScriptedMenu {
     ButtonWidget carimRemove;
 
     void ~CarimMenuPartyRegister() {
+        // TODO: disable mouse controlling character, but leave
+        // other controls intact (like inventory). Might have to
+        // do this within mission
         GetGame().GetCallQueue(CALL_CATEGORY_GUI).Remove(this.CarimUpdateLists);
         GetGame().GetUIManager().Back();
         GetGame().GetUIManager().ShowCursor(true);
@@ -82,7 +85,6 @@ class CarimMenuPartyRegister extends UIScriptedMenu {
     }
 
     void CarimUpdateList(TextListboxWidget targetList, map<string, string> values) {
-        // TODO: remove player from their own list
         auto sortedIds = CarimUtil.GetSortedIdsByLowerName(values);
         int row = 0;
         foreach(string id : sortedIds) {

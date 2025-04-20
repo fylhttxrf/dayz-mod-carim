@@ -137,7 +137,7 @@ FrameWidgetClass rootFrame {
                 visible 1
                 ignorepointer 1
                 color 0.749 0.8471 0 1
-                position 0 0
+                position 0.15 0
                 size 1 1
                 hexactpos 0
                 vexactpos 0
