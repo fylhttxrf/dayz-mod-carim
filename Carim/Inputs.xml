@@ -27,6 +27,18 @@
                    loc="Party Ping Clear"
                    />
         </actions>
+        <sorting name="Carim"
+                 loc="Carim"
+                 >
+            <input name="UACarimChatChannel" />
+            <input name="UACarimChatSizeDown" />
+            <input name="UACarimChatSizeUp" />
+            <input name="UACarimCompassToggle" />
+            <input name="UACarimAutorunToggle" />
+            <input name="UACarimPartyMenu" />
+            <input name="UACarimPartyPing" />
+            <input name="UACarimPartyPingClear" />
+        </sorting>
     </inputs>
     <preset>
         <input name="UACarimChatChannel">

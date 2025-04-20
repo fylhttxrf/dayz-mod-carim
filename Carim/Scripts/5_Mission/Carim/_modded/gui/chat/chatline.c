@@ -1,6 +1,6 @@
 modded class ChatLine {
     void ChatLine(Widget root_widget) {
-        m_RootWidget = GetGame().GetWorkspace().CreateWidgets("Carim/GUI/layouts/chatline.layout", root_widget);
+        m_RootWidget = GetGame().GetWorkspace().CreateWidgets("Carim/gui/layouts/chatline.layout", root_widget);
         m_NameWidget = TextWidget.Cast(m_RootWidget.FindAnyWidget("ChatItemSenderWidget"));
         m_TextWidget = TextWidget.Cast(m_RootWidget.FindAnyWidget("ChatItemTextWidget"));
         m_NameWidget.SetTextExactSize(CarimModelChatSettingsDAL.Get().size);

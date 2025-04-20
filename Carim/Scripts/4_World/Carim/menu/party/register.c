@@ -18,7 +18,7 @@ class CarimMenuPartyRegister extends UIScriptedMenu {
 
     override Widget Init() {
         if (!carimInitialized) {
-            layoutRoot = GetGame().GetWorkspace().CreateWidgets("Carim/GUI/layouts/party/register.layout");
+            layoutRoot = GetGame().GetWorkspace().CreateWidgets("Carim/gui/layouts/party/register.layout");
             carimPlayers = TextListboxWidget.Cast(layoutRoot.FindAnyWidget("players"));
             carimRegistered = TextListboxWidget.Cast(layoutRoot.FindAnyWidget("registered"));
             carimAdd = ButtonWidget.Cast(layoutRoot.FindAnyWidget("add"));

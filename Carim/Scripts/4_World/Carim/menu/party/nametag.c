@@ -11,7 +11,7 @@ class CarimMenuPartyNametag extends CarimMenuPartyMarker {
     int carimListIndex = 0;
 
     void CarimMenuPartyNametag(string name, vector position, PlayerBase player) {
-        carimListRoot = GetGame().GetWorkspace().CreateWidgets("Carim/GUI/layouts/party/list.layout");
+        carimListRoot = GetGame().GetWorkspace().CreateWidgets("Carim/gui/layouts/party/list.layout");
         carimListText = TextWidget.Cast(carimListRoot.FindAnyWidget("nametag"));
         foreach(int level : CARIM_HEALTH_LEVELS) {
             carimHealths.Insert(ImageWidget.Cast(carimRoot.FindAnyWidget("IconHealth" + level.ToString())));

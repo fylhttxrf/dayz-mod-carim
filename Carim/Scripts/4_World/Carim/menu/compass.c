@@ -5,7 +5,7 @@ class CarimMenuCompass extends UIScriptedMenu {
     bool carimIsVisible;
 
     void CarimMenuCompass() {
-        carimRoot = GetGame().GetWorkspace().CreateWidgets("Carim/GUI/layouts/compass.layout");
+        carimRoot = GetGame().GetWorkspace().CreateWidgets("Carim/gui/layouts/compass.layout");
         carimFrame = carimRoot.FindAnyWidget("FrameCompass");
         carimImage = ImageWidget.Cast(carimRoot.FindAnyWidget("ImageCompass"));
         carimIsVisible = true;

@@ -10,7 +10,7 @@ class CarimMenuPartyMarker extends UIScriptedMenu {
     PlayerBase carimPlayer;
 
     void CarimMenuPartyMarker(string name, vector position, PlayerBase player = null) {
-        carimRoot = Widget.Cast(GetGame().GetWorkspace().CreateWidgets("Carim/GUI/layouts/party/marker.layout"));
+        carimRoot = Widget.Cast(GetGame().GetWorkspace().CreateWidgets("Carim/gui/layouts/party/marker.layout"));
         carimNametag = TextWidget.Cast(carimRoot.FindAnyWidget("nametag"));
         carimDistance = TextWidget.Cast(carimRoot.FindAnyWidget("distance"));
         carimIcon = ImageWidget.Cast(carimRoot.FindAnyWidget("icon"));

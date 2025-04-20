@@ -7,25 +7,22 @@ class CfgPatches {
 class CfgMods {
     class Carim {
         name = "Carim";
-        dir = "Carim";
-        picture = "";
         action = "https://github.com/schana/dayz-mod-carim";
         author = "cnofafva";
-        overview = "";
-        inputs = "Carim/Inputs.xml";
+        inputs = "Carim/inputs.xml";
         type = "mod";
         dependencies[] = {"World", "Mission"};
 
         class defs {
             class worldScriptModule {
                 files[] = {
-                    "Carim/Scripts/4_World",
+                    "Carim/scripts/4_world",
                 };
             };
 
             class missionScriptModule {
                 files[] = {
-                    "Carim/Scripts/5_Mission",
+                    "Carim/scripts/5_mission",
                 };
             };
         };
