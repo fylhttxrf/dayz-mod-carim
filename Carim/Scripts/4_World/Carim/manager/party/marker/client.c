@@ -1,6 +1,7 @@
 class CarimManagerPartyMarkerClient extends Managed {
     ref map<string, ref CarimModelPartyMarkers> serverMarkers = new map<string, ref CarimModelPartyMarkers>;
     ref array<ref CarimMenuPartyMarker> menus = new array<ref CarimMenuPartyMarker>;
+    ref CarimRPCPartyMarkers rpc = new CarimRPCPartyMarkers;
 
     void OnUpdate() {
         PlayerBase player = PlayerBase.Cast(GetGame().GetPlayer());
@@ -80,7 +81,7 @@ class CarimManagerPartyMarkerClient extends Managed {
     void Send() {
         if (CarimModelPartyMarkersDAL.Get()) {
             Param2<string, CarimModelPartyMarkers> params = new Param2<string, CarimModelPartyMarkers>("", CarimModelPartyMarkersDAL.Get());
-            CarimRPCPartyMarkers.Send(GetGame().GetPlayer(), params, true);
+            rpc.Send(GetGame().GetPlayer(), params);
         }
     }
 }

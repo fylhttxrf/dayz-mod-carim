@@ -1,4 +1,6 @@
 class CarimManagerPartyPositionServer extends Managed {
+    ref CarimRPCPartyPositions rpc = new CarimRPCPartyPositions;
+
     void CarimManagerPartyPositionServer() {
         // TODO: stagger this so it doesn't send to everyone at once
         GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(this.Send, 10000, true);
@@ -28,7 +30,7 @@ class CarimManagerPartyPositionServer extends Managed {
                     }
                 }
                 Param1<array<CarimModelPartyPlayer>> params = new Param1<array<CarimModelPartyPlayer>>(sharedInfo);
-                CarimRPCPartyPositions.Send(idMap.Get(recipient), params, true, idMap.Get(recipient).GetIdentity());
+                rpc.Send(idMap.Get(recipient), params, idMap.Get(recipient).GetIdentity());
             }
         }
     }

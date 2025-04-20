@@ -1,4 +1,6 @@
 modded class ChatInputMenu {
+	ref CarimRPCChat carimRPCChat = new CarimRPCChat;
+
     override bool OnChange(Widget w, int x, int y, bool finished) {
         /* super call manually because inheritance is weird */
         if (UIScriptedWindow.GetActiveWindows()) {
@@ -16,7 +18,7 @@ modded class ChatInputMenu {
             if (text.IndexOf("#") != 0 && text.IndexOf("!") != 0 && CarimManagerChatSingleton.Get().isChannelGlobal) {
                 PlayerBase player = PlayerBase.Cast(GetGame().GetPlayer());
                 auto params = new Param1<string>(text);
-                CarimRPCChat.Send(player, params, true);
+                carimRPCChat.Send(player, params);
                 GetGame().ChatPlayer(CARIM_CHAT_PREFIX + " " + text);
             } else {
                 GetGame().ChatPlayer(text);

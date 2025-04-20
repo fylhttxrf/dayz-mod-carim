@@ -1,14 +1,14 @@
 class CarimRPCPartyMarkers extends CarimRPCBase<Param2<string, CarimModelPartyMarkers>> {
-    override static int GetType() {
+    override int GetType() {
         return CarimRPCTypesParty.MARKERS;
     }
 
-    override static void HandleServer(PlayerIdentity sender, Param2<string, CarimModelPartyMarkers> params) {
+    override void HandleServer(PlayerIdentity sender, Param2<string, CarimModelPartyMarkers> params) {
         // Register markers from client player
         CarimManagerPartyMarkerServerSingleton.Get().Register(sender.GetId(), params.param2);
     }
 
-    override static void HandleClient(PlayerIdentity sender, Param2<string, CarimModelPartyMarkers> params) {
+    override void HandleClient(PlayerIdentity sender, Param2<string, CarimModelPartyMarkers> params) {
         // Receive markers from server and show them
         CarimManagerPartyMarkerClientSingleton.Get().AddServer(params.param1, params.param2);
     }

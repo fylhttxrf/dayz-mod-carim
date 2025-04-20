@@ -11,6 +11,7 @@ class CarimManagerAutorun extends Managed {
         "UALeanRight"};
 
     bool isAutorunning = false;
+    ref CarimRPCAutorun rpc = new CarimRPCAutorun;
 
     void OnUpdate() {
         PlayerBase player = PlayerBase.Cast(GetGame().GetPlayer());
@@ -87,7 +88,7 @@ class CarimManagerAutorun extends Managed {
         player.GetInputController().OverrideMovementSpeed(isAutorunning, movementIdx);
         player.GetInputController().OverrideMovementAngle(isAutorunning, angle);
         auto params = new Param3<bool, int, int>(isAutorunning, movementIdx, angle);
-        CarimRPCAutorun.Send(player, params, true);
+        rpc.Send(player, params);
     }
 }
 

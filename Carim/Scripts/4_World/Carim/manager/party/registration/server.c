@@ -1,5 +1,6 @@
 class CarimManagerPartyRegistrationServer extends Managed {
     ref CarimModelPartyParties parties = new CarimModelPartyParties;
+    ref CarimRPCPartyRegister rpc = new CarimRPCPartyRegister;
 
     void CarimManagerPartyRegistrationServer() {
         GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(this.Send, 10000, true);
@@ -24,7 +25,7 @@ class CarimManagerPartyRegistrationServer extends Managed {
                     }
                 }
                 Param1<array<string>> params = new Param1<array<string>>(mutuals);
-                CarimRPCPartyRegister.Send(player, params, true, player.GetIdentity());
+                rpc.Send(player, params, player.GetIdentity());
             }
         }
     }

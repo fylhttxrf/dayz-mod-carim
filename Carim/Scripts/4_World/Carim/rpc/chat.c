@@ -1,11 +1,10 @@
-class CarimRPCChat : CarimRPCBase<Param1<string>> {
-    override static int GetType() {
+class CarimRPCChat extends CarimRPCBase<Param1<string>> {
+    override int GetType() {
         return CarimRPCTypesChat.SEND;
     }
 
-    override static void HandleServer(PlayerIdentity sender, Param1<string> params) {
+    override void HandleServer(PlayerIdentity sender, Param1<string> params) {
         auto outParam = new Param1<string>(sender.GetName() + " : " + params.param1);
-
         array<Man> players = {};
         GetGame().GetPlayers(players);
         foreach(Man player : players) {

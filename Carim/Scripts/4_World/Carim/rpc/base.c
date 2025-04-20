@@ -1,8 +1,8 @@
 class CarimRPCBase<Class T> extends Managed {
-    static int GetType();
-    static void Handle(PlayerIdentity sender, T params);
+    int GetType();
+    void Handle(PlayerIdentity sender, T params);
 
-    static void OnRPC(PlayerIdentity sender, ParamsReadContext ctx) {
+    void OnRPC(PlayerIdentity sender, ParamsReadContext ctx) {
         CarimLogging.Trace("OnRPC " + ClassName());
         T params;
         if (!ctx.Read(params)) {
@@ -10,22 +10,27 @@ class CarimRPCBase<Class T> extends Managed {
             return;
         }
         if (GetGame().IsClient()) {
+            CarimLogging.Trace("HandleClient " + ClassName());
             HandleClient(sender, params);
         } else {
+            CarimLogging.Trace("HandleServer " + ClassName());
             HandleServer(sender, params);
         }
     }
 
-    static void HandleClient(PlayerIdentity sender, T params) {
+    void HandleClient(PlayerIdentity sender, T params) {
         Handle(sender, params);
     }
 
-    static void HandleServer(PlayerIdentity sender, T params) {
+    void HandleServer(PlayerIdentity sender, T params) {
         Handle(sender, params);
     }
 
-    static void Send(Man player, T params, bool guaranteed, PlayerIdentity recipient = null) {
+    void Send(Man man, T params, PlayerIdentity recipient = null) {
         CarimLogging.Trace("Send " + ClassName());
-        GetGame().RPCSingleParam(player, GetType(), params, guaranteed, recipient);
+        PlayerBase player = PlayerBase.Cast(man);
+        if (player) {
+            GetGame().RPCSingleParam(player, GetType(), params, true, recipient);
+        }
     }
 }

@@ -1,9 +1,9 @@
 class CarimRPCAutorun extends CarimRPCBase<Param3<bool, int, int>> {
-    override static int GetType() {
+    override int GetType() {
         return CarimRPCTypesAutorun.AUTORUN;
     }
 
-    override static void HandleServer(PlayerIdentity sender, Param3<bool, int, int> params) {
+    override void HandleServer(PlayerIdentity sender, Param3<bool, int, int> params) {
         bool isRunning = params.param1;
         int movementIdx = params.param2;
         int angle = params.param3;

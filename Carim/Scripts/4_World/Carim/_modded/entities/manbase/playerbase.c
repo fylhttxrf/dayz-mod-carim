@@ -1,21 +1,28 @@
 modded class PlayerBase {
+    ref CarimRPCAutorun carimRPCAutorun = new CarimRPCAutorun;
+    ref CarimRPCChat carimRPCChat = new CarimRPCChat;
+    ref CarimRPCPartyMarkers carimRPCPartyMarkers = new CarimRPCPartyMarkers;
+    ref CarimRPCPartyPositions carimRPCPartyPositions = new CarimRPCPartyPositions;
+    ref CarimRPCPartyRegister carimRPCPartyRegister = new CarimRPCPartyRegister;
+
     override void OnRPC(PlayerIdentity sender, int rpc_type, ParamsReadContext ctx) {
+        CarimLogging.Trace("OnRPC " + rpc_type);
         super.OnRPC(sender, rpc_type, ctx);
         switch (rpc_type) {
-            case CarimRPCChat.GetType():
-                CarimRPCChat.OnRPC(sender, ctx);
+            case carimRPCChat.GetType():
+                carimRPCChat.OnRPC(sender, ctx);
                 break;
-            case CarimRPCAutorun.GetType():
-                CarimRPCAutorun.OnRPC(sender, ctx);
+            case carimRPCAutorun.GetType():
+                carimRPCAutorun.OnRPC(sender, ctx);
                 break;
-            case CarimRPCPartyMarkers.GetType():
-                CarimRPCPartyMarkers.OnRPC(sender, ctx);
+            case carimRPCPartyMarkers.GetType():
+                carimRPCPartyMarkers.OnRPC(sender, ctx);
                 break;
-            case CarimRPCPartyPositions.GetType():
-                CarimRPCPartyPositions.OnRPC(sender, ctx);
+            case carimRPCPartyPositions.GetType():
+                carimRPCPartyPositions.OnRPC(sender, ctx);
                 break;
-            case CarimRPCPartyRegister.GetType():
-                CarimRPCPartyRegister.OnRPC(sender, ctx);
+            case carimRPCPartyRegister.GetType():
+                carimRPCPartyRegister.OnRPC(sender, ctx);
                 break;
         }
     }
