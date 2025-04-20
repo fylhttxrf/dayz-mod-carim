@@ -4,7 +4,8 @@ class CarimManagerPartyRegistrationClient extends Managed {
     ref CarimRPCPartyRegister rpc = new CarimRPCPartyRegister;
 
     void CarimManagerPartyRegistrationClient() {
-        GetGame().GetCallQueue(CALL_CATEGORY_GUI).CallLater(this.RenewRegistration, 15000, true);
+        GetGame().GetCallQueue(CALL_CATEGORY_GUI).CallLater(this.RenewRegistration, 2000);
+        GetGame().GetCallQueue(CALL_CATEGORY_GUI).CallLater(this.RenewRegistration, 60000, true);
     }
 
     void ~CarimManagerPartyRegistrationClient() {
@@ -46,13 +47,13 @@ class CarimManagerPartyRegistrationClient extends Managed {
 
     void AddPlayerToParty(string id) {
         CarimModelPartyRegistrationsDAL.Get().Add(id, CarimUtil.GetClientPlayerIdentities().Get(id));
-        CarimModelPartyRegistrationsDAL.Get().Save();
+        CarimModelPartyRegistrationsDAL.Save();
         RenewRegistration();
     }
 
     void RemovePlayerFromParty(string id) {
         CarimModelPartyRegistrationsDAL.Get().Remove(id);
-        CarimModelPartyRegistrationsDAL.Get().Save();
+        CarimModelPartyRegistrationsDAL.Save();
         mutual.RemoveItem(id);
         RenewRegistration();
     }

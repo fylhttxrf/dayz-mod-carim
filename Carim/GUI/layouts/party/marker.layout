@@ -21,7 +21,6 @@ FrameWidgetClass rootFrame {
             scaled 1
             style Normal
             text "[KGB] Sample Player"
-            font "gui/fonts/metron-bold12"
             "exact text" 1
             "size to text h" 1
             "size to text v" 1
@@ -43,7 +42,6 @@ FrameWidgetClass rootFrame {
             scaled 1
             style Normal
             text "888m"
-            font "gui/fonts/metron-bold12"
             "exact text" 1
             "size to text h" 1
             "size to text v" 1
@@ -53,7 +51,7 @@ FrameWidgetClass rootFrame {
         FrameWidgetClass FrameIcon {
         clipchildren 0
         ignorepointer 1
-        position 1.5 -22
+        position 0 -22
         size 20 20
         halign center_ref
         hexactpos 1

@@ -5,17 +5,19 @@ class CarimModelPartyParties extends Managed {
     void Register(string id, array<string> players) {
         set<string> added = new set<string>;
         set<string> removed = new set<string>;
-
         set<string> associated = new set<string>;
+
         foreach(string newPlayer : players) {
             associated.Insert(newPlayer);
             if (!registered.Contains(id) || registered.Get(id).Find(newPlayer) == -1) {
+                CarimLogging.Trace("Register " + id + " added " + newPlayer);
                 added.Insert(newPlayer);
             }
         }
         if (registered.Contains(id)) {
             foreach(string oldPlayer : registered.Get(id)) {
                 if (associated.Find(oldPlayer) == -1) {
+                    CarimLogging.Trace("Register " + id + " removed " + oldPlayer);
                     removed.Insert(oldPlayer);
                 }
             }

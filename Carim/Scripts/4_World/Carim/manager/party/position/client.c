@@ -60,7 +60,7 @@ class CarimManagerPartyPositionClient extends Managed {
         foreach(PlayerBase player : CarimUtil.GetClientPlayerBases()) {
             if (player && player.GetIdentity() && player.IsAlive()) {
                 string id = player.GetIdentity().GetId();
-                if (menus.Contains(id) && serverPositions.Contains(id) && id != activePlayerId) {
+                if (menus.Contains(id) && serverPositions.Contains(id)) {
                     menus.Get(id).carimPlayer = player;
                 }
             }

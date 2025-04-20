@@ -32,6 +32,7 @@ class CarimMenuPartyRegister extends UIScriptedMenu {
 
     override void OnShow() {
         super.OnShow();
+        CarimUpdateLists();
         GetGame().GetCallQueue(CALL_CATEGORY_GUI).CallLater(this.CarimUpdateLists, 500, true);
     }
 

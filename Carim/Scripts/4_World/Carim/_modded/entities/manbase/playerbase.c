@@ -6,7 +6,6 @@ modded class PlayerBase {
     ref CarimRPCPartyRegister carimRPCPartyRegister = new CarimRPCPartyRegister;
 
     override void OnRPC(PlayerIdentity sender, int rpc_type, ParamsReadContext ctx) {
-        CarimLogging.Trace("OnRPC " + rpc_type);
         super.OnRPC(sender, rpc_type, ctx);
         switch (rpc_type) {
             case carimRPCChat.GetType():

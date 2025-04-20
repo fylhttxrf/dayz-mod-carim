@@ -6,11 +6,11 @@ enum CarimRPCTypesAutorun : CarimRPCTypes {
     AUTORUN
 }
 
-enum CarimRPCTypesChat : CarimRPCTypes {
+enum CarimRPCTypesChat : CarimRPCTypesAutorun {
     SEND
 }
 
-enum CarimRPCTypesParty : CarimRPCTypes {
+enum CarimRPCTypesParty : CarimRPCTypesChat {
     POSITIONS,
     MARKERS,
     REGISTER
