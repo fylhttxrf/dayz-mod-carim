@@ -81,6 +81,7 @@ class CarimMenuPartyRegister extends UIScriptedMenu {
     }
 
     void CarimUpdateList(TextListboxWidget targetList, map<string, string> values) {
+        // TODO: remove player from their own list
         auto sortedIds = CarimUtil.GetSortedIdsByLowerName(values);
         int row = 0;
         foreach(string id : sortedIds) {
@@ -120,16 +121,6 @@ class CarimMenuPartyRegister extends UIScriptedMenu {
         for (i = 0; i < carimPlayers.GetNumItems(); ++i) {
             // Gray 400
             carimPlayers.SetItemColor(i, 0, 0xFFBDBDBD);
-        }
-        selectedRow = carimRegistered.GetSelectedRow();
-        if (selectedRow != -1) {
-            // Amber 400
-            carimRegistered.SetItemColor(selectedRow, 0, 0xFFFFCA28);
-        }
-        selectedRow = carimPlayers.GetSelectedRow();
-        if (selectedRow != -1) {
-            // Amber 400
-            carimPlayers.SetItemColor(selectedRow, 0, 0xFFFFCA28);
         }
     }
 }

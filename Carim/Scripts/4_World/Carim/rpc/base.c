@@ -3,7 +3,7 @@ class CarimRPCBase<Class T> extends Managed {
     static void Handle(PlayerIdentity sender, T params);
 
     static void OnRPC(PlayerIdentity sender, ParamsReadContext ctx) {
-        CarimLogging.Trace("OnRPC " + T.ToString());
+        CarimLogging.Trace("OnRPC " + ClassName());
         T params;
         if (!ctx.Read(params)) {
             CarimLogging.Warn("Unable to read params from ctx");
@@ -25,7 +25,7 @@ class CarimRPCBase<Class T> extends Managed {
     }
 
     static void Send(Man player, T params, bool guaranteed, PlayerIdentity recipient = null) {
-        CarimLogging.Trace("Send " + T.ToString());
+        CarimLogging.Trace("Send " + ClassName());
         GetGame().RPCSingleParam(player, GetType(), params, guaranteed, recipient);
     }
 }

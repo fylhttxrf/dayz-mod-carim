@@ -1,5 +1,7 @@
 class CarimModelSettings extends CarimModelBase {
-    static const int DEFAULT_VERBOSITY = -1;
+    // TODO: split this out to server and both
+    // TODO: change to -1
+    static const int DEFAULT_VERBOSITY = 99;
 
     int verbosity = DEFAULT_VERBOSITY;
     ref array<string> adminIds = new array<string>;
