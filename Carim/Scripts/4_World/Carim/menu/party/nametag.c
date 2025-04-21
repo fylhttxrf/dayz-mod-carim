@@ -82,7 +82,6 @@ class CarimMenuPartyNametag extends CarimMenuPartyMarker {
         float width, height, x, y;
         carimListRoot.GetSize(width, height);
         carimListRoot.GetPos(x, y);
-        // TODO: make list spacing configurable?
         y = (5 + height) * carimListIndex;
         carimListRoot.SetPos(x, y);
     }

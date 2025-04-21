@@ -6,6 +6,22 @@ class CarimManagerPartyMarkerClient extends Managed {
     ref array<ref CarimMenuPartyMarker> menus = new array<ref CarimMenuPartyMarker>;
     ref CarimRPCPartyMarkers rpc = new CarimRPCPartyMarkers;
 
+    void CarimManagerPartyMarkerClient() {
+        GetGame().GetCallQueue(CALL_CATEGORY_GUI).CallLater(this.InitialRegistration, 2000, true);
+    }
+
+    void ~CarimManagerPartyMarkerClient() {
+        GetGame().GetCallQueue(CALL_CATEGORY_GUI).Remove(this.InitialRegistration);
+    }
+
+    void InitialRegistration() {
+        PlayerBase player = PlayerBase.Cast(GetGame().GetPlayer());
+        if (player && player.GetIdentity()) {
+            Send();
+            GetGame().GetCallQueue(CALL_CATEGORY_GUI).Remove(this.InitialRegistration);
+        }
+    }
+
     void OnUpdate() {
         PlayerBase player = PlayerBase.Cast(GetGame().GetPlayer());
         if (player && GetUApi() && !GetGame().GetUIManager().IsMenuOpen(MENU_CHAT_INPUT)) {
@@ -22,8 +38,6 @@ class CarimManagerPartyMarkerClient extends Managed {
     }
 
     void SyncMenus() {
-        // TODO: get the markers from the server and/or locally and show them right
-        // away instead of delaying until a marker has been placed
         string name = "null";
         if (GetGame().GetPlayer() && GetGame().GetPlayer().GetIdentity()) {
             name = GetGame().GetPlayer().GetIdentity().GetName();
@@ -32,7 +46,7 @@ class CarimManagerPartyMarkerClient extends Managed {
         int menuIndex = 0;
         foreach(int index, vector position : CarimModelPartyMarkersDAL.Get().markers) {
             // TODO: make the most recent marker index 0
-            string markerName = name + " " + (index).ToString();
+            string markerName = name + " " + (CarimModelPartyMarkersDAL.Get().markers.Count() - index).ToString();
             if (menus.Count() <= menuIndex) {
                 menus.Insert(new CarimMenuPartyMarker(markerName, position));
             } else {
@@ -45,7 +59,7 @@ class CarimManagerPartyMarkerClient extends Managed {
             int playerIndex = 0;
             foreach(vector mark : markers.markers) {
                 if (CarimModelPartyRegistrationsDAL.Get().registrations.Contains(id)) {
-                    markerName = CarimModelPartyRegistrationsDAL.Get().registrations.Get(id) + " " + (playerIndex).ToString();
+                    markerName = CarimModelPartyRegistrationsDAL.Get().registrations.Get(id) + " " + (markers.markers.Count() - playerIndex).ToString();
                 } else {
                     markerName = id.Substring(0, 4) + " " + (playerIndex).ToString();
                 }

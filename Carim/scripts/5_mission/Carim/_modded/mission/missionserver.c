@@ -4,7 +4,7 @@
 modded class MissionServer {
     override void OnInit() {
         super.OnInit();
-#ifndef CARIM_DISABLE_PARTY
+#ifdef CARIM_ENABLE_PARTY
         CarimManagerPartyRegistrationServerSingleton.Get();
         CarimManagerPartyMarkerServerSingleton.Get();
         CarimManagerPartyPositionServerSingleton.Get();

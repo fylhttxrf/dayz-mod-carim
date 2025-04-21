@@ -1,0 +1,1 @@
+#define CARIM_ENABLE_CHAT

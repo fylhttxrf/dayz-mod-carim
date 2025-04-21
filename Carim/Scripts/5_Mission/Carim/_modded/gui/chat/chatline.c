@@ -1,7 +1,7 @@
 #ifndef CarimChatLine
 #define CarimChatLine
 
-#ifndef CARIM_DISABLE_CHAT
+#ifdef CARIM_ENABLE_CHAT
 modded class ChatLine {
     void ChatLine(Widget root_widget) {
         m_RootWidget = GetGame().GetWorkspace().CreateWidgets("Carim/gui/layouts/chatline.layout", root_widget);

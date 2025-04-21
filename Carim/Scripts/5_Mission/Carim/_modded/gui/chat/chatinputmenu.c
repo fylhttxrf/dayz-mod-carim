@@ -1,7 +1,7 @@
 #ifndef CarimChatInputMenu
 #define CarimChatInputMenu
 
-#ifndef CARIM_DISABLE_CHAT
+#ifdef CARIM_ENABLE_CHAT
 modded class ChatInputMenu {
     ref CarimRPCChat carimRPCChat = new CarimRPCChat;
 

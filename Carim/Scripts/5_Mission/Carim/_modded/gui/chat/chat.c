@@ -1,7 +1,7 @@
 #ifndef CarimChat
 #define CarimChat
 
-#ifndef CARIM_DISABLE_CHAT
+#ifdef CARIM_ENABLE_CHAT
 modded class Chat {
     override void Add(ChatMessageEventParams params) {
         int channel = params.param1;
