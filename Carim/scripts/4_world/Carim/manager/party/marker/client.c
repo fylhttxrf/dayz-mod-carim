@@ -45,7 +45,6 @@ class CarimManagerPartyMarkerClient extends Managed {
 
         int menuIndex = 0;
         foreach(int index, vector position : CarimModelPartyMarkersDAL.Get().markers) {
-            // TODO: make the most recent marker index 0
             string markerName = name + " " + (CarimModelPartyMarkersDAL.Get().markers.Count() - index).ToString();
             if (menus.Count() <= menuIndex) {
                 menus.Insert(new CarimMenuPartyMarker(markerName, position));

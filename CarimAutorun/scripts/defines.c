@@ -1,1 +1,0 @@
-#define CARIM_ENABLE_AUTORUN

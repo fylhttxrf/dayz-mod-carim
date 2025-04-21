@@ -12,39 +12,29 @@ modded class PlayerBase {
         super.OnRPC(sender, rpc_type, ctx);
         switch (rpc_type) {
             case carimRPCChat.GetType():
-#ifdef CARIM_ENABLE_CHAT
-                carimRPCChat.OnRPC(sender, ctx);
-#else
-                CarimLogging.Trace("Chat disabled");
-#endif
+                if (CarimEnabled.Chat()) {
+                    carimRPCChat.OnRPC(sender, ctx);
+                }
                 break;
             case carimRPCAutorun.GetType():
-#ifdef CARIM_ENABLE_AUTORUN
-                carimRPCAutorun.OnRPC(sender, ctx);
-#else
-                CarimLogging.Trace("Autorun disabled");
-#endif
+                if (CarimEnabled.Autorun()) {
+                    carimRPCAutorun.OnRPC(sender, ctx);
+                }
                 break;
             case carimRPCPartyMarkers.GetType():
-#ifdef CARIM_ENABLE_PARTY
-                carimRPCPartyMarkers.OnRPC(sender, ctx);
-#else
-                CarimLogging.Trace("Party disabled");
-#endif
+                if (CarimEnabled.Party()) {
+                    carimRPCPartyMarkers.OnRPC(sender, ctx);
+                }
                 break;
             case carimRPCPartyPositions.GetType():
-#ifdef CARIM_ENABLE_PARTY
-                carimRPCPartyPositions.OnRPC(sender, ctx);
-#else
-                CarimLogging.Trace("Party disabled");
-#endif
+                if (CarimEnabled.Party()) {
+                    carimRPCPartyPositions.OnRPC(sender, ctx);
+                }
                 break;
             case carimRPCPartyRegister.GetType():
-#ifdef CARIM_ENABLE_PARTY
-                carimRPCPartyRegister.OnRPC(sender, ctx);
-#else
-                CarimLogging.Trace("Party disabled");
-#endif
+                if (CarimEnabled.Party()) {
+                    carimRPCPartyRegister.OnRPC(sender, ctx);
+                }
                 break;
         }
     }

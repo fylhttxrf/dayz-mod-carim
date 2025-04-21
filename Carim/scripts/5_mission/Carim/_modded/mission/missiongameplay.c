@@ -4,19 +4,19 @@
 modded class MissionGameplay {
     override void OnUpdate(float timeslice) {
         super.OnUpdate(timeslice);
-#ifdef CARIM_ENABLE_AUTORUN
-        CarimManagerAutorunSingleton.Get().OnUpdate();
-#endif
-#ifdef CARIM_ENABLE_CHAT
-        CarimManagerChatSingleton.Get().OnUpdate();
-#endif
-#ifdef CARIM_ENABLE_COMPASS
-        CarimManagerCompassSingleton.Get().OnUpdate();
-#endif
-#ifdef CARIM_ENABLE_PARTY
-        CarimManagerPartyRegistrationClientSingleton.Get().OnUpdate();
-        CarimManagerPartyMarkerClientSingleton.Get().OnUpdate();
-#endif
+        if (CarimEnabled.Autorun()) {
+            CarimManagerAutorunSingleton.Get().OnUpdate();
+        }
+        if (CarimEnabled.Chat()) {
+            CarimManagerChatSingleton.Get().OnUpdate();
+        }
+        if (CarimEnabled.Compass()) {
+            CarimManagerCompassSingleton.Get().OnUpdate();
+        }
+        if (CarimEnabled.Party()) {
+            CarimManagerPartyRegistrationClientSingleton.Get().OnUpdate();
+            CarimManagerPartyMarkerClientSingleton.Get().OnUpdate();
+        }
     }
 }
 

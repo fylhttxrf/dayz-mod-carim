@@ -1,7 +1,5 @@
 class CfgPatches {
-    class CarimParty {
-        requiredAddons[] = {};
-    };
+    class CarimParty {};
 };
 
 class CfgMods {
@@ -10,18 +8,12 @@ class CfgMods {
         action = "https://github.com/schana/dayz-mod-carim";
         author = "cnofafva";
         type = "mod";
-        dependencies[] = {"World", "Mission"};
+        dependencies[] = {"Core"};
 
         class defs {
-            class worldScriptModule {
+            class gameScriptModule {
                 files[] = {
-                    "CarimParty/scripts",
-                };
-            };
-
-            class missionScriptModule {
-                files[] = {
-                    "CarimParty/scripts",
+                    "CarimParty/scripts/1_core",
                 };
             };
         };

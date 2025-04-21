@@ -5,8 +5,7 @@ modded class MissionBase {
     override UIScriptedMenu CreateScriptedMenu(int id) {
         UIScriptedMenu menu = NULL;
         menu = super.CreateScriptedMenu(id);
-#ifdef CARIM_ENABLE_PARTY
-        if (!menu) {
+        if (CarimEnabled.Party() && !menu) {
             switch (id) {
                 case CarimMenuParty.REGISTER:
                     menu = new CarimMenuPartyRegister;
@@ -17,7 +16,6 @@ modded class MissionBase {
                 menu.SetID(id);
             }
         }
-#endif
         return menu;
     }
 }

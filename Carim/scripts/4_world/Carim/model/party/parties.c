@@ -47,10 +47,11 @@ class CarimModelPartyParties extends Managed {
         } else {
             mutuals.Get(id).Clear();
         }
+        auto admins = CarimModelServerSettingsDAL.Get().adminIds;
         foreach(string player : registered.Get(id)) {
             if (registered.Contains(player) && registered.Get(player).Find(id) >= 0) {
                 mutuals.Get(id).Insert(player);
-            } else if (CarimModelServerSettingsDAL.Get().adminIds.Find(id) != -1) {
+            } else if (admins.Find(id) != -1) {
                 mutuals.Get(id).Insert(player);
             }
         }
