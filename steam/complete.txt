@@ -1,0 +1,14 @@
+<FEATURES>
+This Open Source mod includes all the features Carim has to offer:
+[olist]
+    [*] Autorun
+    [*] Chat
+    [*] Compass
+    [*] Party
+[/olist]
+
+<DESCRIPTIONS>
+<AUTORUN>
+<CHAT>
+<COMPASS>
+<PARTY>

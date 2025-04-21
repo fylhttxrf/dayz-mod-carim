@@ -1,0 +1,9 @@
+[h2]Party[/h2]
+[hr][/hr]
+Allows creation of parties and displaying of nametags of party members. There is no party size limit.
+
+Parties are managed by the player. Open the menu (default key: 'P'), and Add players to your party. If they have also added you, then your nametags will automatically appear. Parties are saved, so you don't have to re-create it each time you login. They also work for whatever server runs the mod.
+
+Tactical pings can be placed (default key: 'T') that will be shared with your party.
+
+Optionally, servers can configure Admin Ids that allow adding party members without them needing to add back.
