@@ -7,8 +7,9 @@ $mod = "Carim"
 $modSuffixes = "", "Autorun", "Chat", "Compass", "Party"
 foreach ($suffix in $modSuffixes) {
     if (!(Test-Path -Path "$projectDrive\$mod$suffix")) {
-        # Create the symbolic link
-        New-Item -Path "$projectDrive\$mod$suffix" -Value "$sourceRoot\$mod$suffix" -ItemType SymbolicLink
+        # Create the junction, since pboProject doesn't work with symbolic links
+        cmd /c mklink /J "$projectDrive\$mod$suffix" "$sourceRoot\$mod$suffix"
+        #New-Item -Path "$projectDrive\$mod$suffix" -Value "$sourceRoot\$mod$suffix" -ItemType SymbolicLink
     }
 }
 

@@ -1,5 +1,5 @@
-#ifndef CarimMenuCompass
-#define CarimMenuCompass
+#ifndef CARIM_CarimMenuCompass
+#define CARIM_CarimMenuCompass
 
 class CarimMenuCompass extends UIScriptedMenu {
     Widget carimRoot;

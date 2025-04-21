@@ -1,5 +1,5 @@
-#ifndef CarimManagerPartyPositionClient
-#define CarimManagerPartyPositionClient
+#ifndef CARIM_CarimManagerPartyPositionClient
+#define CARIM_CarimManagerPartyPositionClient
 
 class CarimManagerPartyPositionClient extends Managed {
     ref map<string, ref CarimModelPartyPlayer> serverPositions = new map<string, ref CarimModelPartyPlayer>;

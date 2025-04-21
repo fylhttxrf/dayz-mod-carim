@@ -1,5 +1,5 @@
-#ifndef CarimMenuPartyRegister
-#define CarimMenuPartyRegister
+#ifndef CARIM_CarimMenuPartyRegister
+#define CARIM_CarimMenuPartyRegister
 
 class CarimMenuPartyRegister extends UIScriptedMenu {
     bool carimInitialized;
