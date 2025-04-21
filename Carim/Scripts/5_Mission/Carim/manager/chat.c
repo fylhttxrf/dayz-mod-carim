@@ -1,3 +1,6 @@
+#ifndef CarimManagerChat
+#define CarimManagerChat
+
 class CarimManagerChat extends Managed {
     bool isChannelGlobal = true;
 
@@ -31,3 +34,5 @@ class CarimManagerChat extends Managed {
 }
 
 typedef CarimSingleton<CarimManagerChat> CarimManagerChatSingleton;
+
+#endif

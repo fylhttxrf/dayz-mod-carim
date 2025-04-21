@@ -1,3 +1,6 @@
+#ifndef CarimManagerPartyMarkerClient
+#define CarimManagerPartyMarkerClient
+
 class CarimManagerPartyMarkerClient extends Managed {
     ref map<string, ref CarimModelPartyMarkers> serverMarkers = new map<string, ref CarimModelPartyMarkers>;
     ref array<ref CarimMenuPartyMarker> menus = new array<ref CarimMenuPartyMarker>;
@@ -90,3 +93,5 @@ class CarimManagerPartyMarkerClient extends Managed {
 }
 
 typedef CarimSingleton<CarimManagerPartyMarkerClient> CarimManagerPartyMarkerClientSingleton;
+
+#endif

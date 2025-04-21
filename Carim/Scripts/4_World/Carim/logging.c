@@ -1,3 +1,6 @@
+#ifndef CarimLogging
+#define CarimLogging
+
 class CarimLogging extends Managed {
     static const int NONE = 0;
     static const int WARN = 1;
@@ -35,3 +38,5 @@ class CarimLogging extends Managed {
         return CarimModelSettingsDAL.Get().verbosity >= level;
     }
 }
+
+#endif

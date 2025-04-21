@@ -1,3 +1,6 @@
+#ifndef CarimMenuPartyMarker
+#define CarimMenuPartyMarker
+
 class CarimMenuPartyMarker extends UIScriptedMenu {
     Widget carimRoot;
     TextWidget carimNametag;
@@ -93,3 +96,5 @@ class CarimMenuPartyMarker extends UIScriptedMenu {
         return true;
     }
 }
+
+#endif

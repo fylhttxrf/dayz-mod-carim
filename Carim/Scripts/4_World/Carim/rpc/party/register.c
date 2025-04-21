@@ -1,3 +1,6 @@
+#ifndef CarimRPCPartyRegister
+#define CarimRPCPartyRegister
+
 class CarimRPCPartyRegister extends CarimRPCBase<Param1<array<string>>> {
     override int GetType() {
         return CarimRPCTypesParty.REGISTER;
@@ -11,3 +14,5 @@ class CarimRPCPartyRegister extends CarimRPCBase<Param1<array<string>>> {
         CarimManagerPartyRegistrationServerSingleton.Get().Register(sender.GetId(), params.param1);
     }
 }
+
+#endif

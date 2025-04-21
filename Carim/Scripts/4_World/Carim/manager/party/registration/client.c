@@ -1,3 +1,6 @@
+#ifndef CarimManagerPartyRegistrationClient
+#define CarimManagerPartyRegistrationClient
+
 class CarimManagerPartyRegistrationClient extends Managed {
     ref CarimMenuPartyRegister menu;
     ref array<string> mutual = new array<string>;
@@ -69,3 +72,5 @@ class CarimManagerPartyRegistrationClient extends Managed {
 }
 
 typedef CarimSingleton<CarimManagerPartyRegistrationClient> CarimManagerPartyRegistrationClientSingleton;
+
+#endif

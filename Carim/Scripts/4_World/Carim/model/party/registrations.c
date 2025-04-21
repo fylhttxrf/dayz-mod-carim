@@ -1,3 +1,6 @@
+#ifndef CarimModelPartyRegistrations
+#define CarimModelPartyRegistrations
+
 class CarimModelPartyRegistrations extends CarimModelBase {
     ref map<string, string> registrations = new map<string, string>;
 
@@ -11,3 +14,5 @@ class CarimModelPartyRegistrations extends CarimModelBase {
 }
 
 typedef CarimDAL<CarimModelPartyRegistrations> CarimModelPartyRegistrationsDAL;
+
+#endif

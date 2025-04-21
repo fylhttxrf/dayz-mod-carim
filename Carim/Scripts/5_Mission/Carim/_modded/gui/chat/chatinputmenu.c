@@ -1,5 +1,9 @@
+#ifndef CarimChatInputMenu
+#define CarimChatInputMenu
+
+#ifndef CARIM_DISABLE_CHAT
 modded class ChatInputMenu {
-	ref CarimRPCChat carimRPCChat = new CarimRPCChat;
+    ref CarimRPCChat carimRPCChat = new CarimRPCChat;
 
     override bool OnChange(Widget w, int x, int y, bool finished) {
         /* super call manually because inheritance is weird */
@@ -35,3 +39,6 @@ modded class ChatInputMenu {
         return true;
     }
 }
+#endif
+
+#endif

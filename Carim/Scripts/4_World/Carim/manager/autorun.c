@@ -1,3 +1,6 @@
+#ifndef CarimManagerAutorun
+#define CarimManagerAutorun
+
 class CarimManagerAutorun extends Managed {
     static const string interruptInputs[] = {
         "UACarimAutorunToggle",
@@ -93,3 +96,5 @@ class CarimManagerAutorun extends Managed {
 }
 
 typedef CarimSingleton<CarimManagerAutorun> CarimManagerAutorunSingleton;
+
+#endif

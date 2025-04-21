@@ -1,3 +1,6 @@
+#ifndef CarimModelPartyPlayer
+#define CarimModelPartyPlayer
+
 class CarimModelPartyPlayer extends CarimModelBase {
     string id;
     vector position;
@@ -9,3 +12,5 @@ class CarimModelPartyPlayer extends CarimModelBase {
         healthLevel = newHealthLevel;
     }
 }
+
+#endif

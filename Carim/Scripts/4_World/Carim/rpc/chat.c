@@ -1,3 +1,6 @@
+#ifndef CarimRPCChat
+#define CarimRPCChat
+
 class CarimRPCChat extends CarimRPCBase<Param1<string>> {
     override int GetType() {
         return CarimRPCTypesChat.SEND;
@@ -12,3 +15,5 @@ class CarimRPCChat extends CarimRPCBase<Param1<string>> {
         }
     }
 }
+
+#endif

@@ -1,3 +1,6 @@
+#ifndef CarimSingleton
+#define CarimSingleton
+
 class CarimSingleton<Class T> {
     private static ref T instance;
 
@@ -9,3 +12,5 @@ class CarimSingleton<Class T> {
         return instance;
     }
 }
+
+#endif

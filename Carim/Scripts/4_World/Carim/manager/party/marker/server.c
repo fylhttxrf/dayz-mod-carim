@@ -1,3 +1,6 @@
+#ifndef CarimManagerPartyMarkerServer
+#define CarimManagerPartyMarkerServer
+
 class CarimManagerPartyMarkerServer extends Managed {
     ref map<string, ref CarimModelPartyMarkers> markers = new map<string, ref CarimModelPartyMarkers>;
     ref CarimRPCPartyMarkers rpc = new CarimRPCPartyMarkers;
@@ -23,3 +26,5 @@ class CarimManagerPartyMarkerServer extends Managed {
 }
 
 typedef CarimSingleton<CarimManagerPartyMarkerServer> CarimManagerPartyMarkerServerSingleton;
+
+#endif

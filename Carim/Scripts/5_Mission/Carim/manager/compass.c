@@ -1,3 +1,6 @@
+#ifndef CarimManagerCompass
+#define CarimManagerCompass
+
 class CarimManagerCompass extends Managed {
     ref CarimMenuCompass menu = new CarimMenuCompass;
 
@@ -16,3 +19,5 @@ class CarimManagerCompass extends Managed {
 }
 
 typedef CarimSingleton<CarimManagerCompass> CarimManagerCompassSingleton;
+
+#endif

@@ -1,3 +1,6 @@
+#ifndef CarimRPCBase
+#define CarimRPCBase
+
 class CarimRPCBase<Class T> extends Managed {
     int GetType();
     void Handle(PlayerIdentity sender, T params);
@@ -34,3 +37,5 @@ class CarimRPCBase<Class T> extends Managed {
         }
     }
 }
+
+#endif

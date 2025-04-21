@@ -1,3 +1,6 @@
+#ifndef CarimModelPartySettings
+#define CarimModelPartySettings
+
 class CarimModelPartySettings extends CarimModelBase {
     static const int DEFAULT_LOG_FREQUENCY = -1;
     static const int DEFAULT_MAX_PARTY_SIZE = -1;
@@ -31,3 +34,5 @@ class CarimModelPartySettings extends CarimModelBase {
 }
 
 typedef CarimDAL<CarimModelPartySettings> CarimModelPartySettingsDAL;
+
+#endif

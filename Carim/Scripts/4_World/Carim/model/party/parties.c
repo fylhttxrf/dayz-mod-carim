@@ -1,3 +1,6 @@
+#ifndef CarimModelPartyParties
+#define CarimModelPartyParties
+
 class CarimModelPartyParties extends Managed {
     ref map<string, ref set<string>> registered = new map<string, ref set<string>>;
     ref map<string, ref set<string>> mutuals = new map<string, ref set<string>>;
@@ -47,9 +50,11 @@ class CarimModelPartyParties extends Managed {
         foreach(string player : registered.Get(id)) {
             if (registered.Contains(player) && registered.Get(player).Find(id) >= 0) {
                 mutuals.Get(id).Insert(player);
-            } else if (CarimModelSettingsDAL.Get().adminIds.Find(id) != -1) {
+            } else if (CarimModelServerSettingsDAL.Get().adminIds.Find(id) != -1) {
                 mutuals.Get(id).Insert(player);
             }
         }
     }
 }
+
+#endif

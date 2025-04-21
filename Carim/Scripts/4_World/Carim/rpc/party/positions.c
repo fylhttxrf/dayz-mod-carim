@@ -1,3 +1,6 @@
+#ifndef CarimRPCPartyPositions
+#define CarimRPCPartyPositions
+
 class CarimRPCPartyPositions extends CarimRPCBase<Param1<array<CarimModelPartyPlayer>>> {
     override int GetType() {
         return CarimRPCTypesParty.POSITIONS;
@@ -7,3 +10,5 @@ class CarimRPCPartyPositions extends CarimRPCBase<Param1<array<CarimModelPartyPl
         CarimManagerPartyPositionClientSingleton.Get().SetPositions(params.param1);
     }
 }
+
+#endif

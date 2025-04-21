@@ -1,3 +1,6 @@
+#ifndef CarimManagerPartyPositionClient
+#define CarimManagerPartyPositionClient
+
 class CarimManagerPartyPositionClient extends Managed {
     ref map<string, ref CarimModelPartyPlayer> serverPositions = new map<string, ref CarimModelPartyPlayer>;
     ref map<string, ref CarimMenuPartyNametag> menus = new map<string, ref CarimMenuPartyNametag>;
@@ -83,3 +86,5 @@ class CarimManagerPartyPositionClient extends Managed {
 }
 
 typedef CarimSingleton<CarimManagerPartyPositionClient> CarimManagerPartyPositionClientSingleton;
+
+#endif

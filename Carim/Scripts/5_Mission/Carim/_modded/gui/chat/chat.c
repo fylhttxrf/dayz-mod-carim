@@ -1,3 +1,7 @@
+#ifndef CarimChat
+#define CarimChat
+
+#ifndef CARIM_DISABLE_CHAT
 modded class Chat {
     override void Add(ChatMessageEventParams params) {
         int channel = params.param1;
@@ -31,3 +35,6 @@ modded class Chat {
         super.AddInternal(params);
     }
 }
+#endif
+
+#endif

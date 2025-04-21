@@ -1,3 +1,6 @@
+#ifndef CarimManagerPartyPositionServer
+#define CarimManagerPartyPositionServer
+
 class CarimManagerPartyPositionServer extends Managed {
     ref CarimRPCPartyPositions rpc = new CarimRPCPartyPositions;
 
@@ -37,3 +40,5 @@ class CarimManagerPartyPositionServer extends Managed {
 }
 
 typedef CarimSingleton<CarimManagerPartyPositionServer> CarimManagerPartyPositionServerSingleton;
+
+#endif

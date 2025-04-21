@@ -1,3 +1,6 @@
+#ifndef CarimRPCTypes
+#define CarimRPCTypes
+
 enum CarimRPCTypes {
     START = -44999
 }
@@ -15,3 +18,5 @@ enum CarimRPCTypesParty : CarimRPCTypesChat {
     MARKERS,
     REGISTER
 }
+
+#endif

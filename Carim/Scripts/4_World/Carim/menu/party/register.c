@@ -1,3 +1,6 @@
+#ifndef CarimMenuPartyRegister
+#define CarimMenuPartyRegister
+
 class CarimMenuPartyRegister extends UIScriptedMenu {
     bool carimInitialized;
     TextListboxWidget carimPlayers;
@@ -127,3 +130,5 @@ class CarimMenuPartyRegister extends UIScriptedMenu {
         }
     }
 }
+
+#endif

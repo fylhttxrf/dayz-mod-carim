@@ -1,3 +1,6 @@
+#ifndef CarimManagerPartyRegistrationServer
+#define CarimManagerPartyRegistrationServer
+
 class CarimManagerPartyRegistrationServer extends Managed {
     ref CarimModelPartyParties parties = new CarimModelPartyParties;
     ref CarimRPCPartyRegister rpc = new CarimRPCPartyRegister;
@@ -32,3 +35,5 @@ class CarimManagerPartyRegistrationServer extends Managed {
 }
 
 typedef CarimSingleton<CarimManagerPartyRegistrationServer> CarimManagerPartyRegistrationServerSingleton;
+
+#endif

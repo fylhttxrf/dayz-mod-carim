@@ -1,3 +1,6 @@
+#ifndef CarimModelChatSettings
+#define CarimModelChatSettings
+
 class CarimModelChatSettings extends CarimModelBase {
     static const int DEFAULT_SIZE = 20;
     static const int DEFAULT_COLOR_DIRECT = 0xfffafafa; /* grey 50 */
@@ -31,3 +34,5 @@ class CarimModelChatSettings extends CarimModelBase {
 }
 
 typedef CarimDAL<CarimModelChatSettings> CarimModelChatSettingsDAL;
+
+#endif

@@ -1,3 +1,6 @@
+#ifndef CarimRPCAutorun
+#define CarimRPCAutorun
+
 class CarimRPCAutorun extends CarimRPCBase<Param3<bool, int, int>> {
     override int GetType() {
         return CarimRPCTypesAutorun.AUTORUN;
@@ -12,3 +15,5 @@ class CarimRPCAutorun extends CarimRPCBase<Param3<bool, int, int>> {
         player.GetInputController().OverrideMovementAngle(isRunning, angle);
     }
 }
+
+#endif

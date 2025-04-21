@@ -1,3 +1,6 @@
+#ifndef CarimDAL
+#define CarimDAL
+
 class CarimDAL<Class T> {
     private static ref T instance;
 
@@ -27,3 +30,5 @@ class CarimDAL<Class T> {
         return instance;
     }
 }
+
+#endif

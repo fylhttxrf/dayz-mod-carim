@@ -1,3 +1,6 @@
+#ifndef CarimModelPartyMarkers
+#define CarimModelPartyMarkers
+
 class CarimModelPartyMarkers extends CarimModelBase {
     ref array<vector> markers = new array<vector>;
 
@@ -15,3 +18,5 @@ class CarimModelPartyMarkers extends CarimModelBase {
 }
 
 typedef CarimDAL<CarimModelPartyMarkers> CarimModelPartyMarkersDAL;
+
+#endif

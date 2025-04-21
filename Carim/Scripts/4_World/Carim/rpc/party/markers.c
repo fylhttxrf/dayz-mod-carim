@@ -1,3 +1,6 @@
+#ifndef CarimRPCPartyMarkers
+#define CarimRPCPartyMarkers
+
 class CarimRPCPartyMarkers extends CarimRPCBase<Param2<string, CarimModelPartyMarkers>> {
     override int GetType() {
         return CarimRPCTypesParty.MARKERS;
@@ -13,3 +16,5 @@ class CarimRPCPartyMarkers extends CarimRPCBase<Param2<string, CarimModelPartyMa
         CarimManagerPartyMarkerClientSingleton.Get().AddServer(params.param1, params.param2);
     }
 }
+
+#endif
