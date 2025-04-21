@@ -1,17 +1,12 @@
-#ifndef CarimChatLine
-#define CarimChatLine
+#ifndef CARIM_ChatLine
+#define CARIM_ChatLine
 
-#ifdef CARIM_ENABLE_CHAT
 modded class ChatLine {
+#ifdef CARIM_ENABLE_CHAT
     void ChatLine(Widget root_widget) {
         m_RootWidget = GetGame().GetWorkspace().CreateWidgets("Carim/gui/layouts/chatline.layout", root_widget);
         m_NameWidget = TextWidget.Cast(m_RootWidget.FindAnyWidget("ChatItemSenderWidget"));
         m_TextWidget = TextWidget.Cast(m_RootWidget.FindAnyWidget("ChatItemTextWidget"));
-        m_NameWidget.SetTextExactSize(CarimModelChatSettingsDAL.Get().size);
-        m_TextWidget.SetTextExactSize(CarimModelChatSettingsDAL.Get().size);
-    }
-
-    void CarimUpdateSize() {
         m_NameWidget.SetTextExactSize(CarimModelChatSettingsDAL.Get().size);
         m_TextWidget.SetTextExactSize(CarimModelChatSettingsDAL.Get().size);
     }
@@ -33,12 +28,17 @@ modded class ChatLine {
             SetColour(CarimModelChatSettingsDAL.Get().color_server);
         }
     }
+#endif
+
+    void CarimUpdateSize() {
+        m_NameWidget.SetTextExactSize(CarimModelChatSettingsDAL.Get().size);
+        m_TextWidget.SetTextExactSize(CarimModelChatSettingsDAL.Get().size);
+    }
 
     void CarimSetColour(int colour) {
         m_NameWidget.SetColor(colour);
         m_TextWidget.SetColor(colour);
     }
 }
-#endif
 
 #endif

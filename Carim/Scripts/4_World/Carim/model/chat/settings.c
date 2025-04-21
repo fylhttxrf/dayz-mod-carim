@@ -1,5 +1,5 @@
-#ifndef CarimModelChatSettings
-#define CarimModelChatSettings
+#ifndef CARIM_CarimModelChatSettings
+#define CARIM_CarimModelChatSettings
 
 class CarimModelChatSettings extends CarimModelBase {
     static const int DEFAULT_SIZE = 20;

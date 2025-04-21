@@ -1,5 +1,5 @@
-#ifndef CarimRPCBase
-#define CarimRPCBase
+#ifndef CARIM_CarimRPCBase
+#define CARIM_CarimRPCBase
 
 class CarimRPCBase<Class T> extends Managed {
     int GetType();

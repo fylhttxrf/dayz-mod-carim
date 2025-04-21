@@ -1,5 +1,5 @@
-#ifndef CarimModelPartyMarkers
-#define CarimModelPartyMarkers
+#ifndef CARIM_CarimModelPartyMarkers
+#define CARIM_CarimModelPartyMarkers
 
 class CarimModelPartyMarkers extends CarimModelBase {
     ref array<vector> markers = new array<vector>;

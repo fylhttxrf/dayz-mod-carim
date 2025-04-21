@@ -1,5 +1,5 @@
-#ifndef CarimRPCTypes
-#define CarimRPCTypes
+#ifndef CARIM_CarimRPCTypes
+#define CARIM_CarimRPCTypes
 
 enum CarimRPCTypes {
     START = -44999

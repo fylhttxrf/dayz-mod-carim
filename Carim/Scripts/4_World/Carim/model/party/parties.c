@@ -1,5 +1,5 @@
-#ifndef CarimModelPartyParties
-#define CarimModelPartyParties
+#ifndef CARIM_CarimModelPartyParties
+#define CARIM_CarimModelPartyParties
 
 class CarimModelPartyParties extends Managed {
     ref map<string, ref set<string>> registered = new map<string, ref set<string>>;

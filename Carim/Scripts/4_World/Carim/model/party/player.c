@@ -1,5 +1,5 @@
-#ifndef CarimModelPartyPlayer
-#define CarimModelPartyPlayer
+#ifndef CARIM_CarimModelPartyPlayer
+#define CARIM_CarimModelPartyPlayer
 
 class CarimModelPartyPlayer extends CarimModelBase {
     string id;

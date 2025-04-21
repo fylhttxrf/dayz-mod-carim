@@ -1,5 +1,5 @@
-#ifndef CarimLogging
-#define CarimLogging
+#ifndef CARIM_CarimLogging
+#define CARIM_CarimLogging
 
 class CarimLogging extends Managed {
     static const int NONE = 0;

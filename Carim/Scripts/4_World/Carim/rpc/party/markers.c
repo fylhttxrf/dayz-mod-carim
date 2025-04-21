@@ -1,5 +1,5 @@
-#ifndef CarimRPCPartyMarkers
-#define CarimRPCPartyMarkers
+#ifndef CARIM_CarimRPCPartyMarkers
+#define CARIM_CarimRPCPartyMarkers
 
 class CarimRPCPartyMarkers extends CarimRPCBase<Param2<string, CarimModelPartyMarkers>> {
     override int GetType() {

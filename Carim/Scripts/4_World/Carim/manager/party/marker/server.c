@@ -1,5 +1,5 @@
-#ifndef CarimManagerPartyMarkerServer
-#define CarimManagerPartyMarkerServer
+#ifndef CARIM_CarimManagerPartyMarkerServer
+#define CARIM_CarimManagerPartyMarkerServer
 
 class CarimManagerPartyMarkerServer extends Managed {
     ref map<string, ref CarimModelPartyMarkers> markers = new map<string, ref CarimModelPartyMarkers>;

@@ -1,5 +1,5 @@
-#ifndef CarimUtil
-#define CarimUtil
+#ifndef CARIM_CarimUtil
+#define CARIM_CarimUtil
 
 class CarimUtil {
     static bool CheckInput(string inputName) {

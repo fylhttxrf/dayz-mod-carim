@@ -1,5 +1,5 @@
-#ifndef CarimManagerAutorun
-#define CarimManagerAutorun
+#ifndef CARIM_CarimManagerAutorun
+#define CARIM_CarimManagerAutorun
 
 class CarimManagerAutorun extends Managed {
     static const string interruptInputs[] = {

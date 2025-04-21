@@ -1,5 +1,5 @@
-#ifndef CarimMissionServer
-#define CarimMissionServer
+#ifndef CARIM_MissionServer
+#define CARIM_MissionServer
 
 modded class MissionServer {
     override void OnInit() {

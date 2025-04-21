@@ -1,5 +1,5 @@
-#ifndef CarimModelPartySettings
-#define CarimModelPartySettings
+#ifndef CARIM_CarimModelPartySettings
+#define CARIM_CarimModelPartySettings
 
 class CarimModelPartySettings extends CarimModelBase {
     static const int DEFAULT_LOG_FREQUENCY = -1;

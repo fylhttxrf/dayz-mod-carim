@@ -1,5 +1,5 @@
-#ifndef CarimRPCPartyPositions
-#define CarimRPCPartyPositions
+#ifndef CARIM_CarimRPCPartyPositions
+#define CARIM_CarimRPCPartyPositions
 
 class CarimRPCPartyPositions extends CarimRPCBase<Param1<array<CarimModelPartyPlayer>>> {
     override int GetType() {

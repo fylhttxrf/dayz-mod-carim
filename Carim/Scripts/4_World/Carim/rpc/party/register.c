@@ -1,5 +1,5 @@
-#ifndef CarimRPCPartyRegister
-#define CarimRPCPartyRegister
+#ifndef CARIM_CarimRPCPartyRegister
+#define CARIM_CarimRPCPartyRegister
 
 class CarimRPCPartyRegister extends CarimRPCBase<Param1<array<string>>> {
     override int GetType() {

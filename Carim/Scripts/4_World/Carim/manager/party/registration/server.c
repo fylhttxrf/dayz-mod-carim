@@ -1,5 +1,5 @@
-#ifndef CarimManagerPartyRegistrationServer
-#define CarimManagerPartyRegistrationServer
+#ifndef CARIM_CarimManagerPartyRegistrationServer
+#define CARIM_CarimManagerPartyRegistrationServer
 
 class CarimManagerPartyRegistrationServer extends Managed {
     ref CarimModelPartyParties parties = new CarimModelPartyParties;

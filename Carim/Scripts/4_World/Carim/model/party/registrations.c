@@ -1,5 +1,5 @@
-#ifndef CarimModelPartyRegistrations
-#define CarimModelPartyRegistrations
+#ifndef CARIM_CarimModelPartyRegistrations
+#define CARIM_CarimModelPartyRegistrations
 
 class CarimModelPartyRegistrations extends CarimModelBase {
     ref map<string, string> registrations = new map<string, string>;

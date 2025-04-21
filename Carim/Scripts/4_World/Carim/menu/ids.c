@@ -1,5 +1,5 @@
-#ifndef CarimMenu
-#define CarimMenu
+#ifndef CARIM_CarimMenu
+#define CARIM_CarimMenu
 
 enum CarimMenu {
 }

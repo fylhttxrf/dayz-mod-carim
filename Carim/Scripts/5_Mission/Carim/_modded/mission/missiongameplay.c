@@ -1,5 +1,5 @@
-#ifndef CarimMissionGameplay
-#define CarimMissionGameplay
+#ifndef CARIM_MissionGameplay
+#define CARIM_MissionGameplay
 
 modded class MissionGameplay {
     override void OnUpdate(float timeslice) {

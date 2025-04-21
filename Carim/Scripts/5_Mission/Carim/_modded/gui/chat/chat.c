@@ -1,20 +1,14 @@
-#ifndef CarimChat
-#define CarimChat
+#ifndef CARIM_Chat
+#define CARIM_Chat
 
-#ifdef CARIM_ENABLE_CHAT
 modded class Chat {
+#ifdef CARIM_ENABLE_CHAT
     override void Add(ChatMessageEventParams params) {
         int channel = params.param1;
         if ((channel == CCDirect || channel == 0) && params.param3.IndexOf(CARIM_CHAT_PREFIX) == 0) {
             return;
         }
         super.Add(params);
-    }
-
-    void CarimUpdateSize() {
-        foreach(ChatLine line : m_Lines) {
-            line.CarimUpdateSize();
-        }
     }
 
     override void AddInternal(ChatMessageEventParams params) {
@@ -34,7 +28,13 @@ modded class Chat {
         }
         super.AddInternal(params);
     }
-}
 #endif
+
+    void CarimUpdateSize() {
+        foreach(ChatLine line : m_Lines) {
+            line.CarimUpdateSize();
+        }
+    }
+}
 
 #endif

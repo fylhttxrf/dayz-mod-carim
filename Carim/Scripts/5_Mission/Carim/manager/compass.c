@@ -1,5 +1,5 @@
-#ifndef CarimManagerCompass
-#define CarimManagerCompass
+#ifndef CARIM_CarimManagerCompass
+#define CARIM_CarimManagerCompass
 
 class CarimManagerCompass extends Managed {
     ref CarimMenuCompass menu = new CarimMenuCompass;

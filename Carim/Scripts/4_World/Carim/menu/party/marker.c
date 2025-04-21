@@ -1,5 +1,5 @@
-#ifndef CarimMenuPartyMarker
-#define CarimMenuPartyMarker
+#ifndef CARIM_CarimMenuPartyMarker
+#define CARIM_CarimMenuPartyMarker
 
 class CarimMenuPartyMarker extends UIScriptedMenu {
     Widget carimRoot;

@@ -1,5 +1,5 @@
-#ifndef CarimPlayerBase
-#define CarimPlayerBase
+#ifndef CARIM_PlayerBase
+#define CARIM_PlayerBase
 
 modded class PlayerBase {
     ref CarimRPCAutorun carimRPCAutorun = new CarimRPCAutorun;

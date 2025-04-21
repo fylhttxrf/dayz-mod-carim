@@ -1,5 +1,5 @@
-#ifndef CarimMissionBase
-#define CarimMissionBase
+#ifndef CARIM_MissionBase
+#define CARIM_MissionBase
 
 modded class MissionBase {
     override UIScriptedMenu CreateScriptedMenu(int id) {

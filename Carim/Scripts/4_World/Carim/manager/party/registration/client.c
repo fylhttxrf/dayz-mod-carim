@@ -1,5 +1,5 @@
-#ifndef CarimManagerPartyRegistrationClient
-#define CarimManagerPartyRegistrationClient
+#ifndef CARIM_CarimManagerPartyRegistrationClient
+#define CARIM_CarimManagerPartyRegistrationClient
 
 class CarimManagerPartyRegistrationClient extends Managed {
     ref CarimMenuPartyRegister menu;

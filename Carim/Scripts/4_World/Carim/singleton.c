@@ -1,5 +1,5 @@
-#ifndef CarimSingleton
-#define CarimSingleton
+#ifndef CARIM_CarimSingleton
+#define CARIM_CarimSingleton
 
 class CarimSingleton<Class T> {
     private static ref T instance;

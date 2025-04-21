@@ -1,5 +1,5 @@
-#ifndef CarimRPCAutorun
-#define CarimRPCAutorun
+#ifndef CARIM_CarimRPCAutorun
+#define CARIM_CarimRPCAutorun
 
 class CarimRPCAutorun extends CarimRPCBase<Param3<bool, int, int>> {
     override int GetType() {

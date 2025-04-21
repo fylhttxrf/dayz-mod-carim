@@ -1,5 +1,5 @@
-#ifndef CarimChatInputMenu
-#define CarimChatInputMenu
+#ifndef CARIM_ChatInputMenu
+#define CARIM_ChatInputMenu
 
 #ifdef CARIM_ENABLE_CHAT
 modded class ChatInputMenu {

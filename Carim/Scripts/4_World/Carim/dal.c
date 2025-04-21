@@ -1,5 +1,5 @@
-#ifndef CarimDAL
-#define CarimDAL
+#ifndef CARIM_CarimDAL
+#define CARIM_CarimDAL
 
 class CarimDAL<Class T> {
     private static ref T instance;
