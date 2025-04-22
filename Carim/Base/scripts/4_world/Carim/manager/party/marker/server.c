@@ -12,7 +12,7 @@ class CarimManagerPartyMarkerServer extends Managed {
         auto parties = CarimManagerPartyRegistrationServerSingleton.Get().parties;
         if (parties.mutuals.Contains(id)) {
             auto idMap = CarimUtil.GetServerIdPlayerMap();
-            foreach(string playerId : parties.mutuals.Get(id)) {
+            foreach(string playerId : parties.mutuals.Get(id).ToArray()) {
                 if (idMap.Contains(playerId)) {
                     PlayerBase player = idMap.Get(playerId);
                     if (player.GetIdentity() && player.IsAlive()) {

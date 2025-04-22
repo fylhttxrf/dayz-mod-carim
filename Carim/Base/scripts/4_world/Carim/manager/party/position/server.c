@@ -19,15 +19,19 @@ class CarimManagerPartyPositionServer extends Managed {
 
         // Harvest the relevant information
         foreach(string id, PlayerBase player : idMap) {
-            players.Insert(id, new CarimModelPartyPlayer(id, player.GetPosition(), player.GetHealthLevel()));
+            CarimLogging.Trace("PartyPositionServer Harvest " + id);
+            auto playerInfo = new CarimModelPartyPlayer(id, player.GetPosition(), player.GetHealthLevel());
+            CarimLogging.Trace("PartyPositionServer Harvested " + playerInfo.Repr());
+            players.Insert(id, playerInfo);
         }
 
         // Send the information to each recipient's mutual party members
         auto parties = CarimManagerPartyRegistrationServerSingleton.Get().parties;
-        foreach(string recipient : parties.mutuals.GetKeyArray()) {
+        auto ids = parties.mutuals.GetKeyArray();
+        foreach(string recipient : ids) {
             if (parties.mutuals.Contains(recipient)) {
                 array<CarimModelPartyPlayer> sharedInfo = new array<CarimModelPartyPlayer>;
-                foreach(string mutual : parties.mutuals.Get(recipient)) {
+                foreach(string mutual : parties.mutuals.Get(recipient).ToArray()) {
                     if (players.Contains(mutual)) {
                         sharedInfo.Insert(players.Get(mutual));
                     }

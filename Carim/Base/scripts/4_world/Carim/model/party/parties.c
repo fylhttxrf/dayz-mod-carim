@@ -2,59 +2,76 @@
 #define CARIM_CarimModelPartyParties
 
 class CarimModelPartyParties extends Managed {
-    ref map<string, ref set<string>> registered = new map<string, ref set<string>>;
-    ref map<string, ref set<string>> mutuals = new map<string, ref set<string>>;
+    ref map<string, ref CarimSet> registered = new map<string, ref CarimSet>;
+    ref map<string, ref CarimSet> mutuals = new map<string, ref CarimSet>;
 
-    void Register(string id, array<string> players) {
-        set<string> added = new set<string>;
-        set<string> removed = new set<string>;
-        set<string> associated = new set<string>;
+    bool Register(string id, array<string> players) {
+        if (!registered.Contains(id)) {
+            registered.Insert(id, new CarimSet);
+        }
+
+        bool added;
+        CarimSet removed = registered.Get(id).Copy();
 
         foreach(string newPlayer : players) {
-            associated.Insert(newPlayer);
-            if (!registered.Contains(id) || registered.Get(id).Find(newPlayer) == -1) {
+            removed.Remove(newPlayer);
+            if (!registered.Get(id).Contains(newPlayer)) {
                 CarimLogging.Trace("Register " + id + " added " + newPlayer);
-                added.Insert(newPlayer);
-            }
-        }
-        if (registered.Contains(id)) {
-            foreach(string oldPlayer : registered.Get(id)) {
-                if (associated.Find(oldPlayer) == -1) {
-                    CarimLogging.Trace("Register " + id + " removed " + oldPlayer);
-                    removed.Insert(oldPlayer);
-                }
+                added = true;
+                registered.Get(id).Insert(newPlayer);
             }
         }
 
-        if (added.Count() > 0 || removed.Count() > 0) {
-            registered.Set(id, associated);
+        foreach(string removedPlayer : removed.ToArray()) {
+            registered.Get(id).Remove(removedPlayer);
+            UpdateMutual(removedPlayer);
+        }
+
+        bool changed = (added || removed.Count() > 0);
+        if (changed) {
             UpdateMutual(id);
-            foreach(string addedPlayer : added) {
-                UpdateMutual(addedPlayer);
-            }
-            foreach(string removedPlayer : removed) {
-                UpdateMutual(removedPlayer);
+            foreach(string player : registered.Get(id).ToArray()) {
+                UpdateMutual(player);
             }
         }
+
+        return changed;
     }
 
     void UpdateMutual(string id) {
+        CarimLogging.Trace("UpdateMutual " + id);
         if (!registered.Contains(id)) {
+            CarimLogging.Trace("No registration found");
             return;
         }
         if (!mutuals.Contains(id)) {
-            mutuals.Insert(id, new set<string>);
+            mutuals.Insert(id, new CarimSet);
         } else {
             mutuals.Get(id).Clear();
         }
         auto admins = CarimModelServerSettingsDAL.Get().adminIds;
-        foreach(string player : registered.Get(id)) {
-            if (registered.Contains(player) && registered.Get(player).Find(id) >= 0) {
+        foreach(string player : registered.Get(id).ToArray()) {
+            CarimLogging.Trace("Checking if mutual: " + player);
+            if (registered.Contains(player) && registered.Get(player).Contains(id)) {
+                CarimLogging.Trace("Mutual found: " + player);
                 mutuals.Get(id).Insert(player);
             } else if (admins.Find(id) != -1) {
+                CarimLogging.Trace("Mutual admin override: " + player);
                 mutuals.Get(id).Insert(player);
             }
         }
+    }
+
+    string Repr() {
+        string jsonRegistered;
+        if (CarimLogging.WillLog(CarimLogging.TRACE)) {
+            JsonSerializer().WriteToString(registered, false, jsonRegistered);
+        }
+        string jsonMutuals;
+        if (CarimLogging.WillLog(CarimLogging.TRACE)) {
+            JsonSerializer().WriteToString(mutuals, false, jsonMutuals);
+        }
+        return "PartyParties<" + jsonRegistered + ", " + jsonMutuals + ">";
     }
 }
 

@@ -11,6 +11,10 @@ class CarimModelPartyPlayer extends CarimModelBase {
         position = newPosition;
         healthLevel = newHealthLevel;
     }
+
+    string Repr() {
+        return "PartyPlayer<" + id + ", " + position.ToString() + ", " + healthLevel.ToString() + ">";
+    }
 }
 
 #endif

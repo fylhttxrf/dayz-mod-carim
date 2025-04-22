@@ -5,7 +5,7 @@ class CarimSingleton<Class T> {
     private static ref T instance;
 
     static T Get() {
-        if (!instance) {
+        if (!instance || instance == null) {
             CarimLogging.Trace("Spawn " + T.ToString());
             Class.CastTo(instance, T.Spawn());
         }

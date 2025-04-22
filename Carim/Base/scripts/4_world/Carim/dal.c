@@ -10,13 +10,13 @@ class CarimDAL<Class T> {
 
     static void Save() {
         string error;
-        if (!JsonFileLoader<T>.SaveFile(Path(), instance, error)) {
+        if (!JsonFileLoader<T>.SaveFile(Path(), Get(), error)) {
             CarimLogging.Warn("Settings save " + Path() + " " + error);
         }
     }
 
     static T Get() {
-        if (!instance) {
+        if (!instance || instance == null) {
             Class.CastTo(instance, T.Spawn());
             if (FileExist(Path())) {
                 string error;

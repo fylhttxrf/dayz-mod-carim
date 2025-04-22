@@ -13,10 +13,10 @@ $mission = "P:\missions\dayzOffline.chernarusplus"
 # $mod = "$localMods\@SchanaModGlobalChat;$localMods\@SchanaModCompass;$localMods\@SchanaModParty;"
 
 # check all functionality in single mod
-# $mod = "$localMods\@Carim"
+$mod = "$localMods\@Carim"
 
 # verify all workshop mods
-$mod = "$workshopMods\@SchanaModGlobalChat;$workshopMods\@SchanaModCompass;$workshopMods\@SchanaModParty;$workshopMods\@Carim;$workshopMods\@CarimAutorun;$workshopMods\@CarimChat;$workshopMods\@CarimCompass;$workshopMods\@CarimParty;"
+# $mod = "$workshopMods\@SchanaModGlobalChat;$workshopMods\@SchanaModCompass;$workshopMods\@SchanaModParty;$workshopMods\@Carim;$workshopMods\@CarimAutorun;$workshopMods\@CarimChat;$workshopMods\@CarimCompass;$workshopMods\@CarimParty;"
 
 #Start-Process -FilePath "$clientDir\DayZDiag_x64.exe" -WorkingDirectory "$clientDir" -ArgumentList "-mod=$mod -profiles=$mission\profilesServer -doLogs -server -config=$mission\serverDZ.cfg -limitFPS=1000"
 Start-Process -FilePath "$serverDir\DayZServer_x64.exe" -WorkingDirectory "$serverDir" -ArgumentList "-mod=$mod -profiles=$mission\profilesServer -doLogs -config=$mission\serverDZ.cfg -limitFPS=1000"

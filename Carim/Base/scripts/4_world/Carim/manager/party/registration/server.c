@@ -14,22 +14,30 @@ class CarimManagerPartyRegistrationServer extends Managed {
     }
 
     void Register(string id, array<string> players) {
-        parties.Register(id, players);
+        string jsonPlayers;
+        if (CarimLogging.WillLog(CarimLogging.TRACE)) {
+            JsonSerializer().WriteToString(players, false, jsonPlayers);
+        }
+        CarimLogging.Trace("Register " + id + ", " + jsonPlayers);
+        CarimLogging.Trace("Before: " + parties.Repr());
+        bool changed = parties.Register(id, players);
+        CarimLogging.Trace("After: " + parties.Repr());
+        if (changed) {
+            Send();
+        }
     }
 
     void Send() {
         map<string, PlayerBase> idMap = CarimUtil.GetServerIdPlayerMap();
         foreach(string id, PlayerBase player : idMap) {
-            if (player.IsAlive()) {
-                array<string> mutuals = new array<string>;
-                if (parties.mutuals.Contains(id)) {
-                    foreach(string mutual : parties.mutuals.Get(id)) {
-                        mutuals.Insert(mutual);
-                    }
+            array<string> mutuals = new array<string>;
+            if (parties.mutuals.Contains(id)) {
+                foreach(string mutual : parties.mutuals.Get(id).ToArray()) {
+                    mutuals.Insert(mutual);
                 }
-                Param1<array<string>> params = new Param1<array<string>>(mutuals);
-                rpc.Send(player, params, player.GetIdentity());
             }
+            Param1<array<string>> params = new Param1<array<string>>(mutuals);
+            rpc.Send(player, params, player.GetIdentity());
         }
     }
 }

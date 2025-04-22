@@ -46,8 +46,9 @@ class CarimManagerPartyPositionClient extends Managed {
     }
 
     void RemoveInvalidNametags() {
-        foreach(string id : menus.GetKeyArray()) {
-            if (!serverPositions.Contains(id)) {
+        auto ids = menus.GetKeyArray();
+        foreach(string id : ids) {
+            if (!serverPositions.Contains(id) && menus.Contains(id)) {
                 menus.Get(id).CarimRemove();
                 menus.Remove(id);
             }
