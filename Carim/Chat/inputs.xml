@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<modded_inputs>
+    <inputs>
+        <actions>
+            <input name="UACarimChatChannel"
+                   loc="Switch Chat Channel"
+                   />
+            <input name="UACarimChatSizeDown"
+                   loc="Decrease Font Size"
+                   />
+            <input name="UACarimChatSizeUp"
+                   loc="Increase Font Size"
+                   />
+        </actions>
+        <sorting name="Carim"
+                 loc="Carim"
+                 >
+            <input name="UACarimChatChannel" />
+            <input name="UACarimChatSizeDown" />
+            <input name="UACarimChatSizeUp" />
+        </sorting>
+    </inputs>
+    <preset>
+        <input name="UACarimChatChannel">
+            <btn name="kZ" />
+        </input>
+        <input name="UACarimChatSizeDown">
+            <btn name="kLBracket" />
+        </input>
+        <input name="UACarimChatSizeUp">
+            <btn name="kRBracket" />
+        </input>
+    </preset>
+</modded_inputs>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<modded_inputs>
+    <inputs>
+        <actions>
+            <input name="UACarimPartyMenu"
+                   loc="Party Menu"
+                   />
+            <input name="UACarimPartyPing"
+                   loc="Party Ping"
+                   />
+            <input name="UACarimPartyPingClear"
+                   loc="Party Ping Clear"
+                   />
+        </actions>
+        <sorting name="Carim"
+                 loc="Carim"
+                 >
+            <input name="UACarimPartyMenu" />
+            <input name="UACarimPartyPing" />
+            <input name="UACarimPartyPingClear" />
+        </sorting>
+    </inputs>
+    <preset>
+        <input name="UACarimPartyMenu">
+            <btn name="kP" />
+        </input>
+        <input name="UACarimPartyPing">
+            <btn name="kT" />
+        </input>
+        <input name="UACarimPartyPingClear">
+            <btn name="kY" />
+        </input>
+    </preset>
+</modded_inputs>
