@@ -15,6 +15,9 @@ FrameWidgetClass rootFrame {
             vexactpos 0
             hexactsize 0
             vexactsize 0
+            font "gui/fonts/sdf_MetronLight72"
+            "shadow size" 5
+            "text sharpness" 1.5
             scaled 1
             text ""
             "size to text h" 1
