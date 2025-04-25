@@ -2,57 +2,87 @@
 #define CARIM_MissionGameplay
 
 modded class MissionGameplay {
-    CarimManagerAutorun carimManagerAutorun;
-    CarimManagerChat carimManagerChat;
-    CarimManagerCompass carimManagerCompass;
-    CarimManagerPartyMarkerClient carimManagerPartyMarkerClient;
-    CarimManagerPartyPositionClient carimManagerPartyPositionClient;
-    CarimManagerPartyRegistrationClient carimManagerPartyRegistrationClient;
+    ref CarimManagerAutorun carimManagerAutorun;
+    ref CarimManagerChat carimManagerChat;
+    ref CarimManagerCompass carimManagerCompass;
+    ref CarimManagerPartyMarkerClient carimManagerPartyMarkerClient;
+    ref CarimManagerPartyPositionClient carimManagerPartyPositionClient;
+    ref CarimManagerPartyRegistrationClient carimManagerPartyRegistrationClient;
 
-    CarimModelSettings carimModelSettings;
-    CarimModelChatSettings carimModelChatSettings;
-    CarimModelPartyMarkers carimModelPartyMarkers;
-    CarimModelPartyRegistrations carimModelPartyRegistrations;
+    ref CarimModelChatSettings carimModelChatSettings;
+    ref CarimModelPartyMarkers carimModelPartyMarkers;
+    ref CarimModelPartyRegistrations carimModelPartyRegistrations;
 
-    override void OnInit() {
-        super.OnInit();
-
-        carimModelSettings = CarimModelSettingsDAL.Get();
+    void MissionGameplay() {
+        carimModelSettings.Load();
+        CarimLogging.settings = carimModelSettings;
 
         if (CarimEnabled.Autorun()) {
-            carimManagerAutorun = CarimManagerAutorunSingleton.Get();
+            carimManagerAutorun = new CarimManagerAutorun;
         }
         if (CarimEnabled.Chat()) {
-            carimModelChatSettings = CarimModelChatSettingsDAL.Get();
-            carimManagerChat = CarimManagerChatSingleton.Get();
+            carimModelChatSettings = new CarimModelChatSettings;
+            carimModelChatSettings.Load();
+            carimManagerChat = new CarimManagerChat;
         }
         if (CarimEnabled.Compass()) {
-            carimManagerCompass = CarimManagerCompassSingleton.Get();
+            carimManagerCompass = new CarimManagerCompass;
         }
         if (CarimEnabled.Party()) {
-            carimModelPartyMarkers = CarimModelPartyMarkersDAL.Get();
-            carimModelPartyRegistrations = CarimModelPartyRegistrationsDAL.Get();
-            carimManagerPartyMarkerClient = CarimManagerPartyMarkerClientSingleton.Get();
-            carimManagerPartyPositionClient = CarimManagerPartyPositionClientSingleton.Get();
-            carimManagerPartyRegistrationClient = CarimManagerPartyRegistrationClientSingleton.Get();
+            carimModelPartyMarkers = new CarimModelPartyMarkers;
+            carimModelPartyMarkers.Load();
+            carimModelPartyRegistrations = new CarimModelPartyRegistrations;
+            carimModelPartyRegistrations.Load();
+            carimManagerPartyMarkerClient = new CarimManagerPartyMarkerClient(carimModelPartyMarkers, carimModelPartyRegistrations);
+            carimManagerPartyPositionClient = new CarimManagerPartyPositionClient(carimModelPartyRegistrations);
+            carimManagerPartyRegistrationClient = new CarimManagerPartyRegistrationClient(carimModelPartyRegistrations);
         }
+    }
+
+    override void CarimManagerPartyMarkerClientAddServer(string id, CarimModelPartyMarkers markers) {
+        carimManagerPartyMarkerClient.AddServer(id, markers);
+    }
+
+    override void CarimManagerPartyPositionClientSetPositions(array<CarimModelPartyPlayer> players) {
+        carimManagerPartyPositionClient.SetPositions(players);
+    }
+
+    override void CarimManagerPartyRegistrationClientSetMutual(array<string> ids) {
+        carimManagerPartyRegistrationClient.SetMutual(ids);
     }
 
     override void OnUpdate(float timeslice) {
         super.OnUpdate(timeslice);
         if (CarimEnabled.Autorun()) {
-            CarimManagerAutorunSingleton.Get().OnUpdate();
+            carimManagerAutorun.OnUpdate();
         }
         if (CarimEnabled.Chat()) {
-            CarimManagerChatSingleton.Get().OnUpdate();
+            carimManagerChat.OnUpdate(carimModelChatSettings);
         }
         if (CarimEnabled.Compass()) {
-            CarimManagerCompassSingleton.Get().OnUpdate();
+            carimManagerCompass.OnUpdate();
         }
         if (CarimEnabled.Party()) {
-            CarimManagerPartyRegistrationClientSingleton.Get().OnUpdate();
-            CarimManagerPartyMarkerClientSingleton.Get().OnUpdate();
+            carimManagerPartyRegistrationClient.OnUpdate();
+            carimManagerPartyMarkerClient.OnUpdate();
         }
+    }
+
+    override UIScriptedMenu CreateScriptedMenu(int id) {
+        UIScriptedMenu menu = NULL;
+        menu = super.CreateScriptedMenu(id);
+        if (CarimEnabled.Party() && !menu) {
+            switch (id) {
+                case CarimMenuParty.REGISTER:
+                    menu = new CarimMenuPartyRegister(carimManagerPartyRegistrationClient);
+                    carimManagerPartyRegistrationClient.menu = CarimMenuPartyRegister.Cast(menu);
+                    break;
+            }
+            if (menu) {
+                menu.SetID(id);
+            }
+        }
+        return menu;
     }
 }
 

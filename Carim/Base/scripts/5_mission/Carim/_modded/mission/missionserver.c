@@ -2,24 +2,36 @@
 #define CARIM_MissionServer
 
 modded class MissionServer {
-    CarimManagerPartyMarkerServer carimManagerPartyMarkerServer;
-    CarimManagerPartyPositionServer carimManagerPartyPositionServer;
-    CarimManagerPartyRegistrationServer carimManagerPartyRegistrationServer;
+    ref CarimManagerPartyMarkerServer carimManagerPartyMarkerServer;
+    ref CarimManagerPartyPositionServer carimManagerPartyPositionServer;
+    ref CarimManagerPartyRegistrationServer carimManagerPartyRegistrationServer;
 
-    CarimModelSettings carimModelSettings;
-    CarimModelServerSettings carimModelServerSettings;
+    ref CarimModelServerSettings carimModelServerSettings;
 
-    override void OnInit() {
-        super.OnInit();
+    ref CarimModelPartyParties carimModelPartyParties;
 
-        carimModelSettings = CarimModelSettingsDAL.Get();
-        carimModelServerSettings = CarimModelServerSettingsDAL.Get();
+    void MissionServer() {
+        carimModelSettings.Load();
+        CarimLogging.settings = carimModelSettings;
+
+        carimModelServerSettings = new CarimModelServerSettings;
+        carimModelServerSettings.Load();
 
         if (CarimEnabled.Party()) {
-            carimManagerPartyMarkerServer = CarimManagerPartyMarkerServerSingleton.Get();
-            carimManagerPartyPositionServer = CarimManagerPartyPositionServerSingleton.Get();
-            carimManagerPartyRegistrationServer = CarimManagerPartyRegistrationServerSingleton.Get();
+            carimModelPartyParties = new CarimModelPartyParties(carimModelServerSettings.adminIds);
+
+            carimManagerPartyMarkerServer = new CarimManagerPartyMarkerServer(carimModelPartyParties);
+            carimManagerPartyPositionServer = new CarimManagerPartyPositionServer(carimModelPartyParties);
+            carimManagerPartyRegistrationServer = new CarimManagerPartyRegistrationServer(carimModelPartyParties);
         }
+    }
+
+    override void CarimManagerPartyMarkerServerRegister(string id, CarimModelPartyMarkers markers) {
+        carimManagerPartyMarkerServer.Register(id, markers);
+    }
+
+    override void CarimManagerPartyRegistrationServerRegister(string id, array<string> ids) {
+        carimManagerPartyRegistrationServer.Register(id, ids);
     }
 }
 

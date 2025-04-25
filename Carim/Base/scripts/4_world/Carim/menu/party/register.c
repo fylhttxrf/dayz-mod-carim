@@ -2,24 +2,19 @@
 #define CARIM_CarimMenuPartyRegister
 
 class CarimMenuPartyRegister extends UIScriptedMenu {
+    CarimManagerPartyRegistrationClient registrationClient;
     bool carimInitialized;
     TextListboxWidget carimPlayers;
     TextListboxWidget carimRegistered;
     ButtonWidget carimAdd;
     ButtonWidget carimRemove;
 
+    void CarimMenuPartyRegister(CarimManagerPartyRegistrationClient client) {
+        registrationClient = client;
+    }
+
     void ~CarimMenuPartyRegister() {
-        // TODO: disable mouse controlling character, but leave
-        // other controls intact (like inventory). Might have to
-        // do this within mission
         GetGame().GetCallQueue(CALL_CATEGORY_GUI).Remove(this.CarimUpdateLists);
-        GetGame().GetUIManager().Back();
-        GetGame().GetUIManager().ShowCursor(true);
-        GetGame().GetUIManager().ShowUICursor(false);
-        GetGame().GetInput().ResetGameFocus();
-        if (layoutRoot) {
-            layoutRoot.Unlink();
-        }
     }
 
     override Widget Init() {
@@ -38,18 +33,16 @@ class CarimMenuPartyRegister extends UIScriptedMenu {
 
     override void OnShow() {
         super.OnShow();
-        CarimUpdateLists();
+        GetGame().GetMission().AddActiveInputExcludes({"menu"});
         GetGame().GetCallQueue(CALL_CATEGORY_GUI).CallLater(this.CarimUpdateLists, 500, true);
+
+        CarimUpdateLists();
     }
 
     override void OnHide() {
         super.OnHide();
+        GetGame().GetMission().RemoveActiveInputExcludes({"menu"}, true);
         GetGame().GetCallQueue(CALL_CATEGORY_GUI).Remove(this.CarimUpdateLists);
-        GetGame().GetUIManager().Back();
-        GetGame().GetUIManager().ShowCursor(true);
-        GetGame().GetUIManager().ShowUICursor(false);
-        GetGame().GetInput().ResetGameFocus();
-        Close();
     }
 
     override bool OnClick(Widget w, int x, int y, int button) {
@@ -62,7 +55,7 @@ class CarimMenuPartyRegister extends UIScriptedMenu {
                     break;
                 }
                 carimPlayers.GetItemData(selectedRow, 0, id);
-                CarimManagerPartyRegistrationClientSingleton.Get().AddPlayerToParty(id.param1);
+                registrationClient.AddPlayerToParty(id.param1);
                 CarimUpdateLists();
                 return true;
                 break;
@@ -72,7 +65,7 @@ class CarimMenuPartyRegister extends UIScriptedMenu {
                     break;
                 }
                 carimRegistered.GetItemData(selectedRow, 0, id);
-                CarimManagerPartyRegistrationClientSingleton.Get().RemovePlayerFromParty(id.param1);
+                registrationClient.RemovePlayerFromParty(id.param1);
                 carimRegistered.SelectRow(selectedRow - 1);
                 CarimUpdateLists();
                 return true;
@@ -83,7 +76,7 @@ class CarimMenuPartyRegister extends UIScriptedMenu {
 
     void CarimUpdateLists() {
         CarimUpdateList(carimPlayers, CarimUtil.GetClientPlayerIdentities());
-        CarimUpdateList(carimRegistered, CarimModelPartyRegistrationsDAL.Get().registrations);
+        CarimUpdateList(carimRegistered, registrationClient.registrations.registrations);
         CarimUpdateColors();
     }
 
@@ -113,12 +106,9 @@ class CarimMenuPartyRegister extends UIScriptedMenu {
         Param1<string> id;
         for (i = 0; i < carimRegistered.GetNumItems(); ++i) {
             carimRegistered.GetItemData(i, 0, id);
-            if (onlinePlayers.Contains(id.param1)) {
+            if (onlinePlayers.Contains(id.param1) && registrationClient.mutual.Find(id.param1) >= 0) {
                 // Green 400
                 carimRegistered.SetItemColor(i, 0, 0xFF66BB6A);
-            } else if (onlinePlayers.Contains(id.param1) && CarimManagerPartyRegistrationClientSingleton.Get().mutual.Find(id.param1) < 0) {
-                // Light Blue 400
-                carimRegistered.SetItemColor(i, 0, 0xFF29B6F6);
             } else {
                 // Gray 400
                 carimRegistered.SetItemColor(i, 0, 0xFFBDBDBD);
