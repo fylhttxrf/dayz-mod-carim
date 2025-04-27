@@ -1,0 +1,10 @@
+name = "Carim";
+picture = "Carim/Base/gui/textures/Carim_small.edds";
+logo = "Carim/Base/gui/textures/Carim_small.edds";
+logoSmall = "Carim/Base/gui/textures/Carim_small.edds";
+logoOver = "Carim/Base/gui/textures/Carim_small.edds";
+tooltip = "Carim";
+overview = "Open Source mods for DayZ";
+action = "https://github.com/CarimDayZ/dayz-mod-carim";
+author = "cnofafva";
+authorID = "76561198045960503";
