@@ -1,3 +1,5 @@
+param([switch]$Setup = $false, [switch]$Build = $false, [switch]$Workbench = $false, [switch]$Diag = $false)
+
 $mod = "Carim"
 $key = "S:\Drive\DayZKeys\schana.biprivatekey"
 $dayZExtract = "C:\Program Files\Wardog\DayZ Extract\DayZExtract.exe"
@@ -73,6 +75,15 @@ function Run-Server {
     Start-Process -FilePath "$serverDir\DayZServer_x64.exe" -WorkingDirectory "$serverDir" -ArgumentList "-mod=$localMods\@$mod -profiles=$missions\profiles\server -doLogs -config=$missions\serverDZ.cfg -limitFPS=1000"
 }
 
-Setup-Project
-Build-Project
-Diag-Project
+if ($Setup) {
+    Setup-Project
+}
+if ($Build) {
+    Build-Project
+}
+if ($Workbench) {
+    Start-Workbench
+}
+if ($Diag) {
+    Diag-Project
+}
