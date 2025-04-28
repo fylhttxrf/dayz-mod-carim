@@ -4,7 +4,7 @@
 class CarimManagerPartyMarkerServer extends Managed {
     ref map<string, ref CarimModelPartyMarkers> markers = new map<string, ref CarimModelPartyMarkers>;
     ref CarimRPCPartyMarkers rpc = new CarimRPCPartyMarkers;
-    CarimModelPartyParties parties;
+    ref CarimModelPartyParties parties;
 
     void CarimManagerPartyMarkerServer(CarimModelPartyParties inputParties) {
         parties = inputParties;

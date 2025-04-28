@@ -2,13 +2,14 @@
 #define CARIM_CarimModelPartyParties
 
 class CarimModelPartyParties extends CarimModelAbcBase {
-    ref map<string, ref CarimSet> registered = new map<string, ref CarimSet>;
-    ref map<string, ref CarimSet> mutuals = new map<string, ref CarimSet>;
-
-    array<string> admins;
+    ref map<string, ref CarimSet> registered;
+    ref map<string, ref CarimSet> mutuals;
+    ref array<string> admins;
 
     void CarimModelPartyParties(array<string> adminIds) {
         admins = adminIds;
+        registered = new map<string, ref CarimSet>;
+        mutuals = new map<string, ref CarimSet>;
     }
 
     bool Register(string id, array<string> players) {

@@ -2,7 +2,7 @@
 #define CARIM_CarimManagerPartyRegistrationClient
 
 class CarimManagerPartyRegistrationClient extends Managed {
-    CarimModelPartyRegistrations registrations;
+    ref CarimModelPartyRegistrations registrations;
 
     ref CarimMenuPartyRegister menu;
     ref array<string> mutual = new array<string>;

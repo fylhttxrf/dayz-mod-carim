@@ -2,7 +2,7 @@
 #define CARIM_CarimManagerPartyRegistrationServer
 
 class CarimManagerPartyRegistrationServer extends Managed {
-    CarimModelPartyParties parties;
+    ref CarimModelPartyParties parties;
     ref CarimRPCPartyRegister rpc = new CarimRPCPartyRegister;
 
     void CarimManagerPartyRegistrationServer(CarimModelPartyParties inputParties) {

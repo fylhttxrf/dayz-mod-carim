@@ -5,9 +5,7 @@ modded class MissionServer {
     ref CarimManagerPartyMarkerServer carimManagerPartyMarkerServer;
     ref CarimManagerPartyPositionServer carimManagerPartyPositionServer;
     ref CarimManagerPartyRegistrationServer carimManagerPartyRegistrationServer;
-
     ref CarimModelServerSettings carimModelServerSettings;
-
     ref CarimModelPartyParties carimModelPartyParties;
 
     void MissionServer() {
@@ -19,7 +17,6 @@ modded class MissionServer {
 
         if (CarimEnabled.Party()) {
             carimModelPartyParties = new CarimModelPartyParties(carimModelServerSettings.adminIds);
-
             carimManagerPartyMarkerServer = new CarimManagerPartyMarkerServer(carimModelPartyParties);
             carimManagerPartyPositionServer = new CarimManagerPartyPositionServer(carimModelPartyParties);
             carimManagerPartyRegistrationServer = new CarimManagerPartyRegistrationServer(carimModelPartyParties);
@@ -27,11 +24,19 @@ modded class MissionServer {
     }
 
     override void CarimManagerPartyMarkerServerRegister(string id, CarimModelPartyMarkers markers) {
-        carimManagerPartyMarkerServer.Register(id, markers);
+        if (carimManagerPartyMarkerServer) {
+            carimManagerPartyMarkerServer.Register(id, markers);
+        } else {
+            CarimLogging.Warn(this, "carimManagerPartyMarkerServer not set");
+        }
     }
 
     override void CarimManagerPartyRegistrationServerRegister(string id, array<string> ids) {
-        carimManagerPartyRegistrationServer.Register(id, ids);
+        if (carimManagerPartyRegistrationServer) {
+            carimManagerPartyRegistrationServer.Register(id, ids);
+        } else {
+            CarimLogging.Warn(this, "carimManagerPartyRegistrationServer not set");
+        }
     }
 }
 

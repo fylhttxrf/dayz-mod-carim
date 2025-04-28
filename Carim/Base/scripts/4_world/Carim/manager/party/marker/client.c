@@ -2,8 +2,8 @@
 #define CARIM_CarimManagerPartyMarkerClient
 
 class CarimManagerPartyMarkerClient extends Managed {
-    CarimModelPartyMarkers markers;
-    CarimModelPartyRegistrations registrations;
+    ref CarimModelPartyMarkers markers;
+    ref CarimModelPartyRegistrations registrations;
     ref map<string, ref CarimModelPartyMarkers> serverMarkers = new map<string, ref CarimModelPartyMarkers>;
     ref array<ref CarimMenuPartyMarker> menus = new array<ref CarimMenuPartyMarker>;
     ref CarimRPCPartyMarkers rpc = new CarimRPCPartyMarkers;

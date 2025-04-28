@@ -3,7 +3,7 @@
 
 class CarimManagerPartyPositionServer extends Managed {
     ref CarimRPCPartyPositions rpc = new CarimRPCPartyPositions;
-    CarimModelPartyParties parties;
+    ref CarimModelPartyParties parties;
 
     void CarimManagerPartyPositionServer(CarimModelPartyParties inputParties) {
         parties = inputParties;
