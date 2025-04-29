@@ -30,9 +30,11 @@ class CarimManagerPartyPositionServer extends Managed {
         // Send the information to each recipient's mutual party members
         auto ids = parties.mutuals.GetKeyArray();
         foreach(string recipient : ids) {
-            if (parties.mutuals.Contains(recipient)) {
+            if (idMap.Contains(recipient) && parties.mutuals.Contains(recipient)) {
+                // TODO: clean up registered players that are no longer present
                 array<CarimModelPartyPlayer> sharedInfo = new array<CarimModelPartyPlayer>;
-                foreach(string mutual : parties.mutuals.Get(recipient).ToArray()) {
+                auto mutualPlayers = parties.mutuals.Get(recipient).ToArray();
+                foreach(string mutual : mutualPlayers) {
                     if (players.Contains(mutual)) {
                         sharedInfo.Insert(players.Get(mutual));
                     }

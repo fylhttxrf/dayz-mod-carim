@@ -33,7 +33,8 @@ class CarimManagerPartyRegistrationServer extends Managed {
         foreach(string id, PlayerBase player : idMap) {
             array<string> mutuals = new array<string>;
             if (parties.mutuals.Contains(id)) {
-                foreach(string mutual : parties.mutuals.Get(id).ToArray()) {
+                auto mutualPlayers = parties.mutuals.Get(id).ToArray();
+                foreach(string mutual : mutualPlayers) {
                     mutuals.Insert(mutual);
                 }
             }

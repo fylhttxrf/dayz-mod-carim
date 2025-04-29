@@ -29,7 +29,8 @@ class CarimModelPartyParties extends CarimModelAbcBase {
             }
         }
 
-        foreach(string removedPlayer : removed.ToArray()) {
+        auto removedPlayers = removed.ToArray();
+        foreach(string removedPlayer : removedPlayers) {
             CarimLogging.Info(this, "Register " + id + " removed " + removedPlayer);
             registered.Get(id).Remove(removedPlayer);
             UpdateMutual(removedPlayer);
@@ -38,7 +39,8 @@ class CarimModelPartyParties extends CarimModelAbcBase {
         bool changed = (added || removed.Count() > 0);
         if (changed) {
             UpdateMutual(id);
-            foreach(string player : registered.Get(id).ToArray()) {
+            auto registeredPlayers = registered.Get(id).ToArray();
+            foreach(string player : registeredPlayers) {
                 UpdateMutual(player);
             }
         }
@@ -57,7 +59,8 @@ class CarimModelPartyParties extends CarimModelAbcBase {
         } else {
             mutuals.Get(id).Clear();
         }
-        foreach(string player : registered.Get(id).ToArray()) {
+        auto registeredPlayers = registered.Get(id).ToArray();
+        foreach(string player : registeredPlayers) {
             CarimLogging.Trace(this, "Checking if mutual: " + player);
             if (registered.Contains(player) && registered.Get(player).Contains(id)) {
                 CarimLogging.Trace(this, "Mutual found: " + player);

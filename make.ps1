@@ -1,4 +1,4 @@
-param([switch]$Setup = $false, [switch]$Build = $false, [switch]$Workbench = $false, [switch]$Diag = $false)
+param([switch]$Setup = $false, [switch]$Build = $false, [switch]$Workbench = $false, [switch]$Diag = $false, [switch]$Server = $false)
 
 $mod = "Carim"
 $key = "S:\Drive\DayZKeys\schana.biprivatekey"
@@ -87,4 +87,7 @@ if ($Workbench) {
 }
 if ($Diag) {
     Diag-Project
+}
+if ($Server) {
+    Run-Server
 }

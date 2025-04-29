@@ -16,7 +16,8 @@ class CarimManagerPartyMarkerServer extends Managed {
         // Send markers to mutual members
         if (parties.mutuals.Contains(id)) {
             auto idMap = CarimManagerPartyUtil.GetServerIdPlayerMap();
-            foreach(string playerId : parties.mutuals.Get(id).ToArray()) {
+            auto mutualPlayers = parties.mutuals.Get(id).ToArray();
+            foreach(string playerId : mutualPlayers) {
                 if (idMap.Contains(playerId)) {
                     PlayerBase player = idMap.Get(playerId);
                     if (player.GetIdentity() && player.IsAlive()) {
