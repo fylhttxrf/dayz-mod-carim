@@ -1,4 +1,5 @@
 FrameWidgetClass rootFrame {
+ visible 0
  ignorepointer 1
  position 2 2
  size 0.5 20

@@ -52,27 +52,29 @@ class CarimMenuPartyBase extends UIScriptedMenu {
         super.Update(timeslice);
 
         if (layoutRoot) {
+            CarimSetRootPosition();
+
+            Mission mission = GetGame().GetMission();
+            IngameHud hud = IngameHud.Cast(mission.GetHud());
+            if (hud && hud.GetHudVisibility().IsContextFlagActive(IngameHudVisibility.HUD_HIDE_FLAGS)) {
+                layoutRoot.Show(false);
+            } else {
+                layoutRoot.Show(CarimVisibleOnScreen());
+            }
+
             if (carimLastUpdated > CARIM_60_FPS_INTERVAL_SEC) {
-                Mission mission = GetGame().GetMission();
-                IngameHud hud = IngameHud.Cast(mission.GetHud());
-                if (hud && hud.GetHudVisibility().IsContextFlagActive(IngameHudVisibility.HUD_HIDE_FLAGS)) {
-                    layoutRoot.Show(false);
-                } else {
-                    float distance = Math.Round(vector.Distance(CarimGetPosition(), GetGame().GetPlayer().GetPosition()));
-                    string distanceString = distance.ToString() + "m";
-                    if (distance > 1000) {
-                        distanceString = (Math.Round(distance / 100) / 10).ToString() + "km";
-                    }
-                    carimNametag.SetText(CarimGetName());
-                    carimDistance.SetText(distanceString);
-                    CarimOnUpdate();
-                    layoutRoot.Show(CarimVisibleOnScreen());
+                float distance = Math.Round(vector.Distance(CarimGetPosition(), GetGame().GetPlayer().GetPosition()));
+                string distanceString = distance.ToString() + "m";
+                if (distance > 1000) {
+                    distanceString = (Math.Round(distance / 100) / 10).ToString() + "km";
                 }
+                carimNametag.SetText(CarimGetName());
+                carimDistance.SetText(distanceString);
+                CarimOnUpdate();
                 carimLastUpdated = 0.0;
             } else {
                 carimLastUpdated += timeslice;
             }
-            CarimSetRootPosition();
         }
     }
 
