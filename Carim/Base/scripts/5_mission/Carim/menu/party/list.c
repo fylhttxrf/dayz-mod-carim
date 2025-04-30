@@ -15,6 +15,10 @@ class CarimMenuPartyList extends CarimMenuPartyNametag {
         y = (2 + height) * carimListIndex;
         layoutRoot.SetPos(x, y);
     }
+
+    override bool CarimVisibleOnScreen() {
+        return true;
+    }
 }
 
 #endif

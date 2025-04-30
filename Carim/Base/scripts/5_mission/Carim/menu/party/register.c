@@ -3,29 +3,25 @@
 
 class CarimMenuPartyRegister extends UIScriptedMenu {
     CarimManagerPartyRegistrationClient registrationClient;
-    bool carimInitialized;
+
     TextListboxWidget carimPlayers;
     TextListboxWidget carimRegistered;
     ButtonWidget carimAdd;
     ButtonWidget carimRemove;
 
+    float carimLastUpdated = 0.0;
+
     void CarimMenuPartyRegister(CarimManagerPartyRegistrationClient client) {
         registrationClient = client;
     }
 
-    void ~CarimMenuPartyRegister() {
-        GetGame().GetCallQueue(CALL_CATEGORY_GUI).Remove(this.CarimUpdateLists);
-    }
-
     override Widget Init() {
-        if (!carimInitialized) {
+        if (!layoutRoot) {
             layoutRoot = GetGame().GetWorkspace().CreateWidgets("Carim/Base/gui/layouts/party/register.layout");
             carimPlayers = TextListboxWidget.Cast(layoutRoot.FindAnyWidget("players"));
             carimRegistered = TextListboxWidget.Cast(layoutRoot.FindAnyWidget("registered"));
             carimAdd = ButtonWidget.Cast(layoutRoot.FindAnyWidget("add"));
             carimRemove = ButtonWidget.Cast(layoutRoot.FindAnyWidget("remove"));
-
-            carimInitialized = true;
         }
 
         return layoutRoot;
@@ -34,15 +30,11 @@ class CarimMenuPartyRegister extends UIScriptedMenu {
     override void OnShow() {
         super.OnShow();
         GetGame().GetMission().AddActiveInputExcludes({"menu"});
-        GetGame().GetCallQueue(CALL_CATEGORY_GUI).CallLater(this.CarimUpdateLists, 500, true);
-
-        CarimUpdateLists();
     }
 
     override void OnHide() {
         super.OnHide();
         GetGame().GetMission().RemoveActiveInputExcludes({"menu"}, true);
-        GetGame().GetCallQueue(CALL_CATEGORY_GUI).Remove(this.CarimUpdateLists);
     }
 
     override bool OnClick(Widget w, int x, int y, int button) {
@@ -72,6 +64,19 @@ class CarimMenuPartyRegister extends UIScriptedMenu {
                 break;
         }
         return super.OnClick(w, x, y, button);
+    }
+
+    override void Update(float timeslice) {
+        super.Update(timeslice);
+
+        if (layoutRoot) {
+            if (carimLastUpdated > CARIM_4_FPS_INTERVAL_SEC) {
+                CarimUpdateLists();
+                carimLastUpdated = 0.0;
+            } else {
+                carimLastUpdated += timeslice;
+            }
+        }
     }
 
     void CarimUpdateLists() {

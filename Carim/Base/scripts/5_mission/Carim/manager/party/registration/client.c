@@ -19,7 +19,7 @@ class CarimManagerPartyRegistrationClient extends Managed {
         GetGame().GetCallQueue(CALL_CATEGORY_GUI).Remove(this.RenewRegistration);
     }
 
-    void OnUpdate() {
+    void OnUpdate(float timeslice) {
         PlayerBase player = PlayerBase.Cast(GetGame().GetPlayer());
         if (player && GetUApi() && !GetGame().GetUIManager().IsMenuOpen(MENU_CHAT_INPUT)) {
             if (CarimUtil.CheckInput("UAUIBack")) {
@@ -35,6 +35,9 @@ class CarimManagerPartyRegistrationClient extends Managed {
                     GetGame().GetUIManager().EnterScriptedMenu(CarimMenuParty.REGISTER, NULL);
                 }
             }
+        }
+        if (menu) {
+            menu.Update(timeslice);
         }
     }
 

@@ -60,11 +60,12 @@ modded class MissionGameplay {
             carimManagerChat.OnUpdate(carimModelChatSettings);
         }
         if (CarimEnabled.Compass()) {
-            carimManagerCompass.OnUpdate();
+            carimManagerCompass.OnUpdate(timeslice);
         }
         if (CarimEnabled.Party()) {
-            carimManagerPartyRegistrationClient.OnUpdate();
-            carimManagerPartyMarkerClient.OnUpdate();
+            carimManagerPartyRegistrationClient.OnUpdate(timeslice);
+            carimManagerPartyMarkerClient.OnUpdate(timeslice);
+            carimManagerPartyPositionClient.OnUpdate(timeslice);
         }
     }
 

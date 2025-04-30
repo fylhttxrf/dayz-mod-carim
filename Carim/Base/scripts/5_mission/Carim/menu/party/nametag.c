@@ -50,8 +50,8 @@ class CarimMenuPartyNametag extends CarimMenuPartyMarker {
         return "0 1.3 0";
     }
 
-    override void CarimUpdate() {
-        super.CarimUpdate();
+    override void CarimOnUpdate() {
+        super.CarimOnUpdate();
 
         int currentHealth = CarimGetHealth();
         foreach(int level : CARIM_HEALTH_LEVELS) {

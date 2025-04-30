@@ -27,7 +27,7 @@ class CarimManagerPartyMarkerClient extends Managed {
         }
     }
 
-    void OnUpdate() {
+    void OnUpdate(float timeslice) {
         PlayerBase player = PlayerBase.Cast(GetGame().GetPlayer());
         if (player && GetUApi() && !GetGame().GetUIManager().IsMenuOpen(MENU_CHAT_INPUT)) {
             if (CarimUtil.CheckInput("UACarimPartyPing")) {
@@ -40,6 +40,11 @@ class CarimManagerPartyMarkerClient extends Managed {
             if (CarimUtil.CheckInput("UACarimPartyPingClear")) {
                 CarimLogging.Debug(this, "Input clear");
                 Reset();
+            }
+        }
+        foreach(CarimMenuPartyMarker menu : menus) {
+            if (menu) {
+                menu.Update(timeslice);
             }
         }
     }

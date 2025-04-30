@@ -12,7 +12,6 @@ WrapSpacerWidgetClass ChatItemWidget {
     "Size To Content H" 1
     {
         TextWidgetClass ChatItemSenderWidget {
-            clipchildren 0
             size 0.2 1
             valign center_ref
             hexactpos 1
@@ -29,7 +28,6 @@ WrapSpacerWidgetClass ChatItemWidget {
             "text valign" center
         }
         TextWidgetClass ChatItemTextWidget {
-            clipchildren 0
             size 0.8 1
             valign center_ref
             hexactpos 0

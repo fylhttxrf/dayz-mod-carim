@@ -2,19 +2,21 @@
 #define CARIM_CarimManagerCompass
 
 class CarimManagerCompass extends Managed {
-    ref CarimMenuCompass menu = new CarimMenuCompass;
+    ref CarimMenuCompass menu;
 
-    void OnUpdate() {
+    void CarimManagerCompass() {
+        menu = new CarimMenuCompass;
+        menu.Init();
+    }
+
+    void OnUpdate(float timeslice) {
         PlayerBase player = PlayerBase.Cast(GetGame().GetPlayer());
         if (player && GetUApi() && !GetGame().GetUIManager().IsMenuOpen(MENU_CHAT_INPUT)) {
             if (CarimUtil.CheckInput("UACarimCompassToggle")) {
-                if (menu) {
-                    menu.CarimToggleHeading();
-                } else {
-                    menu = new CarimMenuCompass;
-                }
+                menu.CarimToggleHeading();
             }
         }
+        menu.Update(timeslice);
     }
 }
 

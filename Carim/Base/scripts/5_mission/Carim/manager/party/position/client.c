@@ -40,6 +40,11 @@ class CarimManagerPartyPositionClientMenus extends Managed {
         nametag.Close();
         list.Close();
     }
+
+    void Update(float timeslice) {
+        nametag.Update(timeslice);
+        list.Update(timeslice);
+    }
 }
 
 class CarimManagerPartyPositionClient extends Managed {
@@ -60,6 +65,15 @@ class CarimManagerPartyPositionClient extends Managed {
         serverPositions.Clear();
         foreach(CarimModelPartyPlayer position : positions) {
             serverPositions.Insert(position.id, position);
+        }
+    }
+
+    void OnUpdate(float timeslice) {
+        PlayerBase player = PlayerBase.Cast(GetGame().GetPlayer());
+        foreach(CarimManagerPartyPositionClientMenus menu : menus) {
+            if (menu) {
+                menu.Update(timeslice);
+            }
         }
     }
 
