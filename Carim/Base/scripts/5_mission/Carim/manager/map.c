@@ -10,8 +10,6 @@ class CarimManagerMap extends Managed {
             if (CarimUtil.CheckInput("UAMapToggle")) {
                 if (!menu && !GetGame().GetUIManager().GetMenu()) {
                     menu = CarimMenuMap.Cast(GetGame().GetUIManager().EnterScriptedMenu(MENU_MAP, null));
-                    menu.LoadMapMarkers();
-                    // GetGame().GetMission().AddActiveInputExcludes({"map"});
                 }
             }
         }
