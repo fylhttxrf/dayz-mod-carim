@@ -5,6 +5,7 @@ modded class MissionGameplay {
     ref CarimManagerAutorun carimManagerAutorun;
     ref CarimManagerChat carimManagerChat;
     ref CarimManagerCompass carimManagerCompass;
+    ref CarimManagerMap carimManagerMap;
     ref CarimManagerPartyMarkerClient carimManagerPartyMarkerClient;
     ref CarimManagerPartyPositionClient carimManagerPartyPositionClient;
     ref CarimManagerPartyRegistrationClient carimManagerPartyRegistrationClient;
@@ -27,6 +28,9 @@ modded class MissionGameplay {
         }
         if (CarimEnabled.Compass()) {
             carimManagerCompass = new CarimManagerCompass;
+        }
+        if (CarimEnabled.Map()) {
+            carimManagerMap = new CarimManagerMap;
         }
         if (CarimEnabled.Party()) {
             carimModelPartyMarkers = new CarimModelPartyMarkers;
@@ -62,6 +66,9 @@ modded class MissionGameplay {
         if (CarimEnabled.Compass()) {
             carimManagerCompass.OnUpdate(timeslice);
         }
+        if (CarimEnabled.Map()) {
+            carimManagerMap.OnUpdate(timeslice);
+        }
         if (CarimEnabled.Party()) {
             carimManagerPartyRegistrationClient.OnUpdate(timeslice);
             carimManagerPartyMarkerClient.OnUpdate(timeslice);
@@ -72,12 +79,21 @@ modded class MissionGameplay {
     override UIScriptedMenu CreateScriptedMenu(int id) {
         UIScriptedMenu menu = NULL;
         menu = super.CreateScriptedMenu(id);
-        if (CarimEnabled.Party() && !menu) {
-            switch (id) {
-                case CarimMenuParty.REGISTER:
-                    menu = new CarimMenuPartyRegister(carimManagerPartyRegistrationClient);
-                    carimManagerPartyRegistrationClient.menu = CarimMenuPartyRegister.Cast(menu);
-                    break;
+        if (!menu) {
+            if (CarimEnabled.Party()) {
+                switch (id) {
+                    case CarimMenuParty.REGISTER:
+                        menu = new CarimMenuPartyRegister(carimManagerPartyRegistrationClient);
+                        carimManagerPartyRegistrationClient.menu = CarimMenuPartyRegister.Cast(menu);
+                        break;
+                }
+            }
+            if (CarimEnabled.Map()) {
+                switch (id) {
+                    case CarimMenu.MAP:
+                        menu = new CarimMenuMap;
+                        break;
+                }
             }
             if (menu) {
                 menu.SetID(id);

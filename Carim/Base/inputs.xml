@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<modded_inputs>
+    <inputs>
+        <actions>
+            <input name="UACarimMapMenu"
+                   loc="Map Menu"
+                   />
+        </actions>
+        <sorting name="Carim"
+                 loc="Carim"
+                 >
+            <input name="UACarimMapMenu" />
+        </sorting>
+    </inputs>
+    <preset>
+        <input name="UACarimMapMenu">
+            <btn name="kM" />
+        </input>
+    </preset>
+</modded_inputs>
