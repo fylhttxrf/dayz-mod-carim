@@ -78,19 +78,20 @@ modded class MissionGameplay {
 
     override UIScriptedMenu CreateScriptedMenu(int id) {
         UIScriptedMenu menu = NULL;
-        menu = super.CreateScriptedMenu(id);
+        if (!CarimEnabled.Map() || id != MENU_MAP) {
+            menu = super.CreateScriptedMenu(id);
+        }
         if (!menu) {
             if (CarimEnabled.Party()) {
                 switch (id) {
                     case CarimMenuParty.REGISTER:
                         menu = new CarimMenuPartyRegister(carimManagerPartyRegistrationClient);
-                        carimManagerPartyRegistrationClient.menu = CarimMenuPartyRegister.Cast(menu);
                         break;
                 }
             }
             if (CarimEnabled.Map()) {
                 switch (id) {
-                    case CarimMenu.MAP:
+                    case MENU_MAP:
                         menu = new CarimMenuMap;
                         break;
                 }

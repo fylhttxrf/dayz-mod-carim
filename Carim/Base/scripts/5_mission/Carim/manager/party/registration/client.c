@@ -31,8 +31,8 @@ class CarimManagerPartyRegistrationClient extends Managed {
             if (CarimUtil.CheckInput("UACarimPartyMenu")) {
                 if (menu) {
                     menu.Close();
-                } else if (GetGame().GetUIManager().GetMenu() == NULL) {
-                    GetGame().GetUIManager().EnterScriptedMenu(CarimMenuParty.REGISTER, NULL);
+                } else if (!GetGame().GetUIManager().GetMenu()) {
+                    menu = CarimMenuPartyRegister.Cast(GetGame().GetUIManager().EnterScriptedMenu(CarimMenuParty.REGISTER, null));
                 }
             }
         }

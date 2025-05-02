@@ -10,7 +10,6 @@ class CfgMods {
         action = "https://github.com/CarimDayZ/dayz-mod-carim";
         author = "cnofafva";
         type = "mod";
-        inputs = "Carim/Base/inputs.xml";
         dependencies[] = {"Game", "World", "Mission"};
 
         class defs {

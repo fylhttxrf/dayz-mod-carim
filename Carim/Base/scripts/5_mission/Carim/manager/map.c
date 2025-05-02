@@ -7,17 +7,11 @@ class CarimManagerMap extends Managed {
     void OnUpdate(float timeslice) {
         PlayerBase player = PlayerBase.Cast(GetGame().GetPlayer());
         if (player && GetUApi() && !GetGame().GetUIManager().IsMenuOpen(MENU_CHAT_INPUT)) {
-            if (CarimUtil.CheckInput("UAUIBack")) {
-                if (menu && GetGame().GetUIManager().GetMenu() == menu) {
-                    menu.UnlockControls();
-                    menu.Close();
-                }
-            }
-            if (CarimUtil.CheckInput("UACarimMapMenu")) {
-                if (menu) {
-                    menu.Close();
-                } else if (GetGame().GetUIManager().GetMenu() == NULL) {
-                    GetGame().GetUIManager().EnterScriptedMenu(CarimMenu.MAP, NULL);
+            if (CarimUtil.CheckInput("UAMapToggle")) {
+                if (!menu && !GetGame().GetUIManager().GetMenu()) {
+                    menu = CarimMenuMap.Cast(GetGame().GetUIManager().EnterScriptedMenu(MENU_MAP, null));
+                    menu.LoadMapMarkers();
+                    // GetGame().GetMission().AddActiveInputExcludes({"map"});
                 }
             }
         }
