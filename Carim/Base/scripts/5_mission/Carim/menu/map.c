@@ -4,19 +4,6 @@
 class CarimMenuMap extends MapMenu {
     ref array<ref MapMarker> carimMarkers = new array<ref MapMarker>;
 
-    override Widget Init() {
-        CarimLogging.Trace(this, "Init");
-        auto widget = super.Init();
-        m_IsOpenning = false; // BI typo
-        SetGPSMarkerVisibility(true);
-        SetGPSDirectionVisibility(true);
-        SetCompassUIVisibility(true);
-        SetUpperLegendVisibility(true);
-		m_HasCompass = true;
-		m_HasGPS = true;
-        return widget;
-    }
-
     override void AddMarker(vector pos, int color, int icon = 0) {
         CarimLogging.Trace(this, "AddMarker");
         carimMarkers.Insert(new MapMarker(pos, "", color, icon));
@@ -37,26 +24,6 @@ class CarimMenuMap extends MapMenu {
         // synced to the map item
         m_WasChanged = false;
         super.CloseMapMenu();
-    }
-
-    override void Update(float timeslice) {
-        CarimLogging.Trace(this, "Update " + CarimUtil.CheckInput("UAMapToggle").ToString());
-        super.Update(timeslice);
-    }
-
-    override void SetCompassUIVisibility(bool pState) {
-        CarimLogging.Trace(this, "SetCompassUIVisibility " + pState.ToString());
-        super.SetCompassUIVisibility(pState);
-    }
-
-    override void SetGPSMarkerVisibility(bool pState) {
-        CarimLogging.Trace(this, "SetGPSMarkerVisibility " + pState.ToString());
-        super.SetGPSMarkerVisibility(pState);
-    }
-
-    override void SetGPSDirectionVisibility(bool pState) {
-        CarimLogging.Trace(this, "SetGPSDirectionVisibility " + pState.ToString());
-        super.SetGPSDirectionVisibility(pState);
     }
 }
 
