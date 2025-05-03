@@ -5,7 +5,6 @@ modded class MissionGameplay {
     ref CarimManagerAutorun carimManagerAutorun;
     ref CarimManagerChat carimManagerChat;
     ref CarimManagerCompass carimManagerCompass;
-    ref CarimManagerMap carimManagerMap;
     ref CarimManagerPartyMarkerClient carimManagerPartyMarkerClient;
     ref CarimManagerPartyPositionClient carimManagerPartyPositionClient;
     ref CarimManagerPartyRegistrationClient carimManagerPartyRegistrationClient;
@@ -28,9 +27,6 @@ modded class MissionGameplay {
         }
         if (CarimEnabled.Compass()) {
             carimManagerCompass = new CarimManagerCompass;
-        }
-        if (CarimEnabled.Map()) {
-            carimManagerMap = new CarimManagerMap;
         }
         if (CarimEnabled.Party()) {
             carimModelPartyMarkers = new CarimModelPartyMarkers;
@@ -65,9 +61,6 @@ modded class MissionGameplay {
         }
         if (CarimEnabled.Compass()) {
             carimManagerCompass.OnUpdate(timeslice);
-        }
-        if (CarimEnabled.Map()) {
-            carimManagerMap.OnUpdate(timeslice);
         }
         if (CarimEnabled.Party()) {
             carimManagerPartyRegistrationClient.OnUpdate(timeslice);
