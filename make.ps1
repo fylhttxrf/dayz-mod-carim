@@ -32,7 +32,31 @@ function Setup-Project {
         # Setup the mission used for testing
         Copy-Item "$serverDir\mpmissions\$missionName" -Destination "$missions\$missionName" -Recurse
         Copy-Item "$serverDir\serverDZ.cfg" -Destination "$missions\"
+
         (Get-Content "$missions\serverDZ.cfg").Replace($missionName, "$missions\$missionName") | Set-Content "$missions\serverDZ.cfg"
+        (Get-Content "$missions\serverDZ.cfg").Replace("maxPlayers = 60;", "enableCfgGameplayFile=1;`nmaxPlayers = 60;") | Set-Content "$missions\serverDZ.cfg"
+
+        $cfggameplay = Get-Content "$missions\$missionName\cfggameplay.json" -raw | ConvertFrom-Json
+        # map config
+        $cfggameplay.MapData.ignoreMapOwnership = $true
+        $cfggameplay.MapData.ignoreNavItemsOwnership = $true
+        $cfggameplay.MapData.displayPlayerPosition = $true
+        $cfggameplay.MapData.displayNavInfo = $true
+        # unlimited stamina
+        $cfggameplay.PlayerData.StaminaData.sprintStaminaModifierErc = 0.0
+        $cfggameplay.PlayerData.StaminaData.sprintStaminaModifierCro = 0.0
+        $cfggameplay.PlayerData.StaminaData.staminaWeightLimitThreshold = 60000.0
+        $cfggameplay.PlayerData.StaminaData.staminaMax = 9999.0
+        $cfggameplay.PlayerData.StaminaData.staminaKgToStaminaPercentPenalty = 0.0
+        $cfggameplay.PlayerData.StaminaData.staminaMinCap = 9999.0
+        $cfggameplay.PlayerData.StaminaData.sprintSwimmingStaminaModifier = 0.0
+        $cfggameplay.PlayerData.StaminaData.sprintLadderStaminaModifier = 0.0
+        $cfggameplay.PlayerData.StaminaData.meleeStaminaModifier = 0.0
+        $cfggameplay.PlayerData.StaminaData.obstacleTraversalStaminaModifier = 0.0
+        $cfggameplay.PlayerData.StaminaData.holdBreathStaminaModifier = 0.0
+        # write
+        $cfggameplay | ConvertTo-Json -Depth 32 -Compress | Set-Content "$missions\$missionName\cfggameplay.json"
+
         (Get-Content "$missions\$missionName\db\globals.xml").Replace('<var name="TimeLogin" type="0" value="15"/>', '<var name="TimeLogin" type="0" value="1"/>') | Set-Content "$missions\$missionName\db\globals.xml"
     }
 }
@@ -73,7 +97,7 @@ function Diag-Project {
 }
 
 function Run-Server {
-    Start-Process -FilePath "$serverDir\DayZServer_x64.exe" -WorkingDirectory "$serverDir" -ArgumentList "-mod=$localMods\@$mod -profiles=$missions\profiles\server -doLogs -config=$missions\serverDZ.cfg -limitFPS=1000"
+    Start-Process -FilePath "$serverDir\DayZServer_x64.exe" -WorkingDirectory "$serverDir" -ArgumentList "-mod=$workshopMods\@CF;$workshopMods\@TraderPlus;$localMods\@SchanaModParty;$localMods\@SchanaModGlobalChat -profiles=$missions\profiles\server -doLogs -config=$missions\serverDZ.cfg -limitFPS=1000"
 }
 
 if ($Setup) {
