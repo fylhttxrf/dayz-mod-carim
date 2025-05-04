@@ -62,9 +62,7 @@ function Setup-Project {
 }
 
 function Start-Workbench {
-    $addons = Get-ChildItem "$root\$mod" | Where-Object { $_.PSISContainer }
-    $mods = $addons -join ";$projectDrive\$mod\"
-    Start-Process -FilePath workbenchApp.exe -WorkingDirectory "$toolsDir\Bin\Workbench" -ArgumentList "-mod=$projectDrive\$mod\$mods"
+    Start-Process -FilePath workbenchApp.exe -WorkingDirectory "$toolsDir\Bin\Workbench" -ArgumentList "-mod=$projectDrive\$mod"
 }
 
 function Build-Project {
@@ -72,22 +70,6 @@ function Build-Project {
 
     foreach ($output in $outputs) {
         Start-Process $pboProject -Wait -ArgumentList "$projectDrive\$mod", "+M=$localMods\$output", "+E=DAYZSA", "+K=$key", "+T", "+H", "+$", "+Z", "+B", "+C", "-P" 
-
-        if (!($output.ToString() -eq "@Carim") -and !$output.ToString().EndsWith("Autorun")) {
-            Get-ChildItem -Path "$localMods\$output\addons" -Filter "Autorun*" | Remove-Item
-        }
-
-        if (!($output.ToString() -eq "@Carim") -and !$output.ToString().EndsWith("Chat")) {
-            Get-ChildItem -Path "$localMods\$output\addons" -Filter "Chat*" | Remove-Item
-        }
-
-        if (!($output.ToString() -eq "@Carim") -and !$output.ToString().EndsWith("Compass")) {
-            Get-ChildItem -Path "$localMods\$output\addons" -Filter "Compass*" | Remove-Item
-        }
-
-        if (!($output.ToString() -eq "@Carim") -and !$output.ToString().EndsWith("Party")) {
-            Get-ChildItem -Path "$localMods\$output\addons" -Filter "Party*" | Remove-Item
-        }
     }
 }
 
