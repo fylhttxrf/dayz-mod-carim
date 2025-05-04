@@ -8,12 +8,10 @@ modded class MissionServer {
     ref CarimModelServerSettings carimModelServerSettings;
     ref CarimModelPartyParties carimModelPartyParties;
 
-    void MissionServer() {
-        carimModelSettings.Load();
-        CarimLogging.settings = carimModelSettings;
+    override void OnGameplayDataHandlerLoad() {
+        super.OnGameplayDataHandlerLoad();
 
-        carimModelServerSettings = new CarimModelServerSettings;
-        carimModelServerSettings.Load();
+        CarimEnabled.Initialize();
 
         if (CarimEnabled.Party()) {
             carimModelPartyParties = new CarimModelPartyParties(carimModelServerSettings.adminIds);
@@ -26,16 +24,12 @@ modded class MissionServer {
     override void CarimManagerPartyMarkerServerRegister(string id, CarimModelPartyMarkers markers) {
         if (carimManagerPartyMarkerServer) {
             carimManagerPartyMarkerServer.Register(id, markers);
-        } else {
-            CarimLogging.Warn(this, "carimManagerPartyMarkerServer not set");
         }
     }
 
     override void CarimManagerPartyRegistrationServerRegister(string id, array<string> ids) {
         if (carimManagerPartyRegistrationServer) {
             carimManagerPartyRegistrationServer.Register(id, ids);
-        } else {
-            CarimLogging.Warn(this, "carimManagerPartyRegistrationServer not set");
         }
     }
 }

@@ -13,9 +13,8 @@ modded class MissionGameplay {
     ref CarimModelPartyMarkers carimModelPartyMarkers;
     ref CarimModelPartyRegistrations carimModelPartyRegistrations;
 
-    void MissionGameplay() {
-        carimModelSettings.Load();
-        CarimLogging.settings = carimModelSettings;
+    override void OnGameplayDataHandlerLoad() {
+        super.OnGameplayDataHandlerLoad();
 
         if (CarimEnabled.Autorun()) {
             carimManagerAutorun = new CarimManagerAutorun;
@@ -40,29 +39,38 @@ modded class MissionGameplay {
     }
 
     override void CarimManagerPartyMarkerClientAddServer(string id, CarimModelPartyMarkers markers) {
-        carimManagerPartyMarkerClient.AddServer(id, markers);
+        if (carimManagerPartyMarkerClient) {
+            carimManagerPartyMarkerClient.AddServer(id, markers);
+        }
     }
 
     override void CarimManagerPartyPositionClientSetPositions(array<CarimModelPartyPlayer> players) {
-        carimManagerPartyPositionClient.SetPositions(players);
+        if (carimManagerPartyPositionClient) {
+            carimManagerPartyPositionClient.SetPositions(players);
+        }
     }
 
     override void CarimManagerPartyRegistrationClientSetMutual(array<string> ids) {
-        carimManagerPartyRegistrationClient.SetMutual(ids);
+        if (carimManagerPartyRegistrationClient) {
+            carimManagerPartyRegistrationClient.SetMutual(ids);
+        }
     }
 
     override void OnUpdate(float timeslice) {
         super.OnUpdate(timeslice);
-        if (CarimEnabled.Autorun()) {
+
+        CarimEnabled.Initialize();
+
+        if (CarimEnabled.Autorun() && carimManagerAutorun) {
             carimManagerAutorun.OnUpdate();
         }
-        if (CarimEnabled.Chat()) {
+        if (CarimEnabled.Chat() && carimManagerChat) {
             carimManagerChat.OnUpdate(carimModelChatSettings);
         }
-        if (CarimEnabled.Compass()) {
+        if (CarimEnabled.Compass() && carimManagerCompass) {
             carimManagerCompass.OnUpdate(timeslice);
         }
-        if (CarimEnabled.Party()) {
+        if (CarimEnabled.Party() && carimManagerPartyRegistrationClient && carimManagerPartyMarkerClient && carimManagerPartyPositionClient) {
             carimManagerPartyRegistrationClient.OnUpdate(timeslice);
             carimManagerPartyMarkerClient.OnUpdate(timeslice);
             carimManagerPartyPositionClient.OnUpdate(timeslice);

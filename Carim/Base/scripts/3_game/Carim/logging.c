@@ -16,7 +16,10 @@ class CarimLogging extends Managed {
     static void LogMessage(CarimLoggingLevel level, Class context, string message) {
         if (WillLog(level)) {
             string levelName = typename.EnumToString(CarimLoggingLevel, level);
-            string contextName = context.ClassName();
+            string contextName = "null";
+            if (context) {
+                contextName = context.ClassName();
+            }
             Print("[Carim - " + levelName + " - " + contextName + "] " + message);
         }
     }
