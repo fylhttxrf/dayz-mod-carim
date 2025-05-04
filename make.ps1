@@ -62,7 +62,7 @@ function Setup-Project {
 }
 
 function Start-Workbench {
-    Start-Process -FilePath workbenchApp.exe -WorkingDirectory "$toolsDir\Bin\Workbench" -ArgumentList "-mod=$projectDrive\$mod"
+    Start-Process -FilePath workbenchApp.exe -WorkingDirectory "$toolsDir\Bin\Workbench" -ArgumentList "-mod=$projectDrive\$mod\$mod"
 }
 
 function Build-Project {

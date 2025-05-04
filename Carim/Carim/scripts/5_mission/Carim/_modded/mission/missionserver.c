@@ -5,7 +5,6 @@ modded class MissionServer {
     ref CarimManagerPartyMarkerServer carimManagerPartyMarkerServer;
     ref CarimManagerPartyPositionServer carimManagerPartyPositionServer;
     ref CarimManagerPartyRegistrationServer carimManagerPartyRegistrationServer;
-    ref CarimModelServerSettings carimModelServerSettings;
     ref CarimModelPartyParties carimModelPartyParties;
 
     override void OnGameplayDataHandlerLoad() {
@@ -14,7 +13,7 @@ modded class MissionServer {
         CarimEnabled.Initialize();
 
         if (CarimEnabled.Party()) {
-            carimModelPartyParties = new CarimModelPartyParties(carimModelServerSettings.adminIds);
+            carimModelPartyParties = new CarimModelPartyParties;
             carimManagerPartyMarkerServer = new CarimManagerPartyMarkerServer(carimModelPartyParties);
             carimManagerPartyPositionServer = new CarimManagerPartyPositionServer(carimModelPartyParties);
             carimManagerPartyRegistrationServer = new CarimManagerPartyRegistrationServer(carimModelPartyParties);

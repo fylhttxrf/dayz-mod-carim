@@ -6,8 +6,8 @@ class CarimModelPartyParties extends CarimModelAbcBase {
     ref map<string, ref CarimSet> mutuals;
     ref array<string> admins;
 
-    void CarimModelPartyParties(array<string> adminIds) {
-        admins = adminIds;
+    void CarimModelPartyParties() {
+        admins = CfgGameplayHandler.GetCarimAdminIds();
         registered = new map<string, ref CarimSet>;
         mutuals = new map<string, ref CarimSet>;
     }
