@@ -12,7 +12,7 @@ modded class MissionServer {
 
         CarimEnabled.Initialize();
 
-        if (CarimEnabled.Party()) {
+        if (CarimEnabled.Party() && !carimManagerPartyMarkerServer && !carimManagerPartyPositionServer && !carimManagerPartyRegistrationServer) {
             carimModelPartyParties = new CarimModelPartyParties;
             carimManagerPartyMarkerServer = new CarimManagerPartyMarkerServer(carimModelPartyParties);
             carimManagerPartyPositionServer = new CarimManagerPartyPositionServer(carimModelPartyParties);

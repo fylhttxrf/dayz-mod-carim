@@ -47,7 +47,10 @@ class CarimMenuPartyRegister extends UIScriptedMenu {
                     break;
                 }
                 carimPlayers.GetItemData(selectedRow, 0, id);
-                registrationClient.AddPlayerToParty(id.param1);
+                int maxPartySize = CfgGameplayHandler.GetCarimPartyMaxPartySize();
+                if (maxPartySize > 0 && registrationClient.registrations.registrations.Count() < maxPartySize) {
+                    registrationClient.AddPlayerToParty(id.param1);
+                }
                 CarimUpdateLists();
                 return true;
                 break;
@@ -72,6 +75,12 @@ class CarimMenuPartyRegister extends UIScriptedMenu {
         if (layoutRoot) {
             if (carimLastUpdated > CARIM_4_FPS_INTERVAL_SEC) {
                 CarimUpdateLists();
+                int maxPartySize = CfgGameplayHandler.GetCarimPartyMaxPartySize();
+                if (maxPartySize > 0 && registrationClient.registrations.registrations.Count() >= maxPartySize) {
+                    carimAdd.Enable(false);
+                } else {
+                    carimAdd.Enable(true);
+                }
                 carimLastUpdated = 0.0;
             } else {
                 carimLastUpdated += timeslice;

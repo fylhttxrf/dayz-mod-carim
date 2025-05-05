@@ -16,18 +16,18 @@ modded class MissionGameplay {
     override void OnGameplayDataHandlerLoad() {
         super.OnGameplayDataHandlerLoad();
 
-        if (CarimEnabled.Autorun()) {
+        if (CarimEnabled.Autorun() && !carimManagerAutorun) {
             carimManagerAutorun = new CarimManagerAutorun;
         }
-        if (CarimEnabled.Chat()) {
+        if (CarimEnabled.Chat() && !carimManagerChat) {
             carimModelChatSettings = new CarimModelChatSettings;
             carimModelChatSettings.Load();
             carimManagerChat = new CarimManagerChat;
         }
-        if (CarimEnabled.Compass()) {
+        if (CarimEnabled.Compass() && !carimManagerCompass) {
             carimManagerCompass = new CarimManagerCompass;
         }
-        if (CarimEnabled.Party()) {
+        if (CarimEnabled.Party() && !carimManagerPartyMarkerClient && !carimManagerPartyPositionClient && !carimManagerPartyRegistrationClient) {
             carimModelPartyMarkers = new CarimModelPartyMarkers;
             carimModelPartyMarkers.Load();
             carimModelPartyRegistrations = new CarimModelPartyRegistrations;
@@ -78,7 +78,7 @@ modded class MissionGameplay {
     }
 
     override UIScriptedMenu CreateScriptedMenu(int id) {
-        UIScriptedMenu menu = NULL;
+        UIScriptedMenu menu;
         if (!CarimEnabled.Map() || id != MENU_MAP) {
             menu = super.CreateScriptedMenu(id);
         }

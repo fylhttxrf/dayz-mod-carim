@@ -6,8 +6,8 @@ class CarimModelPartyMarkers extends CarimModelAbcDiskJson {
 
     void Add(vector mark) {
         markers.Insert(mark);
-        // TODO: respect server's max markers setting
-        if (markers.Count() > 3) {
+        int maxMarkers = CfgGameplayHandler.GetCarimPartyMaxMarkers();
+        if (maxMarkers > 0 && markers.Count() > maxMarkers) {
             markers.RemoveOrdered(0);
         }
         Persist();

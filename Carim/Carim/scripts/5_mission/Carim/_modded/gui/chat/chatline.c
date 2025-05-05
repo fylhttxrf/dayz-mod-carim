@@ -18,16 +18,16 @@ modded class ChatLine {
             int channel = params.param1;
             if (channel & CCSystem) {
                 if (params.param2 == "" && params.param3.IndexOf(" : ") > 0) {
-                    CarimSetColour(MissionGameplay.Cast(GetGame().GetMission()).carimModelChatSettings.color_global);
+                    CarimSetColour(CfgGameplayHandler.GetCarimChatColorGlobal());
                 } else {
-                    SetColour(MissionGameplay.Cast(GetGame().GetMission()).carimModelChatSettings.color_alert);
+                    SetColour(CfgGameplayHandler.GetCarimChatColorAlert());
                 }
             } else if (channel & CCAdmin) {
-                SetColour(MissionGameplay.Cast(GetGame().GetMission()).carimModelChatSettings.color_server);
+                SetColour(CfgGameplayHandler.GetCarimChatColorServer());
             } else if (channel == 0 || channel & CCDirect) {
-                CarimSetColour(MissionGameplay.Cast(GetGame().GetMission()).carimModelChatSettings.color_direct);
+                CarimSetColour(CfgGameplayHandler.GetCarimChatColorDirect());
             } else {
-                SetColour(MissionGameplay.Cast(GetGame().GetMission()).carimModelChatSettings.color_server);
+                SetColour(CfgGameplayHandler.GetCarimChatColorServer());
             }
         }
     }
