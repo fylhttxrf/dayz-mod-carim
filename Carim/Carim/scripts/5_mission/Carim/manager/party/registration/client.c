@@ -1,6 +1,3 @@
-#ifndef CARIM_CarimManagerPartyRegistrationClient
-#define CARIM_CarimManagerPartyRegistrationClient
-
 class CarimManagerPartyRegistrationClient extends Managed {
     ref CarimModelPartyRegistrations registrations;
 
@@ -74,5 +71,3 @@ class CarimManagerPartyRegistrationClient extends Managed {
         RenewRegistration();
     }
 }
-
-#endif

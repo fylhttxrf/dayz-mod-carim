@@ -1,7 +1,4 @@
-#ifndef CARIM_CarimMenuPartyNametag
-#define CARIM_CarimMenuPartyNametag
-
-class CarimMenuPartyNametag extends CarimMenuPartyMarker {
+class CarimMenuPartyNametag extends CarimMenuPartyPing {
     static const int CARIM_HEALTH_LEVELS[] = {GameConstants.STATE_PRISTINE, GameConstants.STATE_WORN, GameConstants.STATE_DAMAGED, GameConstants.STATE_BADLY_DAMAGED, GameConstants.STATE_RUINED};
 
     ref array<ref ImageWidget> carimHealths = new array<ref ImageWidget>;
@@ -61,5 +58,3 @@ class CarimMenuPartyNametag extends CarimMenuPartyMarker {
         }
     }
 }
-
-#endif

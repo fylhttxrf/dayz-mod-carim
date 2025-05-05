@@ -1,6 +1,3 @@
-#ifndef CARIM_ChatLine
-#define CARIM_ChatLine
-
 modded class ChatLine {
     void ChatLine(Widget root_widget) {
         if (CarimEnabled.Chat()) {
@@ -42,5 +39,3 @@ modded class ChatLine {
         m_TextWidget.SetColor(colour);
     }
 }
-
-#endif

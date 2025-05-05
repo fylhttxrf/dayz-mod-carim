@@ -1,6 +1,3 @@
-#ifndef CARIM_CarimManagerPartyPositionServer
-#define CARIM_CarimManagerPartyPositionServer
-
 class CarimManagerPartyPositionServer extends Managed {
     ref CarimRPCPartyPositions rpc = new CarimRPCPartyPositions;
     ref CarimModelPartyParties parties;
@@ -45,5 +42,3 @@ class CarimManagerPartyPositionServer extends Managed {
         }
     }
 }
-
-#endif

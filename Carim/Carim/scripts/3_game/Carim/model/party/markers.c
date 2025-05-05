@@ -1,22 +1,13 @@
-#ifndef CARIM_CarimModelPartyMarkers
-#define CARIM_CarimModelPartyMarkers
+class CarimModelPartyMarkers extends CarimModelAbcMarkers {}
 
-class CarimModelPartyMarkers extends CarimModelAbcDiskJson {
-    ref array<vector> markers = new array<vector>;
-
-    void Add(vector mark) {
-        markers.Insert(mark);
-        int maxMarkers = CfgGameplayHandler.GetCarimPartyMaxMarkers();
-        if (maxMarkers > 0 && markers.Count() > maxMarkers) {
+class CarimModelPartyPings extends CarimModelAbcMarkers {
+    override void Add(MapMarker mark) {
+        int maxPings = CfgGameplayHandler.GetCarimPartyMaxPings();
+        if (maxPings > 0 && markers.Count() >= maxPings) {
             markers.RemoveOrdered(0);
         }
-        Persist();
-    }
-
-    void Clear() {
-        markers.Clear();
-        Persist();
+        super.Add(mark);
     }
 }
 
-#endif
+class CarimModelPartyPositiosn extends CarimModelAbcMarkers {}

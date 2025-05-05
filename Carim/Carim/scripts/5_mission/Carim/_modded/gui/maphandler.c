@@ -1,6 +1,3 @@
-#ifndef CARIM_MapHandler
-#define CARIM_MapHandler
-
 modded class MapHandler {
     override bool OnDoubleClick(Widget w, int x, int y, int button) {
         if (!CarimEnabled.Map()) {
@@ -22,5 +19,3 @@ modded class MapHandler {
         return true;
     }
 }
-
-#endif

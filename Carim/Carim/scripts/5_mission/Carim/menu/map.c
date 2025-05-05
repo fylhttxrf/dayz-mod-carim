@@ -1,6 +1,3 @@
-#ifndef CARIM_CarimMenuMap
-#define CARIM_CarimMenuMap
-
 class CarimMenuMap extends MapMenu {
     // TODO: make this more useful and/or combine with CarimModelMapMarkers
     ref array<ref MapMarker> carimMarkers = new array<ref MapMarker>;
@@ -19,7 +16,7 @@ class CarimMenuMap extends MapMenu {
 
         if (CarimEnabled.Party()) {
             // TODO: make this usable even if parties aren't enabled
-            mission.carimManagerPartyMarkerClient.SyncMenus();
+            mission.carimManagerPartyPingClient.SyncMenus();
         }
 
         carimMarkers.Insert(new MapMarker(pos, "", color, icon));
@@ -34,8 +31,8 @@ class CarimMenuMap extends MapMenu {
 
         auto mission = MissionGameplay.Cast(GetGame().GetMission());
         if (CarimEnabled.Party()) {
-            foreach(int index, vector position : mission.carimModelPartyMarkers.markers) {
-                m_MapWidgetInstance.AddUserMark(position, (mission.carimModelPartyMarkers.markers.Count() - index).ToString(), ARGB(255, 255, 0, 0), MapMarkerTypes.GetMarkerTypeFromID(0));
+            foreach(int index, vector position : mission.carimModelPartyPings.markers) {
+                m_MapWidgetInstance.AddUserMark(position, (mission.carimModelPartyPings.markers.Count() - index).ToString(), ARGB(255, 255, 0, 0), MapMarkerTypes.GetMarkerTypeFromID(0));
             }
         }
         foreach(int mapIndex, vector mapPosition : mission.carimModelMapMarkers.markers) {
@@ -52,5 +49,3 @@ class CarimMenuMap extends MapMenu {
         super.CloseMapMenu();
     }
 }
-
-#endif

@@ -1,6 +1,3 @@
-#ifndef CARIM_CfgGameplayJson
-#define CARIM_CfgGameplayJson
-
 modded class CfgGameplayJson {
     ref ITEM_CarimData CarimData = new ITEM_CarimData;
 }
@@ -29,11 +26,11 @@ class ITEM_CarimData extends ITEM_DataBase {
 }
 
 class ITEM_CarimAutorunData extends ITEM_DataBase {
-    bool enabled = false;
+    bool enabled = true;
 }
 
 class ITEM_CarimChatData extends ITEM_DataBase {
-    bool enabled = false;
+    bool enabled = true;
     int colorDirect = 0xfffafafa; /* grey 50 */
     int colorGlobal = 0xffffd54f; /* amber 300 */
     int colorServer = 0xff4fc3f7; /* light blue 300 */
@@ -41,18 +38,16 @@ class ITEM_CarimChatData extends ITEM_DataBase {
 }
 
 class ITEM_CarimCompassData extends ITEM_DataBase {
-    bool enabled = false;
+    bool enabled = true;
     bool requireNavItem = false;
 }
 
 class ITEM_CarimMapData extends ITEM_DataBase {
-    bool enabled = false;
+    bool enabled = true;
 }
 
 class ITEM_CarimPartyData extends ITEM_DataBase {
-    bool enabled = false;
+    bool enabled = true;
     int maxPartySize = -1;
-    int maxMarkers = 3;
+    int maxPings = 3;
 }
-
-#endif

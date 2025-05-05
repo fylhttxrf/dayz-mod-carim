@@ -1,6 +1,3 @@
-#ifndef CARIM_CarimModelAbcDiskJson
-#define CARIM_CarimModelAbcDiskJson
-
 class CarimModelAbcDiskJson extends CarimModelAbcBase {
     string Path() {
         return "$profile:" + this.ClassName() + ".json";
@@ -27,5 +24,3 @@ class CarimModelAbcDiskJson extends CarimModelAbcBase {
         }
     }
 }
-
-#endif

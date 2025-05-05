@@ -1,6 +1,3 @@
-#ifndef CARIM_CarimManagerPartyPositionClient
-#define CARIM_CarimManagerPartyPositionClient
-
 class CarimManagerPartyPositionClientMenus extends Managed {
     ref CarimMenuPartyNametag nametag;
     ref CarimMenuPartyList list;
@@ -151,5 +148,3 @@ class CarimManagerPartyPositionClient extends Managed {
         return players;
     }
 }
-
-#endif

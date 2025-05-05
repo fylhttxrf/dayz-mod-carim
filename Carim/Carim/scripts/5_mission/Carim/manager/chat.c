@@ -1,6 +1,3 @@
-#ifndef CARIM_CarimManagerChat
-#define CARIM_CarimManagerChat
-
 class CarimManagerChat extends Managed {
     bool isChannelGlobal = true;
 
@@ -32,5 +29,3 @@ class CarimManagerChat extends Managed {
         }
     }
 }
-
-#endif

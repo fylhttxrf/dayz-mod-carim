@@ -1,6 +1,3 @@
-#ifndef CARIM_CarimLogging
-#define CARIM_CarimLogging
-
 enum CarimLoggingLevel {
     NONE = 0,
     ERROR,
@@ -71,5 +68,3 @@ class CarimLogging extends Managed {
         return settings.verbosity >= level;
     }
 }
-
-#endif

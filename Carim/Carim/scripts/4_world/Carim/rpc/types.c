@@ -1,6 +1,3 @@
-#ifndef CARIM_CarimRPCTypes
-#define CARIM_CarimRPCTypes
-
 enum CarimRPCTypes {
     START = -44999
 }
@@ -14,9 +11,8 @@ enum CarimRPCTypesChat : CarimRPCTypesAutorun {
 }
 
 enum CarimRPCTypesParty : CarimRPCTypesChat {
-    POSITIONS,
     MARKERS,
+    PINGS,
+    POSITIONS,
     REGISTER
 }
-
-#endif

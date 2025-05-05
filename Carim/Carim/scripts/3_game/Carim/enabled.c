@@ -1,6 +1,3 @@
-#ifndef CARIM_CarimEnabled
-#define CARIM_CarimEnabled
-
 class CarimEnabled {
     static bool autorun;
     static bool chat;
@@ -48,5 +45,3 @@ class CarimEnabled {
         }
     }
 }
-
-#endif

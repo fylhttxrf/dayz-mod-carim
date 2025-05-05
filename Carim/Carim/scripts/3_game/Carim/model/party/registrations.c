@@ -1,6 +1,3 @@
-#ifndef CARIM_CarimModelPartyRegistrations
-#define CARIM_CarimModelPartyRegistrations
-
 class CarimModelPartyRegistrations extends CarimModelAbcDiskJson {
     ref map<string, string> registrations = new map<string, string>;
 
@@ -14,5 +11,3 @@ class CarimModelPartyRegistrations extends CarimModelAbcDiskJson {
         Persist();
     }
 }
-
-#endif

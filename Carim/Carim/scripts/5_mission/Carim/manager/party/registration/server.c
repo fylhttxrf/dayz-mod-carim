@@ -1,6 +1,3 @@
-#ifndef CARIM_CarimManagerPartyRegistrationServer
-#define CARIM_CarimManagerPartyRegistrationServer
-
 class CarimManagerPartyRegistrationServer extends Managed {
     ref CarimModelPartyParties parties;
     ref CarimRPCPartyRegister rpc = new CarimRPCPartyRegister;
@@ -43,5 +40,3 @@ class CarimManagerPartyRegistrationServer extends Managed {
         }
     }
 }
-
-#endif

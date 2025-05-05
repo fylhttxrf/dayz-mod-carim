@@ -1,6 +1,3 @@
-#ifndef CARIM_ChatInputMenu
-#define CARIM_ChatInputMenu
-
 modded class ChatInputMenu {
     ref CarimRPCChat carimRPCChat = new CarimRPCChat;
 
@@ -42,5 +39,3 @@ modded class ChatInputMenu {
         }
     }
 }
-
-#endif

@@ -1,6 +1,3 @@
-#ifndef CARIM_CarimMenuPartyRegister
-#define CARIM_CarimMenuPartyRegister
-
 class CarimMenuPartyRegister extends UIScriptedMenu {
     CarimManagerPartyRegistrationClient registrationClient;
 
@@ -134,5 +131,3 @@ class CarimMenuPartyRegister extends UIScriptedMenu {
         }
     }
 }
-
-#endif

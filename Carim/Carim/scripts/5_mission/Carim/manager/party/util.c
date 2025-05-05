@@ -1,6 +1,3 @@
-#ifndef CARIM_CarimManagerPartyUtil
-#define CARIM_CarimManagerPartyUtil
-
 class CarimManagerPartyUtil {
     static map<string, PlayerBase> GetServerIdPlayerMap() {
         map<string, PlayerBase> idMap = new map<string, PlayerBase>;
@@ -17,5 +14,3 @@ class CarimManagerPartyUtil {
         return idMap;
     }
 }
-
-#endif

@@ -1,7 +1,4 @@
-#ifndef CARIM_CarimMenuPartyMarker
-#define CARIM_CarimMenuPartyMarker
-
-class CarimMenuPartyMarker extends CarimMenuPartyBase {
+class CarimMenuPartyPing extends CarimMenuPartyBase {
     override string CarimGetLayout() {
         return "Carim/Carim/gui/layouts/party/marker.layout";
     }
@@ -28,5 +25,3 @@ class CarimMenuPartyMarker extends CarimMenuPartyBase {
         return true;
     }
 }
-
-#endif

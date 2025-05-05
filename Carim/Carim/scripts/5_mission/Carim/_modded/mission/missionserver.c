@@ -1,8 +1,5 @@
-#ifndef CARIM_MissionServer
-#define CARIM_MissionServer
-
 modded class MissionServer {
-    ref CarimManagerPartyMarkerServer carimManagerPartyMarkerServer;
+    ref CarimManagerPartyPingServer carimManagerPartyPingServer;
     ref CarimManagerPartyPositionServer carimManagerPartyPositionServer;
     ref CarimManagerPartyRegistrationServer carimManagerPartyRegistrationServer;
     ref CarimModelPartyParties carimModelPartyParties;
@@ -12,17 +9,17 @@ modded class MissionServer {
 
         CarimEnabled.Initialize();
 
-        if (CarimEnabled.Party() && !carimManagerPartyMarkerServer && !carimManagerPartyPositionServer && !carimManagerPartyRegistrationServer) {
+        if (CarimEnabled.Party() && !carimManagerPartyPingServer && !carimManagerPartyPositionServer && !carimManagerPartyRegistrationServer) {
             carimModelPartyParties = new CarimModelPartyParties;
-            carimManagerPartyMarkerServer = new CarimManagerPartyMarkerServer(carimModelPartyParties);
+            carimManagerPartyPingServer = new CarimManagerPartyPingServer(carimModelPartyParties);
             carimManagerPartyPositionServer = new CarimManagerPartyPositionServer(carimModelPartyParties);
             carimManagerPartyRegistrationServer = new CarimManagerPartyRegistrationServer(carimModelPartyParties);
         }
     }
 
-    override void CarimManagerPartyMarkerServerRegister(string id, CarimModelPartyMarkers markers) {
-        if (carimManagerPartyMarkerServer) {
-            carimManagerPartyMarkerServer.Register(id, markers);
+    override void CarimManagerPartyPingServerRegister(string id, CarimModelPartyPings markers) {
+        if (carimManagerPartyPingServer) {
+            carimManagerPartyPingServer.Register(id, markers);
         }
     }
 
@@ -32,5 +29,3 @@ modded class MissionServer {
         }
     }
 }
-
-#endif

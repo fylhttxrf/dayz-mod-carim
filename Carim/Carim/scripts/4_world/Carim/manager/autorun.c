@@ -1,6 +1,3 @@
-#ifndef CARIM_CarimManagerAutorun
-#define CARIM_CarimManagerAutorun
-
 class CarimManagerAutorun extends Managed {
     static const string interruptInputs[] = {
         "UACarimAutorunToggle",
@@ -94,5 +91,3 @@ class CarimManagerAutorun extends Managed {
         rpc.Send(player, params);
     }
 }
-
-#endif

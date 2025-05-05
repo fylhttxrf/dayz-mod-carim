@@ -1,6 +1,3 @@
-#ifndef CARIM_Chat
-#define CARIM_Chat
-
 modded class Chat {
     override void Add(ChatMessageEventParams params) {
         if (CarimEnabled.Chat()) {
@@ -38,5 +35,3 @@ modded class Chat {
         }
     }
 }
-
-#endif

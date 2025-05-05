@@ -1,6 +1,3 @@
-#ifndef CARIM_CarimSet
-#define CARIM_CarimSet
-
 class CarimSet {
     private ref map<string, bool> data;
 
@@ -44,5 +41,3 @@ class CarimSet {
         return result;
     }
 }
-
-#endif

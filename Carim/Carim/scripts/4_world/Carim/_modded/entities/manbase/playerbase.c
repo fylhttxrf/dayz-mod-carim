@@ -1,10 +1,7 @@
-#ifndef CARIM_PlayerBase
-#define CARIM_PlayerBase
-
 modded class PlayerBase {
     ref CarimRPCAutorun carimRPCAutorun = new CarimRPCAutorun;
     ref CarimRPCChat carimRPCChat = new CarimRPCChat;
-    ref CarimRPCPartyMarkers carimRPCPartyMarkers = new CarimRPCPartyMarkers;
+    ref CarimRPCPartyPings carimRPCPartyPings = new CarimRPCPartyPings;
     ref CarimRPCPartyPositions carimRPCPartyPositions = new CarimRPCPartyPositions;
     ref CarimRPCPartyRegister carimRPCPartyRegister = new CarimRPCPartyRegister;
 
@@ -21,9 +18,9 @@ modded class PlayerBase {
                     carimRPCAutorun.OnRPC(sender, ctx);
                 }
                 break;
-            case carimRPCPartyMarkers.GetType():
+            case carimRPCPartyPings.GetType():
                 if (CarimEnabled.Party()) {
-                    carimRPCPartyMarkers.OnRPC(sender, ctx);
+                    carimRPCPartyPings.OnRPC(sender, ctx);
                 }
                 break;
             case carimRPCPartyPositions.GetType():
@@ -39,4 +36,3 @@ modded class PlayerBase {
         }
     }
 }
-#endif

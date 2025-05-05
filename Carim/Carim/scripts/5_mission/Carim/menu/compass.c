@@ -1,6 +1,3 @@
-#ifndef CARIM_CarimMenuCompass
-#define CARIM_CarimMenuCompass
-
 class CarimMenuCompass extends UIScriptedMenu {
     Widget carimFrame;
     ImageWidget carimImage;
@@ -62,5 +59,3 @@ class CarimMenuCompass extends UIScriptedMenu {
         carimIsVisible = !carimIsVisible;
     }
 }
-
-#endif

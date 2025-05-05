@@ -1,6 +1,3 @@
-#ifndef CARIM_CarimMenuPartyBase
-#define CARIM_CarimMenuPartyBase
-
 class CarimMenuPartyBase extends UIScriptedMenu {
     string carimName;
     vector carimPosition;
@@ -85,5 +82,3 @@ class CarimMenuPartyBase extends UIScriptedMenu {
     void CarimSetRootPosition();
     void CarimOnUpdate();
 }
-
-#endif

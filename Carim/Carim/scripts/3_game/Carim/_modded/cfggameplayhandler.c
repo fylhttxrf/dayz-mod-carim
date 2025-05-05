@@ -1,6 +1,3 @@
-#ifndef CARIM_CfgGameplayHandler
-#define CARIM_CfgGameplayHandler
-
 modded class CfgGameplayHandler {
     // Carim
     static bool GetCarimInitialized() {
@@ -60,9 +57,7 @@ modded class CfgGameplayHandler {
         return m_Data.CarimData.CarimPartyData.maxPartySize;
     }
 
-    static int GetCarimPartyMaxMarkers() {
-        return m_Data.CarimData.CarimPartyData.maxMarkers;
+    static int GetCarimPartyMaxPings() {
+        return m_Data.CarimData.CarimPartyData.maxPings;
     }
 }
-
-#endif

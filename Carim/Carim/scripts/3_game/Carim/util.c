@@ -1,6 +1,3 @@
-#ifndef CARIM_CarimUtil
-#define CARIM_CarimUtil
-
 class CarimUtil {
     static bool CheckInput(string inputName) {
         UAInput inp = GetUApi().GetInputByName(inputName);
@@ -33,5 +30,3 @@ class CarimUtil {
         return result;
     }
 }
-
-#endif

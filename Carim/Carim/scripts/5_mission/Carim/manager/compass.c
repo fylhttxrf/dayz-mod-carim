@@ -1,6 +1,3 @@
-#ifndef CARIM_CarimManagerCompass
-#define CARIM_CarimManagerCompass
-
 class CarimManagerCompass extends Managed {
     ref CarimMenuCompass menu;
 
@@ -19,5 +16,3 @@ class CarimManagerCompass extends Managed {
         menu.Update(timeslice);
     }
 }
-
-#endif

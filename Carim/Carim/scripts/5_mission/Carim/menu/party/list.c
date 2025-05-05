@@ -1,6 +1,3 @@
-#ifndef CARIM_CarimMenuPartyList
-#define CARIM_CarimMenuPartyList
-
 class CarimMenuPartyList extends CarimMenuPartyNametag {
     int carimListIndex = 0;
 
@@ -20,5 +17,3 @@ class CarimMenuPartyList extends CarimMenuPartyNametag {
         return true;
     }
 }
-
-#endif

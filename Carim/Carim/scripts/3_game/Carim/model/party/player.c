@@ -1,6 +1,3 @@
-#ifndef CARIM_CarimModelPartyPlayer
-#define CARIM_CarimModelPartyPlayer
-
 class CarimModelPartyPlayer extends CarimModelAbcBase {
     string id;
     vector position;
@@ -16,5 +13,3 @@ class CarimModelPartyPlayer extends CarimModelAbcBase {
         return "PartyPlayer<" + id + ", " + position.ToString() + ", " + healthLevel.ToString() + ">";
     }
 }
-
-#endif

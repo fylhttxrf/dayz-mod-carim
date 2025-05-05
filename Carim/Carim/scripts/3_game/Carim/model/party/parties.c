@@ -1,6 +1,3 @@
-#ifndef CARIM_CarimModelPartyParties
-#define CARIM_CarimModelPartyParties
-
 class CarimModelPartyParties extends CarimModelAbcBase {
     ref map<string, ref CarimSet> registered;
     ref map<string, ref CarimSet> mutuals;
@@ -84,5 +81,3 @@ class CarimModelPartyParties extends CarimModelAbcBase {
         return "PartyParties<" + jsonRegistered + ", " + jsonMutuals + ">";
     }
 }
-
-#endif

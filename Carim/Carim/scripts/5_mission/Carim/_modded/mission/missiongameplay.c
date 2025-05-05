@@ -1,21 +1,26 @@
-#ifndef CARIM_MissionGameplay
-#define CARIM_MissionGameplay
-
 modded class MissionGameplay {
+    ref CarimManagerMarker carimManagerMarker;
+
     ref CarimManagerAutorun carimManagerAutorun;
     ref CarimManagerChat carimManagerChat;
     ref CarimManagerCompass carimManagerCompass;
-    ref CarimManagerPartyMarkerClient carimManagerPartyMarkerClient;
+    ref CarimManagerPartyPingClient carimManagerPartyPingClient;
     ref CarimManagerPartyPositionClient carimManagerPartyPositionClient;
     ref CarimManagerPartyRegistrationClient carimManagerPartyRegistrationClient;
 
     ref CarimModelChatSettings carimModelChatSettings;
     ref CarimModelMapMarkers carimModelMapMarkers;
     ref CarimModelPartyMarkers carimModelPartyMarkers;
+    ref CarimModelPartyPings carimModelPartyPings;
+    ref CarimModelPartyPositions CarimModelPartyPositions;
     ref CarimModelPartyRegistrations carimModelPartyRegistrations;
 
     override void OnGameplayDataHandlerLoad() {
         super.OnGameplayDataHandlerLoad();
+
+        if (!carimManagerMarker) {
+            carimManagerMarker = new CarimManagerMarker;
+        }
 
         if (CarimEnabled.Autorun() && !carimManagerAutorun) {
             carimManagerAutorun = new CarimManagerAutorun;
@@ -31,20 +36,20 @@ modded class MissionGameplay {
         if (CarimEnabled.Map()) {
             carimModelMapMarkers = new CarimModelMapMarkers;
         }
-        if (CarimEnabled.Party() && !carimManagerPartyMarkerClient && !carimManagerPartyPositionClient && !carimManagerPartyRegistrationClient) {
-            carimModelPartyMarkers = new CarimModelPartyMarkers;
-            carimModelPartyMarkers.Load();
+        if (CarimEnabled.Party() && !carimManagerPartyPingClient && !carimManagerPartyPositionClient && !carimManagerPartyRegistrationClient) {
+            carimModelPartyPings = new CarimModelPartyPings;
+            carimModelPartyPings.Load();
             carimModelPartyRegistrations = new CarimModelPartyRegistrations;
             carimModelPartyRegistrations.Load();
-            carimManagerPartyMarkerClient = new CarimManagerPartyMarkerClient(carimModelPartyMarkers, carimModelMapMarkers, carimModelPartyRegistrations);
+            carimManagerPartyPingClient = new CarimManagerPartyPingClient(carimModelPartyPings, carimModelMapMarkers, carimModelPartyRegistrations);
             carimManagerPartyPositionClient = new CarimManagerPartyPositionClient(carimModelPartyRegistrations);
             carimManagerPartyRegistrationClient = new CarimManagerPartyRegistrationClient(carimModelPartyRegistrations);
         }
     }
 
-    override void CarimManagerPartyMarkerClientAddServer(string id, CarimModelPartyMarkers markers) {
-        if (carimManagerPartyMarkerClient) {
-            carimManagerPartyMarkerClient.AddServer(id, markers);
+    override void CarimManagerPartyPingClientAddServer(string id, CarimModelPartyPings markers) {
+        if (carimManagerPartyPingClient) {
+            carimManagerPartyPingClient.AddServer(id, markers);
         }
     }
 
@@ -65,6 +70,10 @@ modded class MissionGameplay {
 
         CarimEnabled.Initialize(true);
 
+        if (carimManagerMarker) {
+            carimManagerMarker.OnUpdate(timeslice);
+        }
+
         if (CarimEnabled.Autorun() && carimManagerAutorun) {
             carimManagerAutorun.OnUpdate();
         }
@@ -74,9 +83,9 @@ modded class MissionGameplay {
         if (CarimEnabled.Compass() && carimManagerCompass) {
             carimManagerCompass.OnUpdate(timeslice);
         }
-        if (CarimEnabled.Party() && carimManagerPartyRegistrationClient && carimManagerPartyMarkerClient && carimManagerPartyPositionClient) {
+        if (CarimEnabled.Party() && carimManagerPartyRegistrationClient && carimManagerPartyPingClient && carimManagerPartyPositionClient) {
             carimManagerPartyRegistrationClient.OnUpdate(timeslice);
-            carimManagerPartyMarkerClient.OnUpdate(timeslice);
+            carimManagerPartyPingClient.OnUpdate(timeslice);
             carimManagerPartyPositionClient.OnUpdate(timeslice);
         }
     }
@@ -108,5 +117,3 @@ modded class MissionGameplay {
         return menu;
     }
 }
-
-#endif

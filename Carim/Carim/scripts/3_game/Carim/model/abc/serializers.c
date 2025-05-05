@@ -1,6 +1,3 @@
-#ifndef CARIM_CarimModelAbcSerializers
-#define CARIM_CarimModelAbcSerializers
-
 class CarimModelAbcSerializers extends Managed {
     // A fairly hacky way to get around lack of support for templated
     // classes with inheritance
@@ -19,9 +16,9 @@ class CarimModelAbcSerializers extends Managed {
                 auto data2 = CarimModelMapMarkers.Cast(target);
                 return JsonFileLoader<CarimModelMapMarkers>.LoadFile(data2.Path(), data2, error);
                 break;
-            case "CarimModelPartyMarkers":
-                auto data3 = CarimModelPartyMarkers.Cast(target);
-                return JsonFileLoader<CarimModelPartyMarkers>.LoadFile(data3.Path(), data3, error);
+            case "CarimModelPartyPings":
+                auto data3 = CarimModelPartyPings.Cast(target);
+                return JsonFileLoader<CarimModelPartyPings>.LoadFile(data3.Path(), data3, error);
                 break;
             case "CarimModelPartyRegistrations":
                 auto data4 = CarimModelPartyRegistrations.Cast(target);
@@ -46,9 +43,9 @@ class CarimModelAbcSerializers extends Managed {
                 auto data2 = CarimModelMapMarkers.Cast(target);
                 return JsonFileLoader<CarimModelMapMarkers>.SaveFile(data2.Path(), data2, error);
                 break;
-            case "CarimModelPartyMarkers":
-                auto data3 = CarimModelPartyMarkers.Cast(target);
-                return JsonFileLoader<CarimModelPartyMarkers>.SaveFile(data3.Path(), data3, error);
+            case "CarimModelPartyPings":
+                auto data3 = CarimModelPartyPings.Cast(target);
+                return JsonFileLoader<CarimModelPartyPings>.SaveFile(data3.Path(), data3, error);
                 break;
             case "CarimModelPartyRegistrations":
                 auto data4 = CarimModelPartyRegistrations.Cast(target);
@@ -59,5 +56,3 @@ class CarimModelAbcSerializers extends Managed {
         return false;
     }
 }
-
-#endif
