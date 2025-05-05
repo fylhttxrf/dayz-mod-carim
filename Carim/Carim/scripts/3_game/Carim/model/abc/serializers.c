@@ -12,8 +12,12 @@ class CarimModelAbcSerializers extends Managed {
                 return JsonFileLoader<CarimModelSettings>.LoadFile(data0.Path(), data0, error);
                 break;
             case "CarimModelChatSettings":
-                auto data2 = CarimModelChatSettings.Cast(target);
-                return JsonFileLoader<CarimModelChatSettings>.LoadFile(data2.Path(), data2, error);
+                auto data1 = CarimModelChatSettings.Cast(target);
+                return JsonFileLoader<CarimModelChatSettings>.LoadFile(data1.Path(), data1, error);
+                break;
+            case "CarimModelMapMarkers":
+                auto data2 = CarimModelMapMarkers.Cast(target);
+                return JsonFileLoader<CarimModelMapMarkers>.LoadFile(data2.Path(), data2, error);
                 break;
             case "CarimModelPartyMarkers":
                 auto data3 = CarimModelPartyMarkers.Cast(target);
@@ -35,8 +39,12 @@ class CarimModelAbcSerializers extends Managed {
                 return JsonFileLoader<CarimModelSettings>.SaveFile(data0.Path(), data0, error);
                 break;
             case "CarimModelChatSettings":
-                auto data2 = CarimModelChatSettings.Cast(target);
-                return JsonFileLoader<CarimModelChatSettings>.SaveFile(data2.Path(), data2, error);
+                auto data1 = CarimModelChatSettings.Cast(target);
+                return JsonFileLoader<CarimModelChatSettings>.SaveFile(data1.Path(), data1, error);
+                break;
+            case "CarimModelMapMarkers":
+                auto data2 = CarimModelMapMarkers.Cast(target);
+                return JsonFileLoader<CarimModelMapMarkers>.SaveFile(data2.Path(), data2, error);
                 break;
             case "CarimModelPartyMarkers":
                 auto data3 = CarimModelPartyMarkers.Cast(target);

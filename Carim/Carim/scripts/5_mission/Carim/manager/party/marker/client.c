@@ -3,13 +3,15 @@
 
 class CarimManagerPartyMarkerClient extends Managed {
     ref CarimModelPartyMarkers markers;
+    ref CarimModelMapMarkers mapMarkers;
     ref CarimModelPartyRegistrations registrations;
     ref map<string, ref CarimModelPartyMarkers> serverMarkers = new map<string, ref CarimModelPartyMarkers>;
     ref array<ref CarimMenuPartyMarker> menus = new array<ref CarimMenuPartyMarker>;
     ref CarimRPCPartyMarkers rpc = new CarimRPCPartyMarkers;
 
-    void CarimManagerPartyMarkerClient(CarimModelPartyMarkers inputMarkers, CarimModelPartyRegistrations inputRegistrations) {
+    void CarimManagerPartyMarkerClient(CarimModelPartyMarkers inputMarkers, CarimModelMapMarkers inputMapMarkers, CarimModelPartyRegistrations inputRegistrations) {
         markers = inputMarkers;
+        mapMarkers = inputMapMarkers;
         registrations = inputRegistrations;
         GetGame().GetCallQueue(CALL_CATEGORY_GUI).CallLater(this.InitialRegistration, 2000, true);
     }
@@ -70,6 +72,23 @@ class CarimManagerPartyMarkerClient extends Managed {
                 menus.Get(menuIndex).carimPosition = position;
             }
             menuIndex++;
+        }
+        if (CarimEnabled.Map()) {
+            foreach(int mapIndex, vector mapPosition : mapMarkers.markers) {
+                markerName = name + " MAP DEBUG " + (mapMarkers.markers.Count() - mapIndex).ToString();
+                CarimLogging.Debug(this, "Adding map marker " + markerName + " " + mapPosition.ToString() + " at index " + menuIndex.ToString());
+                if (menus.Count() <= menuIndex) {
+                    auto mapMenu = new CarimMenuPartyMarker(markerName, mapPosition);
+                    mapMenu.Init();
+                    menus.Insert(mapMenu);
+                    CarimLogging.Trace(this, "Creating new");
+                } else {
+                    CarimLogging.Trace(this, "Using existing");
+                    menus.Get(menuIndex).carimName = markerName;
+                    menus.Get(menuIndex).carimPosition = mapPosition;
+                }
+                menuIndex++;
+            }
         }
         foreach(string id, CarimModelPartyMarkers singleServerMarkers : serverMarkers) {
             int playerIndex = 0;
