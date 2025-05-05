@@ -1,11 +1,11 @@
 class CarimManagerMarker extends Managed {
     // Local
-    ref CarimModelPartyPings pings;
     ref CarimModelMapMarkers marks;
+    ref CarimModelPartyPings pings;
 
     // Server
-    ref CarimModelPartyPings serverPings;
-    ref CarimModelPartyPositions positions;
+    ref map<string, ref CarimModelPartyMarkers> serverMarkers;
+    ref map<string, ref CarimModelPartyPositions> positions;
 
     ref array<ref CarimMenuMarker> menus = new array<ref CarimMenuMarker>;
 

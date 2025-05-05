@@ -1,6 +1,7 @@
 modded class MissionBaseWorld {
     void CarimManagerPartyPingServerRegister(string id, CarimModelPartyPings markers);
-    void CarimManagerPartyPingClientAddServer(string id, CarimModelPartyPings markers);
+    void CarimManagerPartyPingClientAddServerMarker(string id, CarimModelPartyMarkers markers);
+    void CarimManagerPartyPingClientAddServerPings(string id, CarimModelPartyPings markers);
 
     void CarimManagerPartyPositionClientSetPositions(array<CarimModelPartyPlayer> players);
 

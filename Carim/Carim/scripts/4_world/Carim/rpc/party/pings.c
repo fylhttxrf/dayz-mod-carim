@@ -8,6 +8,6 @@ class CarimRPCPartyPings extends CarimRPCBase<Param2<string, CarimModelPartyPing
     }
 
     override void HandleClient(PlayerIdentity sender, Param2<string, CarimModelPartyPings> params) {
-        MissionBaseWorld.Cast(GetGame().GetMission()).CarimManagerPartyPingClientAddServer(params.param1, params.param2);
+        MissionBaseWorld.Cast(GetGame().GetMission()).CarimManagerPartyPingClientAddServerPings(params.param1, params.param2);
     }
 }

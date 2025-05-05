@@ -1,4 +1,4 @@
-class CarimMenuPartyList extends CarimMenuPartyNametag {
+class CarimMenuPartyList extends CarimMenuMarker {
     int carimListIndex = 0;
 
     override string CarimGetLayout() {

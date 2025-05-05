@@ -9,18 +9,16 @@ modded class MissionGameplay {
     ref CarimManagerPartyRegistrationClient carimManagerPartyRegistrationClient;
 
     ref CarimModelChatSettings carimModelChatSettings;
+
     ref CarimModelMapMarkers carimModelMapMarkers;
-    ref CarimModelPartyMarkers carimModelPartyMarkers;
     ref CarimModelPartyPings carimModelPartyPings;
-    ref CarimModelPartyPositions CarimModelPartyPositions;
+    ref CarimModelPartyMarkers carimModelPartyMarkers;
+    ref CarimModelPartyPositions carimModelPartyPositions;
+
     ref CarimModelPartyRegistrations carimModelPartyRegistrations;
 
     override void OnGameplayDataHandlerLoad() {
         super.OnGameplayDataHandlerLoad();
-
-        if (!carimManagerMarker) {
-            carimManagerMarker = new CarimManagerMarker;
-        }
 
         if (CarimEnabled.Autorun() && !carimManagerAutorun) {
             carimManagerAutorun = new CarimManagerAutorun;
@@ -35,21 +33,32 @@ modded class MissionGameplay {
         }
         if (CarimEnabled.Map()) {
             carimModelMapMarkers = new CarimModelMapMarkers;
+            carimModelMapMarkers.Load();
         }
         if (CarimEnabled.Party() && !carimManagerPartyPingClient && !carimManagerPartyPositionClient && !carimManagerPartyRegistrationClient) {
             carimModelPartyPings = new CarimModelPartyPings;
             carimModelPartyPings.Load();
             carimModelPartyRegistrations = new CarimModelPartyRegistrations;
             carimModelPartyRegistrations.Load();
-            carimManagerPartyPingClient = new CarimManagerPartyPingClient(carimModelPartyPings, carimModelMapMarkers, carimModelPartyRegistrations);
+            carimManagerPartyPingClient = new CarimManagerPartyPingClient(carimModelPartyPings, carimModelPartyRegistrations);
             carimManagerPartyPositionClient = new CarimManagerPartyPositionClient(carimModelPartyRegistrations);
             carimManagerPartyRegistrationClient = new CarimManagerPartyRegistrationClient(carimModelPartyRegistrations);
         }
+
+        if (!carimManagerMarker) {
+            carimManagerMarker = new CarimManagerMarker(carimModelMapMarkers, carimModelPartyPings, carimModelPartyMarkers, CarimModelPartyPositions);
+        }
     }
 
-    override void CarimManagerPartyPingClientAddServer(string id, CarimModelPartyPings markers) {
+    override void CarimManagerPartyPingClientAddServerMarker(string id, CarimModelPartyMarkers markers) {
         if (carimManagerPartyPingClient) {
-            carimManagerPartyPingClient.AddServer(id, markers);
+            carimManagerPartyPingClient.AddServerMarker(id, markers);
+        }
+    }
+
+    override void CarimManagerPartyPingClientAddServerPings(string id, CarimModelPartyPings markers) {
+        if (carimManagerPartyPingClient) {
+            carimManagerPartyPingClient.AddServerPings(id, markers);
         }
     }
 

@@ -38,20 +38,17 @@ class CarimManagerPartyPingClient extends Managed {
         }
     }
 
-    void AddServer(string id, CarimModelPartyPings inputMarkers) {
+    void AddServerPings(string id, CarimModelPartyPings inputMarkers) {
         serverMarkers.Set(id, inputMarkers);
-        SyncMenus();
     }
 
     void Add(vector position) {
         markers.Add(position);
-        SyncMenus();
         Send();
     }
 
     void Reset() {
         markers.Clear();
-        SyncMenus();
         Send();
     }
 

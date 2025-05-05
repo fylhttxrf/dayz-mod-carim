@@ -1,1 +1,0 @@
-class CarimModelMapMarkers extends CarimModelAbcMarkers {}
