@@ -19,8 +19,6 @@ modded class MapHandler {
         MapMenu m = MapMenu.Cast(g_Game.GetUIManager().FindMenu(MENU_MAP));
         m.AddMarker(worldPos, ARGB(255, 255, 0, 0), 0);
 
-        MissionGameplay.Cast(GetGame().GetMission()).carimModelMapMarkers.Add(worldPos);
-
         return true;
     }
 }

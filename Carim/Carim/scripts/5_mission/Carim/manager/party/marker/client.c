@@ -2,6 +2,7 @@
 #define CARIM_CarimManagerPartyMarkerClient
 
 class CarimManagerPartyMarkerClient extends Managed {
+    // TODO: make this usable for both parties and maps
     ref CarimModelPartyMarkers markers;
     ref CarimModelMapMarkers mapMarkers;
     ref CarimModelPartyRegistrations registrations;
@@ -75,7 +76,7 @@ class CarimManagerPartyMarkerClient extends Managed {
         }
         if (CarimEnabled.Map()) {
             foreach(int mapIndex, vector mapPosition : mapMarkers.markers) {
-                markerName = name + " MAP DEBUG " + (mapMarkers.markers.Count() - mapIndex).ToString();
+                markerName = name + " MAP DEBUG " + mapIndex.ToString();
                 CarimLogging.Debug(this, "Adding map marker " + markerName + " " + mapPosition.ToString() + " at index " + menuIndex.ToString());
                 if (menus.Count() <= menuIndex) {
                     auto mapMenu = new CarimMenuPartyMarker(markerName, mapPosition);
