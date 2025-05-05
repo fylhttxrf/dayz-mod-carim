@@ -30,7 +30,7 @@ class CarimEnabled {
         return party;
     }
 
-    static void Initialize() {
+    static void Initialize(bool notifyMission = false) {
         if (!initialized && CfgGameplayHandler.GetCarimInitialized()) {
             CarimLogging.Info(null, "Carim configuration loaded");
 
@@ -40,7 +40,9 @@ class CarimEnabled {
             cmap = CfgGameplayHandler.GetCarimMapEnabled();
             party = CfgGameplayHandler.GetCarimPartyEnabled();
 
-            GetGame().GetMission().OnGameplayDataHandlerLoad();
+            if (notifyMission) {
+                GetGame().GetMission().OnGameplayDataHandlerLoad();
+            }
 
             initialized = true;
         }

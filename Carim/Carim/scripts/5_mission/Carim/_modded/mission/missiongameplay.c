@@ -59,7 +59,7 @@ modded class MissionGameplay {
     override void OnUpdate(float timeslice) {
         super.OnUpdate(timeslice);
 
-        CarimEnabled.Initialize();
+        CarimEnabled.Initialize(true);
 
         if (CarimEnabled.Autorun() && carimManagerAutorun) {
             carimManagerAutorun.OnUpdate();
