@@ -12,14 +12,14 @@ class CarimManagerMarker extends Managed {
     ref array<ref CarimMenuMarker> menus = new array<ref CarimMenuMarker>;
     ref array<ref CarimMenuPartyList> listMenus = new array<ref CarimMenuPartyList>;
 
-    void CarimManagerMarker(CarimModelPartyPings iPings, CarimModelMapMarkers iMarks, CarimModelPartyPings iServerPings, CarimModelPartyPositions iPositions, CarimModelPartyRegistrations iRegistrations) {
+    void CarimManagerMarker(CarimModelPartyPings iPings, CarimModelMapMarkers iMarks, CarimModelPartyMarkers iServerMarkers, CarimModelPartyPositions iPositions, CarimModelPartyRegistrations iRegistrations) {
         pings = iPings;
         marks = iMarks;
-        serverPings = iServerPings;
+        serverMarkers = iServerMarkers;
         positions = iPositions;
         registrations = iRegistrations;
 
-        GetGame().GetCallQueue(CALL_CATEGORY_GUI).CallLater(this.SyncMenus, 1000, true);
+        GetGame().GetCallQueue(CALL_CATEGORY_GUI).CallLater(this.SyncMenus, 10000, true);
     }
 
     void ~CarimManagerMarker() {
@@ -37,13 +37,21 @@ class CarimManagerMarker extends Managed {
                 listMenu.Update(timeslice);
             }
         }
+
+        if (pings.changed || serverMarkers.changed || positions.changed || marks.changed) {
+            SyncMenus();
+            pings.changed = false;
+            serverMarkers.changed = false;
+            positions.changed = false;
+            marks.changed = false;
+        }
     }
 
     void SyncMenus() {
         int index = 0;
         if (CarimEnabled.Party()) {
             index = Sync(pings, index);
-            index = Sync(serverPings, index);
+            index = Sync(serverMarkers, index);
             index = Sync(positions, index);
             SyncList(positions);
         }
@@ -69,7 +77,7 @@ class CarimManagerMarker extends Managed {
                     menus.Insert(menu);
                 } else {
                     CarimLogging.Trace(this, "Using existing");
-                    menus.Get(index).marker = marker;
+                    menus.Get(index).carimMarker = marker;
                 }
                 ++index;
             }
@@ -78,36 +86,33 @@ class CarimManagerMarker extends Managed {
     }
 
     void SyncList(CarimModelAbcMarkers markers) {
+        auto sortedIds = CarimUtil.GetSortedIdsByLowerName(registrations.registrations);
         int index = 0;
-        foreach(CarimMapMarker marker : markers.markers) {
-            CarimLogging.Debug(this, string.Format("Adding %1: <%2, %3, %4> at index %5", markers.ClassName(), marker.carimPlayerId, marker.GetMarkerText(), marker.GetMarkerPos(), index));
-            if (listMenus.Count() <= index) {
-                CarimLogging.Trace(this, "Creating new");
-                auto menu = new CarimMenuPartyList(marker);
-                menu.Init();
-                listMenus.Insert(menu);
-            } else {
-                CarimLogging.Trace(this, "Using existing");
-                listMenus.Get(index).marker = marker;
+        foreach(auto id : sortedIds) {
+            if (markers.markers.Contains(id)) {
+                auto markerArray = markers.markers.Get(id);
+                if (markerArray.Count() == 1) { // Should only have one position per id
+                    auto marker = markerArray.Get(0);
+                    CarimLogging.Debug(this, string.Format("Adding %1: <%2, %3, %4> at index %5", markers.ClassName(), marker.carimPlayerId, marker.GetMarkerText(), marker.GetMarkerPos(), index));
+                    if (listMenus.Count() <= index) {
+                        CarimLogging.Trace(this, "Creating new");
+                        auto menu = new CarimMenuPartyList(marker);
+                        menu.Init();
+                        menu.carimListIndex = index;
+                        listMenus.Insert(menu);
+                    } else {
+                        CarimLogging.Trace(this, "Using existing");
+                        listMenus.Get(index).carimMarker = marker;
+                        listMenus.Get(index).carimListIndex = index;
+                    }
+                    ++index;
+                }
             }
-            ++index;
         }
         for (int i = listMenus.Count() - 1; i >= index; --i) {
             CarimLogging.Debug(this, "Closing list menu at index " + i.ToString());
             listMenus.Get(i).Close();
         }
         listMenus.Resize(index);
-
-        // menu ids should always be in registrations
-        // if there's duplicate indicies (i.e. overlapping list items), then
-        // that assumption is false for some reason and needs fixed here
-        auto sortedIds = CarimUtil.GetSortedIdsByLowerName(registrations.registrations);
-        int sortingIndex = 0;
-        foreach(auto id : sortedIds) {
-            if (listMenus.Contains(id)) {
-                listMenus.Get(id).carimListIndex = sortingIndex;
-                ++sortingIndex;
-            }
-        }
     }
 }

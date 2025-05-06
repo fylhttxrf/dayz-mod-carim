@@ -3,7 +3,7 @@ class CarimManagerPartyServer extends Managed {
 
     ref CarimModelPartyParties parties;
 
-    ref CarimRPCPartyPings rpcPing = new CarimRPCPartyPings;
+    ref CarimRPCPartyMarkers rpcMarkers = new CarimRPCPartyMarkers;
     ref CarimRPCPartyPositions rpcPositions = new CarimRPCPartyPositions;
     ref CarimRPCPartyRegister rpcRegister = new CarimRPCPartyRegister;
 
@@ -18,18 +18,22 @@ class CarimManagerPartyServer extends Managed {
     }
 
     void RegisterMarkers(string id, CarimModelPartyPings playerMarkers) {
-        markers.Set(id, playerMarkers);
+        markers.Replace(id, playerMarkers.markers.Get(id));
 
         // Send markers to mutual members
         if (parties.mutuals.Contains(id)) {
+            // translate pings to markers
+            // TODO: include map markers
+            auto markersToSend = new CarimModelPartyMarkers;
+            markersToSend.Replace(id, playerMarkers.markers.Get(id));
             auto idMap = CarimManagerPartyUtil.GetServerIdPlayerMap();
             auto mutualPlayers = parties.mutuals.Get(id).ToArray();
             foreach(string playerId : mutualPlayers) {
                 if (idMap.Contains(playerId)) {
                     PlayerBase player = idMap.Get(playerId);
                     if (player.GetIdentity() && player.IsAlive()) {
-                        auto params = new Param2<string, CarimModelPartyPings>(id, playerMarkers);
-                        rpcPing.Send(player, params, player.GetIdentity());
+                        auto params = new Param2<string, CarimModelPartyMarkers>(id, markersToSend);
+                        rpcMarkers.Send(player, params, player.GetIdentity());
                     }
                 }
             }
@@ -47,19 +51,22 @@ class CarimManagerPartyServer extends Managed {
         CarimLogging.Trace(this, "After: " + parties.Repr());
         if (changed) {
             SendParty();
+            SendPositions();
         }
     }
 
     void SendPositions() {
         map<string, PlayerBase> idMap = CarimManagerPartyUtil.GetServerIdPlayerMap();
-        map<string, ref CarimModelPartyPlayer> players = new map<string, ref CarimModelPartyPlayer>;
+        auto players = new CarimModelPartyPositions;
 
         // Harvest the relevant information
         foreach(string id, PlayerBase player : idMap) {
             CarimLogging.Trace(this, "PartyPositionServer Harvest " + id);
-            auto playerInfo = new CarimModelPartyPlayer(id, player.GetPosition(), player.GetHealthLevel());
-            CarimLogging.Trace(this, "PartyPositionServer Harvested " + playerInfo.Repr());
-            players.Insert(id, playerInfo);
+            auto playerInfo = new CarimMapMarker(player.GetPosition(), "", 0xffffffff, 0);
+            playerInfo.carimPlayerId = id;
+            playerInfo.carimHealthLevel = player.GetHealthLevel();
+            CarimLogging.Trace(this, "PartyPositionServer Harvested " + playerInfo.CarimRepr());
+            players.Add(playerInfo);
         }
 
         // Send the information to each recipient's mutual party members
@@ -67,14 +74,14 @@ class CarimManagerPartyServer extends Managed {
         foreach(string recipient : ids) {
             if (idMap.Contains(recipient) && parties.mutuals.Contains(recipient)) {
                 // TODO: clean up registered players that are no longer present
-                array<CarimModelPartyPlayer> sharedInfo = new array<CarimModelPartyPlayer>;
+                auto positions = new CarimModelPartyPositions;
                 auto mutualPlayers = parties.mutuals.Get(recipient).ToArray();
                 foreach(string mutual : mutualPlayers) {
-                    if (players.Contains(mutual)) {
-                        sharedInfo.Insert(players.Get(mutual));
+                    if (players.markers.Contains(mutual)) {
+                        positions.Replace(mutual, players.markers.Get(mutual));
                     }
                 }
-                Param1<array<CarimModelPartyPlayer>> params = new Param1<array<CarimModelPartyPlayer>>(sharedInfo);
+                Param1<CarimModelPartyPositions> params = new Param1<CarimModelPartyPositions>(positions);
                 rpcPositions.Send(idMap.Get(recipient), params, idMap.Get(recipient).GetIdentity());
             }
         }

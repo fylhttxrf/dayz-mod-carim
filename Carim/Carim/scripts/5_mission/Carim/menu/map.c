@@ -1,7 +1,4 @@
 class CarimMenuMap extends MapMenu {
-    // TODO: make this more useful and/or combine with CarimModelMapMarkers
-    ref array<ref MapMarker> carimMarkers = new array<ref MapMarker>;
-
     override Widget Init() {
         super.Init();
         LoadMapMarkers();
@@ -12,31 +9,26 @@ class CarimMenuMap extends MapMenu {
         CarimLogging.Trace(this, "AddMarker");
 
         auto mission = MissionGameplay.Cast(GetGame().GetMission());
-        mission.carimModelMapMarkers.Add(pos);
+        mission.carimModelMapMarkers.Add(new CarimMapMarker(pos, "", color, icon));
 
-        if (CarimEnabled.Party()) {
-            // TODO: make this usable even if parties aren't enabled
-            mission.carimManagerPartyPingClient.SyncMenus();
-        }
-
-        carimMarkers.Insert(new MapMarker(pos, "", color, icon));
         m_MapWidgetInstance.AddUserMark(pos, "", color, MapMarkerTypes.GetMarkerTypeFromID(icon));
     }
 
     override void LoadMapMarkers() {
         CarimLogging.Trace(this, "LoadMapMarkers");
-        foreach(MapMarker marker : carimMarkers) {
-            m_MapWidgetInstance.AddUserMark(marker.GetMarkerPos(), marker.GetMarkerText(), marker.GetMarkerColor(), MapMarkerTypes.GetMarkerTypeFromID(marker.GetMarkerIcon()));
-        }
 
         auto mission = MissionGameplay.Cast(GetGame().GetMission());
-        if (CarimEnabled.Party()) {
-            foreach(int index, vector position : mission.carimModelPartyPings.markers) {
-                m_MapWidgetInstance.AddUserMark(position, (mission.carimModelPartyPings.markers.Count() - index).ToString(), ARGB(255, 255, 0, 0), MapMarkerTypes.GetMarkerTypeFromID(0));
+        CarimLoadMapMarkers(mission.carimModelMapMarkers);
+        CarimLoadMapMarkers(mission.carimModelPartyPings);
+        CarimLoadMapMarkers(mission.carimModelPartyMarkers);
+        CarimLoadMapMarkers(mission.carimModelPartyPositions);
+    }
+
+    void CarimLoadMapMarkers(CarimModelAbcMarkers markers) {
+        foreach(array<ref CarimMapMarker> markerArray : markers.markers) {
+            foreach(CarimMapMarker marker : markerArray) {
+                m_MapWidgetInstance.AddUserMark(marker.GetMarkerPos(), marker.GetMarkerText(), marker.GetMarkerColor(), MapMarkerTypes.GetMarkerTypeFromID(marker.GetMarkerIcon()));
             }
-        }
-        foreach(int mapIndex, vector mapPosition : mission.carimModelMapMarkers.markers) {
-            m_MapWidgetInstance.AddUserMark(mapPosition, mapIndex.ToString(), ARGB(255, 0, 255, 0), MapMarkerTypes.GetMarkerTypeFromID(0));
         }
     }
 

@@ -55,7 +55,7 @@ class CarimMenuMarker extends UIScriptedMenu {
     }
 
     void CarimSetRootPosition() {
-        vector screenPosition = GetGame().GetScreenPos(marker.GetMarkerPos() + CarimGetMarkerOffset());
+        vector screenPosition = GetGame().GetScreenPos(carimMarker.GetMarkerPos() + CarimGetMarkerOffset());
         float x = screenPosition[0];
         float y = screenPosition[1];
 
@@ -63,7 +63,7 @@ class CarimMenuMarker extends UIScriptedMenu {
     }
 
     vector CarimGetMarkerOffset() {
-        if (carimPlayer) {
+        if (carimMarker.carimPlayer) {
             return "0 1.3 0";
         } else {
             return "0 0.2 0";
@@ -78,7 +78,7 @@ class CarimMenuMarker extends UIScriptedMenu {
     }
 
     bool CarimVisibleOnScreen() {
-        vector pos = GetGame().GetScreenPosRelative(marker.GetMarkerPos());
+        vector pos = GetGame().GetScreenPosRelative(carimMarker.GetMarkerPos());
         if (pos[0] >= 1 || pos[0] == 0 || pos[1] >= 1 || pos[1] == 0) {
             return false;
         } else if (pos[2] < 0) {
@@ -88,14 +88,14 @@ class CarimMenuMarker extends UIScriptedMenu {
     }
 
     void CarimUpdateContent() {
-        carimNametag.SetText(marker.GetMarkerText());
+        carimNametag.SetText(carimMarker.GetMarkerText());
         carimDistance.SetText(CarimGetDistance());
         CarimUpdateHealths();
         CarimOnUpdate();
     }
 
     string CarimGetDistance() {
-        float distance = Math.Round(vector.Distance(marker.GetMarkerPos(), GetGame().GetPlayer().GetPosition()));
+        float distance = Math.Round(vector.Distance(carimMarker.GetMarkerPos(), GetGame().GetPlayer().GetPosition()));
         string distanceString = distance.ToString() + "m";
         if (distance > 1000) {
             distanceString = (Math.Round(distance / 100) / 10).ToString() + "km";
@@ -104,7 +104,7 @@ class CarimMenuMarker extends UIScriptedMenu {
     }
 
     void CarimUpdateHealths() {
-        int currentHealth = marker.CarimGetHealthLevel();
+        int currentHealth = carimMarker.CarimGetHealthLevel();
         foreach(int level : CARIM_HEALTH_LEVELS) {
             if (carimHealths.Count() > level) {
                 carimHealths.Get(level).Show(level == currentHealth);

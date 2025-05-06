@@ -2,7 +2,6 @@ class CarimMenuCompass extends UIScriptedMenu {
     Widget carimFrame;
     ImageWidget carimImage;
     bool carimIsVisible = true;
-    float carimLastUpdated = 0.0;
 
     override Widget Init() {
         if (!layoutRoot) {
@@ -17,21 +16,16 @@ class CarimMenuCompass extends UIScriptedMenu {
         super.Update(timeslice);
 
         if (layoutRoot) {
-            if (carimLastUpdated > CARIM_60_FPS_INTERVAL_SEC) {
-                Mission mission = GetGame().GetMission();
-                IngameHud hud = IngameHud.Cast(mission.GetHud());
-                if (hud && hud.GetHudVisibility().IsContextFlagActive(IngameHudVisibility.HUD_HIDE_FLAGS)) {
-                    layoutRoot.Show(false);
-                } else {
-                    if (carimIsVisible) {
-                        CarimSetCompassPos();
-                        layoutRoot.Update();
-                    }
-                    layoutRoot.Show(carimIsVisible);
-                }
-                carimLastUpdated = 0.0;
+            Mission mission = GetGame().GetMission();
+            IngameHud hud = IngameHud.Cast(mission.GetHud());
+            if (hud && hud.GetHudVisibility().IsContextFlagActive(IngameHudVisibility.HUD_HIDE_FLAGS)) {
+                layoutRoot.Show(false);
             } else {
-                carimLastUpdated += timeslice;
+                if (carimIsVisible) {
+                    CarimSetCompassPos();
+                    layoutRoot.Update();
+                }
+                layoutRoot.Show(carimIsVisible);
             }
         }
     }

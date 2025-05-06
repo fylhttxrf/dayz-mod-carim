@@ -56,7 +56,7 @@ modded class MissionGameplay {
 
         if (!carimManagerMarker) {
             // Manager
-            carimManagerMarker = new CarimManagerMarker(carimModelMapMarkers, carimModelPartyPings, carimModelPartyMarkers, CarimModelPartyPositions);
+            carimManagerMarker = new CarimManagerMarker(carimModelPartyPings, carimModelMapMarkers, carimModelPartyMarkers, carimModelPartyPositions, carimModelPartyRegistrations);
         }
     }
 
@@ -64,15 +64,24 @@ modded class MissionGameplay {
 
     override void CarimPartyClientAddMarkers(string id, CarimModelPartyMarkers markers) {
         if (carimModelPartyMarkers) {
-            carimModelPartyMarkers.Replace(id, markers);
+            carimModelPartyMarkers.Replace(id, markers.markers.Get(id));
         }
     }
 
     override void CarimPartyClientSetPositions(CarimModelPartyPositions positions) {
         if (carimModelPartyPositions) {
-            carimModelPartyPositions.Clear();
-            foreach(CarimModelPartyPlayer position : positions) {
-                carimModelPartyPositions.Insert(position.id, position);
+            foreach(string id, auto position : positions.markers) {
+                if (carimModelPartyPositions.markers.Contains(id) && carimModelPartyPositions.markers.Get(id).Count() > 0) {
+                    carimModelPartyPositions.markers.Get(id).Get(0).CarimCopyValues(position.Get(0));
+                } else {
+                    carimModelPartyPositions.Replace(id, position);
+                }
+            }
+            // Clear no longer present positions
+            foreach(string existingId, auto existingPosition : carimModelPartyPositions.markers) {
+                if (!positions.markers.Contains(existingId)) {
+                    carimModelPartyPositions.Clear(existingId);
+                }
             }
         }
     }
@@ -80,6 +89,18 @@ modded class MissionGameplay {
     override void CarimPartyClientSetMutual(array<string> ids) {
         if (carimManagerPartyClient) {
             carimManagerPartyClient.SetMutual(ids);
+
+            foreach(string posId, auto posPosition : carimModelPartyPositions.markers) {
+                if (ids.Find(posId) < 0) {
+                    carimModelPartyPositions.Clear(posId);
+                }
+            }
+
+            foreach(string markId, auto markPosition : carimModelPartyMarkers.markers) {
+                if (ids.Find(markId) < 0) {
+                    carimModelPartyPositions.Clear(markId);
+                }
+            }
         }
     }
 
@@ -90,10 +111,6 @@ modded class MissionGameplay {
 
         CarimEnabled.Initialize(true);
 
-        if (carimManagerMarker) {
-            carimManagerMarker.OnUpdate(timeslice);
-        }
-
         if (CarimEnabled.Autorun() && carimManagerAutorun) {
             carimManagerAutorun.OnUpdate();
         }
@@ -103,10 +120,12 @@ modded class MissionGameplay {
         if (CarimEnabled.Compass() && carimManagerCompass) {
             carimManagerCompass.OnUpdate(timeslice);
         }
-        if (CarimEnabled.Party() && carimManagerPartyRegistrationClient && carimManagerPartyPingClient && carimManagerPartyPositionClient) {
-            carimManagerPartyRegistrationClient.OnUpdate(timeslice);
-            carimManagerPartyPingClient.OnUpdate(timeslice);
-            carimManagerPartyPositionClient.OnUpdate(timeslice);
+        if (CarimEnabled.Party() && carimManagerPartyClient) {
+            carimManagerPartyClient.OnUpdate(timeslice);
+        }
+
+        if (carimManagerMarker) {
+            carimManagerMarker.OnUpdate(timeslice);
         }
     }
 
@@ -119,7 +138,7 @@ modded class MissionGameplay {
             if (CarimEnabled.Party()) {
                 switch (id) {
                     case CarimMenuParty.REGISTER:
-                        menu = new CarimMenuPartyRegister(carimManagerPartyRegistrationClient);
+                        menu = new CarimMenuPartyRegister(carimManagerPartyClient);
                         break;
                 }
             }

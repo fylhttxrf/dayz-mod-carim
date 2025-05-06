@@ -33,6 +33,19 @@ class CarimMapMarker extends MapMarker {
             return carimHealthLevel;
         }
     }
+
+    void CarimCopyValues(CarimMapMarker other) {
+        m_Position = other.m_Position;
+        m_Color = other.m_Color;
+        m_IconIdx = other.m_IconIdx;
+        m_Text = other.m_Text;
+        carimPlayerId = other.carimPlayerId;
+        carimHealthLevel = other.carimHealthLevel;
+    }
+
+    string CarimRepr() {
+        return string.Format("%1<%2, %3>", ClassName(), carimPlayerId, GetMarkerPos(), CarimGetHealthLevel());
+    }
 }
 
 class CarimModelAbcMarkers extends CarimModelAbcDiskJson {

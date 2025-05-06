@@ -45,17 +45,15 @@ class CarimManagerPartyClient extends Managed {
     }
 
     void UpdatePositionsWithLocalPlayers() {
-        string activePlayerId;
-        PlayerBase activePlayer = PlayerBase.Cast(GetGame().GetPlayer());
-        if (activePlayer && activePlayer.GetIdentity()) {
-            activePlayerId = activePlayer.GetIdentity().GetId();
-        }
         auto players = GetClientPlayerBases();
         foreach(PlayerBase player : players) {
             if (player && player.GetIdentity() && player.IsAlive()) {
                 string id = player.GetIdentity().GetId();
                 if (positions.markers.Contains(id) && positions.markers.Get(id).Count() > 0) {
-                    positions.markers.Get(id).Get(0).carimPlayer = player;
+                    if (!positions.markers.Get(id).Get(0).carimPlayer) {
+                        CarimLogging.Debug(this, "Adding local player to positions " + id);
+                        positions.markers.Get(id).Get(0).carimPlayer = player;
+                    }
                 }
             }
         }
@@ -64,7 +62,7 @@ class CarimManagerPartyClient extends Managed {
     void SendRegistration() {
         array<string> keys = registrations.registrations.GetKeyArray();
         auto params = new Param1<array<string>>(keys);
-        rpcRegister.Send(player, params);
+        rpcRegister.Send(GetGame().GetPlayer(), params);
     }
 
     void SendPings() {
@@ -103,26 +101,11 @@ class CarimManagerPartyClient extends Managed {
         if (menuRegister) {
             menuRegister.Update(timeslice);
         }
-
-        if (markers.changed) {
-            markers.changed = false;
-        }
-        if (pings.changed) {
-            SendPings();
-            pings.changed = false;
-        }
-        if (positions.changed) {
-            positions.changed = false;
-        }
-        if (registrations.changed) {
-            PeriodicSend();
-            registrations.changed = false;
-        }
     }
 
     void AddPing(vector position) {
         PlayerBase player = PlayerBase.Cast(GetGame().GetPlayer());
-        mark = new CarimMapMarker(position, "", 0xffffffff, 0);
+        auto mark = new CarimMapMarker(position, "", 0xffffffff, 0);
         mark.carimPlayerId = player.GetIdentity().GetId();
         pings.Add(mark);
         SendPings();

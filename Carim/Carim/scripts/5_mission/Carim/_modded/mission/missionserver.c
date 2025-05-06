@@ -13,9 +13,9 @@ modded class MissionServer {
         }
     }
 
-    override void CarimPartyServerAddPings(string id, CarimModelPartyPings markers) {
+    override void CarimPartyServerAddPings(string id, CarimModelPartyPings pings) {
         if (carimManagerPartyServer) {
-            carimManagerPartyServer.RegisterMarkers(id, markers);
+            carimManagerPartyServer.RegisterMarkers(id, pings);
         }
     }
 
