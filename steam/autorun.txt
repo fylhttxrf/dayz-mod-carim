@@ -1,3 +1,0 @@
-[h2]Autorun[/h2]
-[hr][/hr]
-Provides autorunning functionality. Start and stop using the configurable key (default: '+'). Adjust the running speed using your normal keybinds.

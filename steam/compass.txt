@@ -1,3 +1,0 @@
-[h2]Compass[/h2]
-[hr][/hr]
-Provides a compass at the top of the display with the press of a configurable key (default: 'H').

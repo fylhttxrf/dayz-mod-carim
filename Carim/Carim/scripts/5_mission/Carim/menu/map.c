@@ -41,8 +41,7 @@ class CarimMenuMap extends MapMenu {
 
     override void CloseMapMenu() {
         CarimLogging.Trace(this, "CloseMapMenu");
-        // TODO: make it so the markers are synced somewhere
-        // but setting this flag to false makes sure they aren't
+        // setting this flag to false makes sure they aren't
         // synced to the map item
         m_WasChanged = false;
         super.CloseMapMenu();
