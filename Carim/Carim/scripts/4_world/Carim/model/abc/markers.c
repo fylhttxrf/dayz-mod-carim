@@ -1,11 +1,24 @@
+enum CarimMapMarkerTypes {
+    START = -44000,
+    DEFAULT,
+    HEALTH_0,
+    HEALTH_1,
+    HEALTH_2,
+    HEALTH_3,
+    HEALTH_4
+}
+
 class CarimMapMarker extends MapMarker {
     string carimPlayerId;
     int carimHealthLevel = -1;
 
     [NonSerialized()] PlayerBase carimPlayer;
 
-    override void MapMarker(vector pos, string text, int color, int idx) {
-        // Included just for signature reference
+    static CarimMapMarker CarimNew(vector pos, string text, int color, int idx, string playerId, int healthLevel = -1) {
+        auto marker = new CarimMapMarker(pos, text, color, idx);
+        marker.carimPlayerId = playerId;
+        marker.carimHealthLevel = healthLevel;
+        return marker;
     }
 
     override vector GetMarkerPos() {
@@ -17,13 +30,45 @@ class CarimMapMarker extends MapMarker {
     }
 
     override int GetMarkerIcon() {
-        if (CarimGetHealthLevel() > -1) {
-            // TODO: get appropriate icon (if possible) here
-            // TODO: Also set color appropriately
-            return CarimGetHealthLevel();
-        } else {
-            return super.GetMarkerIcon();
+        switch (CarimGetHealthLevel()) {
+            case 0:
+                return CarimMapMarkerTypes.HEALTH_0;
+                break;
+            case 1:
+                return CarimMapMarkerTypes.HEALTH_1;
+                break;
+            case 2:
+                return CarimMapMarkerTypes.HEALTH_2;
+                break;
+            case 3:
+                return CarimMapMarkerTypes.HEALTH_3;
+                break;
+            case 4:
+                return CarimMapMarkerTypes.HEALTH_4;
+                break;
         }
+        return super.GetMarkerIcon();
+    }
+
+    override int GetMarkerColor() {
+        switch (CarimGetHealthLevel()) {
+            case 0:
+                return CarimColor.HEALTH_WHITE;
+                break;
+            case 1:
+                return CarimColor.HEALTH_WHITE;
+                break;
+            case 2:
+                return CarimColor.HEALTH_YELLOW;
+                break;
+            case 3:
+                return CarimColor.HEALTH_RED;
+                break;
+            case 4:
+                return CarimColor.HEALTH_RED;
+                break;
+        }
+        return super.GetMarkerColor();
     }
 
     int CarimGetHealthLevel() {
@@ -66,6 +111,22 @@ class CarimModelAbcMarkers extends CarimModelAbcDiskJson {
         markers.Get(mark.carimPlayerId).Insert(mark);
         Persist();
         changed = true;
+    }
+
+    void Remove(CarimMapMarker mark) {
+        if (!markers.Contains(mark.carimPlayerId)) {
+            return;
+        }
+        foreach(int i, auto marker : markers.Get(mark.carimPlayerId)) {
+            auto distance = vector.Distance(mark.GetMarkerPos(), marker.GetMarkerPos());
+
+            if (distance < 50) {
+                markers.Get(mark.carimPlayerId).RemoveOrdered(i);
+                Persist();
+                changed = true;
+                return;
+            }
+        }
     }
 
     void Clear(string id) {

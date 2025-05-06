@@ -51,109 +51,19 @@ FrameWidgetClass rootFrame {
     }
    }
   }
-  FrameWidgetClass FrameHealth {
-   ignorepointer 1
-   position 0 0
-   size 20 1
-   hexactpos 0
-   vexactpos 0
-   hexactsize 1
-   vexactsize 0
-   {
-    ImageWidgetClass IconHealth0 {
-     visible 0
-     ignorepointer 1
-     position 0 0
-     size 1 1
-     hexactpos 0
-     vexactpos 0
-     hexactsize 0
-     vexactsize 0
-     scaled 1
-     image0 "set:dayz_gui image:iconHealth0"
-     mode blend
-     "src alpha" 1
+  ImageWidgetClass icon {
+        visible 1
+        ignorepointer 1
+        position 0 0
+        size 20 1
+        hexactpos 0
+        vexactpos 0
+        hexactsize 1
+        vexactsize 0
+        scaled 1
+        image0 "set:dayz_gui image:icon_plus"
+        mode blend
+        "src alpha" 1
     }
-    ImageWidgetClass IconHealth1 {
-     visible 0
-     ignorepointer 1
-     color 1 1 0.1216 1
-     position 0 0
-     size 1 1
-     hexactpos 0
-     vexactpos 0
-     hexactsize 0
-     vexactsize 0
-     scaled 1
-     image0 "set:dayz_gui image:iconHealth1"
-     mode blend
-     "src alpha" 1
-    }
-    ImageWidgetClass IconHealth2 {
-     visible 0
-     ignorepointer 1
-     color 1 1 0.1216 1
-     position 0 0
-     size 1 1
-     hexactpos 0
-     vexactpos 0
-     hexactsize 0
-     vexactsize 0
-     scaled 1
-     image0 "set:dayz_gui image:iconHealth2"
-     mode blend
-     "src alpha" 1
-    }
-    ImageWidgetClass IconHealth3 {
-     visible 0
-     ignorepointer 1
-     color 1 0.1216 0.1216 1
-     position 0 0
-     size 1 1
-     hexactpos 0
-     vexactpos 0
-     hexactsize 0
-     vexactsize 0
-     scaled 1
-     image0 "set:dayz_gui image:iconHealth3"
-     mode blend
-     "src alpha" 1
-    }
-    ImageWidgetClass IconHealth4 {
-     visible 0
-     ignorepointer 1
-     color 1 0.1216 0.1216 1
-     position 0 0
-     size 1 1
-     hexactpos 0
-     vexactpos 0
-     hexactsize 0
-     vexactsize 0
-     scaled 1
-     image0 "set:dayz_gui image:iconHealth4"
-     mode blend
-     "src alpha" 1
-    }
-    ImageWidgetClass icon {
-      visible 0
-      ignorepointer 1
-      color 0.749 0.8471 0 1
-      position 0.2 0
-      size 1 1
-      hexactpos 0
-      vexactpos 0
-      hexactsize 0
-      vexactsize 0
-      scaled 1
-      imageTexture "{9D15AA5672F81909}gui/textures/arrow_raw.edds"
-      mode blend
-      "src alpha" 1
-      "stretch mode" stretch_w_h
-      "flip v" 1
-      filter 1
-      rotation 0 0 337
-    }
-   }
-  }
  }
 }

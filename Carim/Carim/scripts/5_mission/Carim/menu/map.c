@@ -1,17 +1,24 @@
 class CarimMenuMap extends MapMenu {
+    float carimLastUpdated = 0.0;
+
     override Widget Init() {
         super.Init();
         LoadMapMarkers();
         return layoutRoot;
     }
 
-    override void AddMarker(vector pos, int color, int icon = 0) {
-        CarimLogging.Trace(this, "AddMarker");
+    override void Update(float timeslice) {
+        super.Update(timeslice);
 
-        auto mission = MissionGameplay.Cast(GetGame().GetMission());
-        mission.carimModelMapMarkers.Add(new CarimMapMarker(pos, "", color, icon));
-
-        m_MapWidgetInstance.AddUserMark(pos, "", color, MapMarkerTypes.GetMarkerTypeFromID(icon));
+        if (layoutRoot) {
+            if (carimLastUpdated > CARIM_4_FPS_INTERVAL_SEC) {
+                m_MapWidgetInstance.ClearUserMarks();
+                LoadMapMarkers();
+                carimLastUpdated = 0.0;
+            } else {
+                carimLastUpdated += timeslice;
+            }
+        }
     }
 
     override void LoadMapMarkers() {

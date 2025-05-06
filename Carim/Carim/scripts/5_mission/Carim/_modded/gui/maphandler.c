@@ -5,7 +5,7 @@ modded class MapHandler {
         }
         super.OnDoubleClick(w, x, y, button);
 
-        CarimLogging.Trace(this, "OnDoubleClick");
+        CarimLogging.Trace(this, "OnDoubleClick " + button.ToString());
 
         vector mousePos, worldPos;
         mousePos[0] = x;
@@ -13,8 +13,16 @@ modded class MapHandler {
         worldPos = MapWidget.Cast(w).ScreenToMap(mousePos);
         worldPos[1] = GetGame().SurfaceY(worldPos[0], worldPos[2]);
 
-        MapMenu m = MapMenu.Cast(g_Game.GetUIManager().FindMenu(MENU_MAP));
-        m.AddMarker(worldPos, ARGB(255, 255, 0, 0), 0);
+        auto mission = MissionGameplay.Cast(GetGame().GetMission());
+        auto marker = CarimMapMarker.CarimNew(worldPos, "TODO", CarimColor.PURPLE_300, CarimMapMarkerTypes.DEFAULT, GetGame().GetPlayer().GetIdentity().GetId());
+
+        if (button == 0) {
+            // Add marker
+            mission.carimModelMapMarkers.Add(marker);
+        } else {
+            // Remove marker
+            mission.carimModelMapMarkers.Remove(marker);
+        }
 
         return true;
     }

@@ -15,6 +15,12 @@ modded class MissionGameplay {
 
     ref CarimModelPartyRegistrations carimModelPartyRegistrations;
 
+    override void OnInit() {
+        super.OnInit();
+
+        MapMarkerTypes.CarimInit();
+    }
+
     override void OnGameplayDataHandlerLoad() {
         super.OnGameplayDataHandlerLoad();
 

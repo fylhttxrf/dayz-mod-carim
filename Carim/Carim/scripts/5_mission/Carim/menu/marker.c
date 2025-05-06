@@ -6,7 +6,6 @@ class CarimMenuMarker extends UIScriptedMenu {
     TextWidget carimNametag;
     TextWidget carimDistance;
     ImageWidget carimIcon;
-    ref array<ref ImageWidget> carimHealths = new array<ref ImageWidget>;
 
     float carimLastUpdated = 0.0;
 
@@ -30,9 +29,6 @@ class CarimMenuMarker extends UIScriptedMenu {
             carimNametag = TextWidget.Cast(layoutRoot.FindAnyWidget("nametag"));
             carimDistance = TextWidget.Cast(layoutRoot.FindAnyWidget("distance"));
             carimIcon = ImageWidget.Cast(layoutRoot.FindAnyWidget("icon"));
-            foreach(int level : CARIM_HEALTH_LEVELS) {
-                carimHealths.Insert(ImageWidget.Cast(layoutRoot.FindAnyWidget("IconHealth" + level.ToString())));
-            }
         }
 
         return layoutRoot;
@@ -90,7 +86,8 @@ class CarimMenuMarker extends UIScriptedMenu {
     void CarimUpdateContent() {
         carimNametag.SetText(carimMarker.GetMarkerText());
         carimDistance.SetText(CarimGetDistance());
-        CarimUpdateHealths();
+        carimIcon.LoadImageFile(0, MapMarkerTypes.GetMarkerTypeFromID(carimMarker.GetMarkerIcon()));
+        carimIcon.SetColor(carimMarker.GetMarkerColor());
         CarimOnUpdate();
     }
 
@@ -101,20 +98,6 @@ class CarimMenuMarker extends UIScriptedMenu {
             distanceString = (Math.Round(distance / 100) / 10).ToString() + "km";
         }
         return distanceString;
-    }
-
-    void CarimUpdateHealths() {
-        int currentHealth = carimMarker.CarimGetHealthLevel();
-        foreach(int level : CARIM_HEALTH_LEVELS) {
-            if (carimHealths.Count() > level) {
-                carimHealths.Get(level).Show(level == currentHealth);
-            }
-        }
-        if (currentHealth >= 0 && currentHealth < carimHealths.Count()) {
-            carimIcon.Show(false);
-        } else {
-            carimIcon.Show(true);
-        }
     }
 
     void CarimOnUpdate();

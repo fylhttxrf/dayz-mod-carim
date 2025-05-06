@@ -62,9 +62,7 @@ class CarimManagerPartyServer extends Managed {
         // Harvest the relevant information
         foreach(string id, PlayerBase player : idMap) {
             CarimLogging.Trace(this, "PartyPositionServer Harvest " + id);
-            auto playerInfo = new CarimMapMarker(player.GetPosition(), "", 0xffffffff, 0);
-            playerInfo.carimPlayerId = id;
-            playerInfo.carimHealthLevel = player.GetHealthLevel();
+            auto playerInfo = CarimMapMarker.CarimNew(player.GetPosition(), player.GetIdentity().GetName(), CarimColor.TEAL_300, CarimMapMarkerTypes.DEFAULT, id, player.GetHealthLevel());
             CarimLogging.Trace(this, "PartyPositionServer Harvested " + playerInfo.CarimRepr());
             players.Add(playerInfo);
         }

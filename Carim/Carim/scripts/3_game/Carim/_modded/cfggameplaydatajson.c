@@ -31,10 +31,10 @@ class ITEM_CarimAutorunData extends ITEM_DataBase {
 
 class ITEM_CarimChatData extends ITEM_DataBase {
     bool enabled = true;
-    int colorDirect = 0xfffafafa; /* grey 50 */
-    int colorGlobal = 0xffffd54f; /* amber 300 */
-    int colorServer = 0xff4fc3f7; /* light blue 300 */
-    int colorAlert = 0xffff8a65;  /* deep orange 300 */
+    int colorDirect = CarimColor.GREY_50;
+    int colorGlobal = CarimColor.AMBER_300;
+    int colorServer = CarimColor.LIGHT_BLUE_300;
+    int colorAlert = CarimColor.DEEP_ORANGE_300;
 }
 
 class ITEM_CarimCompassData extends ITEM_DataBase {
