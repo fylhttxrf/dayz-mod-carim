@@ -1,6 +1,0 @@
-[h2]Chat[/h2]
-[hr][/hr]
-Provides global chat. Switch chat channels with the press of a configurable key (default: 'Z'). Adjust size with configurable keys (up: ']', down: '[').
-
-If you have an admin tool that disallows non-ascii characters, you need to allowlist the following: [code]ᐅ[/code]
-For Battleye BEC, go to Config.cfg in the battleye/Bec folder and change IgnoreChatChars to [code]IgnoreChatChars = €,£,æ,Æ,ø,Ø,å,Å,ö,ä,ü,ß,ᐅ[/code]
