@@ -28,7 +28,7 @@ Provides a compass at the top of the display with the press of a configurable ke
 
 [h2]Map[/h2]
 [hr][/hr]
-Provides an in-game map for saving markers and viewing party members. Open with the vanilla configurable key (default: 'M').
+Provides an in-game map for saving markers and viewing party members. Open with the vanilla configurable key (default: 'M'). Double-click to add a marker, double-right-click to remove.
 
 [h2]Party[/h2]
 [hr][/hr]
@@ -88,3 +88,14 @@ This mod originated from the Carim DayZ project
 The original source is at https://github.com/CarimDayZ/dayz-mod-carim
 To support this open source project, you can donate at https://paypal.me/cnofafva
 To learn more visit https://discord.gg/kdPnVu4
+
+[h3]Deprecated mods (unlisted from workshop)[/h3]
+[olist]
+    [*] CarimParty https://steamcommunity.com/sharedfiles/filedetails/?id=3468068823
+    [*] CarimCompass https://steamcommunity.com/sharedfiles/filedetails/?id=3468068260
+    [*] CarimChat https://steamcommunity.com/sharedfiles/filedetails/?id=3468067683
+    [*] CarimAutorun https://steamcommunity.com/sharedfiles/filedetails/?id=3468066705
+    [*] SchanaModGlobalChat https://steamcommunity.com/sharedfiles/filedetails/?id=2115602332
+    [*] SchanaModParty https://steamcommunity.com/sharedfiles/filedetails/?id=2075831381
+    [*] SchanaModCompass https://steamcommunity.com/sharedfiles/filedetails/?id=2067834152
+[/olist]
