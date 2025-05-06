@@ -4,9 +4,7 @@ modded class MissionGameplay {
     ref CarimManagerAutorun carimManagerAutorun;
     ref CarimManagerChat carimManagerChat;
     ref CarimManagerCompass carimManagerCompass;
-    ref CarimManagerPartyPingClient carimManagerPartyPingClient;
-    ref CarimManagerPartyPositionClient carimManagerPartyPositionClient;
-    ref CarimManagerPartyRegistrationClient carimManagerPartyRegistrationClient;
+    ref CarimManagerPartyClient carimManagerPartyClient;
 
     ref CarimModelChatSettings carimModelChatSettings;
 
@@ -21,58 +19,71 @@ modded class MissionGameplay {
         super.OnGameplayDataHandlerLoad();
 
         if (CarimEnabled.Autorun() && !carimManagerAutorun) {
+            // Manager
             carimManagerAutorun = new CarimManagerAutorun;
         }
         if (CarimEnabled.Chat() && !carimManagerChat) {
+            // Local
             carimModelChatSettings = new CarimModelChatSettings;
             carimModelChatSettings.Load();
+
+            // Manager
             carimManagerChat = new CarimManagerChat;
         }
         if (CarimEnabled.Compass() && !carimManagerCompass) {
+            // Manager
             carimManagerCompass = new CarimManagerCompass;
         }
         if (CarimEnabled.Map()) {
+            // Local
             carimModelMapMarkers = new CarimModelMapMarkers;
             carimModelMapMarkers.Load();
         }
-        if (CarimEnabled.Party() && !carimManagerPartyPingClient && !carimManagerPartyPositionClient && !carimManagerPartyRegistrationClient) {
+        if (CarimEnabled.Party() && !carimManagerPartyClient) {
+            // Local
             carimModelPartyPings = new CarimModelPartyPings;
             carimModelPartyPings.Load();
             carimModelPartyRegistrations = new CarimModelPartyRegistrations;
             carimModelPartyRegistrations.Load();
-            carimManagerPartyPingClient = new CarimManagerPartyPingClient(carimModelPartyPings, carimModelPartyRegistrations);
-            carimManagerPartyPositionClient = new CarimManagerPartyPositionClient(carimModelPartyRegistrations);
-            carimManagerPartyRegistrationClient = new CarimManagerPartyRegistrationClient(carimModelPartyRegistrations);
+
+            // From Server
+            carimModelPartyMarkers = new CarimModelPartyMarkers;
+            carimModelPartyPositions = new CarimModelPartyPositions;
+
+            // Manager
+            carimManagerPartyClient = new CarimManagerPartyClient(carimModelPartyMarkers, carimModelPartyPings, carimModelPartyPositions, carimModelPartyRegistrations);
         }
 
         if (!carimManagerMarker) {
+            // Manager
             carimManagerMarker = new CarimManagerMarker(carimModelMapMarkers, carimModelPartyPings, carimModelPartyMarkers, CarimModelPartyPositions);
         }
     }
 
-    override void CarimManagerPartyPingClientAddServerMarker(string id, CarimModelPartyMarkers markers) {
-        if (carimManagerPartyPingClient) {
-            carimManagerPartyPingClient.AddServerMarker(id, markers);
+    // ---------- RPC callbacks
+
+    override void CarimPartyClientAddMarkers(string id, CarimModelPartyMarkers markers) {
+        if (carimModelPartyMarkers) {
+            carimModelPartyMarkers.Replace(id, markers);
         }
     }
 
-    override void CarimManagerPartyPingClientAddServerPings(string id, CarimModelPartyPings markers) {
-        if (carimManagerPartyPingClient) {
-            carimManagerPartyPingClient.AddServerPings(id, markers);
+    override void CarimPartyClientSetPositions(CarimModelPartyPositions positions) {
+        if (carimModelPartyPositions) {
+            carimModelPartyPositions.Clear();
+            foreach(CarimModelPartyPlayer position : positions) {
+                carimModelPartyPositions.Insert(position.id, position);
+            }
         }
     }
 
-    override void CarimManagerPartyPositionClientSetPositions(array<CarimModelPartyPlayer> players) {
-        if (carimManagerPartyPositionClient) {
-            carimManagerPartyPositionClient.SetPositions(players);
+    override void CarimPartyClientSetMutual(array<string> ids) {
+        if (carimManagerPartyClient) {
+            carimManagerPartyClient.SetMutual(ids);
         }
     }
 
-    override void CarimManagerPartyRegistrationClientSetMutual(array<string> ids) {
-        if (carimManagerPartyRegistrationClient) {
-            carimManagerPartyRegistrationClient.SetMutual(ids);
-        }
-    }
+    // ---------- RPC callbacks end
 
     override void OnUpdate(float timeslice) {
         super.OnUpdate(timeslice);

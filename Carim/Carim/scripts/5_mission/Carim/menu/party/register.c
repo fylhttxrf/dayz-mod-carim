@@ -1,5 +1,5 @@
 class CarimMenuPartyRegister extends UIScriptedMenu {
-    CarimManagerPartyRegistrationClient registrationClient;
+    CarimManagerPartyClient carimClient;
 
     TextListboxWidget carimPlayers;
     TextListboxWidget carimRegistered;
@@ -8,8 +8,8 @@ class CarimMenuPartyRegister extends UIScriptedMenu {
 
     float carimLastUpdated = 0.0;
 
-    void CarimMenuPartyRegister(CarimManagerPartyRegistrationClient client) {
-        registrationClient = client;
+    void CarimMenuPartyRegister(CarimManagerPartyClient client) {
+        carimClient = client;
     }
 
     override Widget Init() {
@@ -45,8 +45,8 @@ class CarimMenuPartyRegister extends UIScriptedMenu {
                 }
                 carimPlayers.GetItemData(selectedRow, 0, id);
                 int maxPartySize = CfgGameplayHandler.GetCarimPartyMaxPartySize();
-                if (maxPartySize < 0 || registrationClient.registrations.registrations.Count() < maxPartySize) {
-                    registrationClient.AddPlayerToParty(id.param1);
+                if (maxPartySize < 0 || carimClient.registrations.registrations.Count() < maxPartySize) {
+                    carimClient.AddPlayerToParty(id.param1);
                 }
                 CarimUpdateLists();
                 return true;
@@ -57,7 +57,7 @@ class CarimMenuPartyRegister extends UIScriptedMenu {
                     break;
                 }
                 carimRegistered.GetItemData(selectedRow, 0, id);
-                registrationClient.RemovePlayerFromParty(id.param1);
+                carimClient.RemovePlayerFromParty(id.param1);
                 carimRegistered.SelectRow(selectedRow - 1);
                 CarimUpdateLists();
                 return true;
@@ -73,7 +73,7 @@ class CarimMenuPartyRegister extends UIScriptedMenu {
             if (carimLastUpdated > CARIM_4_FPS_INTERVAL_SEC) {
                 CarimUpdateLists();
                 int maxPartySize = CfgGameplayHandler.GetCarimPartyMaxPartySize();
-                if (maxPartySize >= 0 && registrationClient.registrations.registrations.Count() >= maxPartySize) {
+                if (maxPartySize >= 0 && carimClient.registrations.registrations.Count() >= maxPartySize) {
                     carimAdd.Enable(false);
                 } else {
                     carimAdd.Enable(true);
@@ -87,7 +87,7 @@ class CarimMenuPartyRegister extends UIScriptedMenu {
 
     void CarimUpdateLists() {
         CarimUpdateList(carimPlayers, CarimUtil.GetClientPlayerIdentities());
-        CarimUpdateList(carimRegistered, registrationClient.registrations.registrations);
+        CarimUpdateList(carimRegistered, carimClient.registrations.registrations);
         CarimUpdateColors();
     }
 
@@ -117,7 +117,7 @@ class CarimMenuPartyRegister extends UIScriptedMenu {
         Param1<string> id;
         for (i = 0; i < carimRegistered.GetNumItems(); ++i) {
             carimRegistered.GetItemData(i, 0, id);
-            if (onlinePlayers.Contains(id.param1) && registrationClient.mutual.Find(id.param1) >= 0) {
+            if (onlinePlayers.Contains(id.param1) && carimClient.mutual.Find(id.param1) >= 0) {
                 // Green 400
                 carimRegistered.SetItemColor(i, 0, 0xFF66BB6A);
             } else {

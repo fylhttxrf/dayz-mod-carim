@@ -1,9 +1,9 @@
-class CarimRPCPartyPositions extends CarimRPCBase<Param1<array<CarimModelPartyPlayer>>> {
+class CarimRPCPartyPositions extends CarimRPCBase<Param1<CarimModelPartyPositions>> {
     override int GetType() {
         return CarimRPCTypesParty.POSITIONS;
     }
 
-    override void HandleClient(PlayerIdentity sender, Param1<array<CarimModelPartyPlayer>> params) {
-        MissionBaseWorld.Cast(GetGame().GetMission()).CarimManagerPartyPositionClientSetPositions(params.param1);
+    override void HandleClient(PlayerIdentity sender, Param1<CarimModelPartyPositions> params) {
+        MissionBaseWorld.Cast(GetGame().GetMission()).CarimPartyClientSetPositions(params.param1);
     }
 }

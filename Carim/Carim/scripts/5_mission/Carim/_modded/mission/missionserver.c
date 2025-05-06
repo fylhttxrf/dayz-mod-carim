@@ -1,7 +1,5 @@
 modded class MissionServer {
-    ref CarimManagerPartyPingServer carimManagerPartyPingServer;
-    ref CarimManagerPartyPositionServer carimManagerPartyPositionServer;
-    ref CarimManagerPartyRegistrationServer carimManagerPartyRegistrationServer;
+    ref CarimManagerPartyServer carimManagerPartyServer;
     ref CarimModelPartyParties carimModelPartyParties;
 
     override void OnGameplayDataHandlerLoad() {
@@ -9,23 +7,21 @@ modded class MissionServer {
 
         CarimEnabled.Initialize();
 
-        if (CarimEnabled.Party() && !carimManagerPartyPingServer && !carimManagerPartyPositionServer && !carimManagerPartyRegistrationServer) {
+        if (CarimEnabled.Party() && !carimManagerPartyServer) {
             carimModelPartyParties = new CarimModelPartyParties;
-            carimManagerPartyPingServer = new CarimManagerPartyPingServer(carimModelPartyParties);
-            carimManagerPartyPositionServer = new CarimManagerPartyPositionServer(carimModelPartyParties);
-            carimManagerPartyRegistrationServer = new CarimManagerPartyRegistrationServer(carimModelPartyParties);
+            carimManagerPartyServer = new CarimManagerPartyServer(carimModelPartyParties);
         }
     }
 
-    override void CarimManagerPartyPingServerRegister(string id, CarimModelPartyPings markers) {
-        if (carimManagerPartyPingServer) {
-            carimManagerPartyPingServer.Register(id, markers);
+    override void CarimPartyServerAddPings(string id, CarimModelPartyPings markers) {
+        if (carimManagerPartyServer) {
+            carimManagerPartyServer.RegisterMarkers(id, markers);
         }
     }
 
-    override void CarimManagerPartyRegistrationServerRegister(string id, array<string> ids) {
-        if (carimManagerPartyRegistrationServer) {
-            carimManagerPartyRegistrationServer.Register(id, ids);
+    override void CarimPartyServerRegister(string id, array<string> ids) {
+        if (carimManagerPartyServer) {
+            carimManagerPartyServer.RegisterParty(id, ids);
         }
     }
 }

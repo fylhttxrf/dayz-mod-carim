@@ -1,7 +1,12 @@
 class CarimMapMarker extends MapMarker {
     string carimPlayerId;
-    PlayerBase carimPlayer;
     int carimHealthLevel = -1;
+
+    [NonSerialized()] PlayerBase carimPlayer;
+
+    override void MapMarker(vector pos, string text, int color, int idx) {
+        // Included just for signature reference
+    }
 
     override vector GetMarkerPos() {
         if (carimPlayer) {
@@ -33,25 +38,25 @@ class CarimMapMarker extends MapMarker {
 class CarimModelAbcMarkers extends CarimModelAbcDiskJson {
     [NonSerialized()] bool changed = false;
 
-    ref array<ref CarimMapMarker> markers = new array<ref CarimMapMarker>;
+    ref map<string, ref array<ref CarimMapMarker>> markers = new map<string, ref array<ref CarimMapMarker>>;
 
-    void Replace(array<CarimMapMarker> marks) {
-        markers.Clear();
-        foreach(CarimMapMarker mark : marks) {
-            markers.Insert(mark);
-        }
+    void Replace(string id, array<ref CarimMapMarker> marks) {
+        markers.Set(id, marks);
         Persist();
         changed = true;
     }
 
     void Add(CarimMapMarker mark) {
-        markers.Insert(mark);
+        if (!markers.Contains(mark.carimPlayerId)) {
+            markers.Insert(mark.carimPlayerId, new array<ref CarimMapMarker>);
+        }
+        markers.Get(mark.carimPlayerId).Insert(mark);
         Persist();
         changed = true;
     }
 
-    void Clear() {
-        markers.Clear();
+    void Clear(string id) {
+        markers.Remove(id);
         Persist();
         changed = true;
     }
@@ -63,8 +68,8 @@ class CarimModelMapMarkers extends CarimModelAbcMarkers {}
 class CarimModelPartyPings extends CarimModelAbcMarkers {
     override void Add(CarimMapMarker mark) {
         int maxPings = CfgGameplayHandler.GetCarimPartyMaxPings();
-        if (maxPings > 0 && markers.Count() >= maxPings) {
-            markers.RemoveOrdered(0);
+        if (maxPings > 0 && markers.Contains(mark.carimPlayerId) && markers.Get(mark.carimPlayerId).Count() >= maxPings) {
+            markers.Get(mark.carimPlayerId).RemoveOrdered(0);
         }
         super.Add(mark);
     }
