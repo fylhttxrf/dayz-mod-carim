@@ -14,7 +14,7 @@ modded class MapHandler {
         worldPos[1] = GetGame().SurfaceY(worldPos[0], worldPos[2]);
 
         auto mission = MissionGameplay.Cast(GetGame().GetMission());
-        auto marker = CarimMapMarker.CarimNew(worldPos, "TODO", CarimColor.PURPLE_300, CarimMapMarkerTypes.DEFAULT, GetGame().GetPlayer().GetIdentity().GetId());
+        auto marker = CarimMapMarker.CarimNew(worldPos, "", CarimColor.PURPLE_300, CarimMapMarkerTypes.ARROW_3, GetGame().GetPlayer().GetIdentity().GetId());
 
         if (button == 0) {
             // Add marker

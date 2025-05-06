@@ -105,7 +105,7 @@ class CarimManagerPartyClient extends Managed {
 
     void AddPing(vector position) {
         PlayerBase player = PlayerBase.Cast(GetGame().GetPlayer());
-        auto mark = CarimMapMarker.CarimNew(position, player.GetIdentity().GetName(), CarimColor.CYAN_300, CarimMapMarkerTypes.DEFAULT, player.GetIdentity().GetId());
+        auto mark = CarimMapMarker.CarimNew(position, player.GetIdentity().GetName(), CarimColor.CYAN_300, CarimMapMarkerTypes.ARROW_1, player.GetIdentity().GetId());
         pings.Add(mark);
         SendPings();
     }

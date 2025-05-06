@@ -104,7 +104,7 @@ modded class MissionGameplay {
 
             foreach(string markId, auto markPosition : carimModelPartyMarkers.markers) {
                 if (ids.Find(markId) < 0) {
-                    carimModelPartyPositions.Clear(markId);
+                    carimModelPartyMarkers.Clear(markId);
                 }
             }
         }

@@ -18,14 +18,22 @@ class CarimManagerPartyServer extends Managed {
     }
 
     void RegisterMarkers(string id, CarimModelPartyPings playerMarkers) {
-        markers.Replace(id, playerMarkers.markers.Get(id));
+        if (playerMarkers.markers.Contains(id)) {
+            foreach(CarimMapMarker marker : playerMarkers.markers.Get(id)) {
+                marker.CarimSetMarkerColor(CarimColor.TEAL_300);
+                marker.CarimSetMarkerIcon(CarimMapMarkerTypes.ARROW_2);
+            }
+            markers.Replace(id, playerMarkers.markers.Get(id));
+        } else {
+            markers.Clear(id);
+        }
 
         // Send markers to mutual members
         if (parties.mutuals.Contains(id)) {
             // translate pings to markers
             // TODO: include map markers
             auto markersToSend = new CarimModelPartyMarkers;
-            markersToSend.Replace(id, playerMarkers.markers.Get(id));
+            markersToSend.Replace(id, markers.markers.Get(id));
             auto idMap = CarimManagerPartyUtil.GetServerIdPlayerMap();
             auto mutualPlayers = parties.mutuals.Get(id).ToArray();
             foreach(string playerId : mutualPlayers) {
@@ -62,7 +70,7 @@ class CarimManagerPartyServer extends Managed {
         // Harvest the relevant information
         foreach(string id, PlayerBase player : idMap) {
             CarimLogging.Trace(this, "PartyPositionServer Harvest " + id);
-            auto playerInfo = CarimMapMarker.CarimNew(player.GetPosition(), player.GetIdentity().GetName(), CarimColor.TEAL_300, CarimMapMarkerTypes.DEFAULT, id, player.GetHealthLevel());
+            auto playerInfo = CarimMapMarker.CarimNew(player.GetPosition(), player.GetIdentity().GetName(), CarimColor.HEALTH_WHITE, CarimMapMarkerTypes.HEALTH_0, id, player.GetHealthLevel());
             CarimLogging.Trace(this, "PartyPositionServer Harvested " + playerInfo.CarimRepr());
             players.Add(playerInfo);
         }

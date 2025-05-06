@@ -60,7 +60,6 @@ FrameWidgetClass rootFrame {
    hexactsize 1
    vexactsize 1
    scaled 1
-   image0 "set:dayz_gui image:iconArrowUp2"
    mode blend
    "src alpha" 1
   }

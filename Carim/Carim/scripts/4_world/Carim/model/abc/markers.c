@@ -1,6 +1,8 @@
 enum CarimMapMarkerTypes {
     START = -44000,
-    DEFAULT,
+    ARROW_1,
+    ARROW_2,
+    ARROW_3,
     HEALTH_0,
     HEALTH_1,
     HEALTH_2,
@@ -88,6 +90,18 @@ class CarimMapMarker extends MapMarker {
         carimHealthLevel = other.carimHealthLevel;
     }
 
+    void CarimSetMarkerText(string text) {
+        m_Text = text;
+    }
+
+    void CarimSetMarkerIcon(int icon) {
+        m_IconIdx = icon;
+    }
+
+    void CarimSetMarkerColor(int color) {
+        m_Color = color;
+    }
+
     string CarimRepr() {
         return string.Format("%1<%2, %3>", ClassName(), carimPlayerId, GetMarkerPos(), CarimGetHealthLevel());
     }
@@ -130,21 +144,47 @@ class CarimModelAbcMarkers extends CarimModelAbcDiskJson {
     }
 
     void Clear(string id) {
-        markers.Remove(id);
+        if (markers.Contains(id)) {
+            markers.Get(id).Resize(0);
+        } else {
+            markers.Insert(id, new array<ref CarimMapMarker>);
+        }
         Persist();
         changed = true;
     }
 }
 
 // Local
-class CarimModelMapMarkers extends CarimModelAbcMarkers {}
+class CarimModelMapMarkers extends CarimModelAbcMarkers {
+    int counter = 0;
+
+    override void Clear(string id) {
+        counter = 0;
+        super.Clear(id);
+    }
+
+    override void Add(CarimMapMarker mark) {
+        mark.CarimSetMarkerText(mark.GetMarkerText() + counter.ToString());
+        ++counter;
+        super.Add(mark);
+    }
+}
 
 class CarimModelPartyPings extends CarimModelAbcMarkers {
+    int counter = 0;
+
+    override void Clear(string id) {
+        counter = 0;
+        super.Clear(id);
+    }
+
     override void Add(CarimMapMarker mark) {
         int maxPings = CfgGameplayHandler.GetCarimPartyMaxPings();
         if (maxPings > 0 && markers.Contains(mark.carimPlayerId) && markers.Get(mark.carimPlayerId).Count() >= maxPings) {
             markers.Get(mark.carimPlayerId).RemoveOrdered(0);
         }
+        mark.CarimSetMarkerText(mark.GetMarkerText() + " " + counter.ToString());
+        ++counter;
         super.Add(mark);
     }
 }
