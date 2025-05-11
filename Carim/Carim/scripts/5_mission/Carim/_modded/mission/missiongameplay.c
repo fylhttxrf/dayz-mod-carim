@@ -19,10 +19,11 @@ modded class MissionGameplay {
         super.OnInit();
 
         MapMarkerTypes.CarimInit();
+        CarimInit();
     }
 
-    override void OnGameplayDataHandlerLoad() {
-        super.OnGameplayDataHandlerLoad();
+    void CarimInit() {
+        CarimEnabled.Initialize();
 
         if (CarimEnabled.Autorun() && !carimManagerAutorun) {
             // Manager
@@ -114,8 +115,6 @@ modded class MissionGameplay {
 
     override void OnUpdate(float timeslice) {
         super.OnUpdate(timeslice);
-
-        CarimEnabled.Initialize(true);
 
         if (CarimEnabled.Autorun() && carimManagerAutorun) {
             carimManagerAutorun.OnUpdate();

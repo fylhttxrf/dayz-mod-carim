@@ -4,8 +4,11 @@ modded class ChatLine {
             m_RootWidget = GetGame().GetWorkspace().CreateWidgets("Carim/Carim/gui/layouts/chatline.layout", root_widget);
             m_NameWidget = TextWidget.Cast(m_RootWidget.FindAnyWidget("ChatItemSenderWidget"));
             m_TextWidget = TextWidget.Cast(m_RootWidget.FindAnyWidget("ChatItemTextWidget"));
-            m_NameWidget.SetTextExactSize(MissionGameplay.Cast(GetGame().GetMission()).carimModelChatSettings.size);
-            m_TextWidget.SetTextExactSize(MissionGameplay.Cast(GetGame().GetMission()).carimModelChatSettings.size);
+            auto carimSettings = MissionGameplay.Cast(GetGame().GetMission()).carimModelChatSettings;
+            if (carimSettings) {
+                m_NameWidget.SetTextExactSize(carimSettings.size);
+                m_TextWidget.SetTextExactSize(carimSettings.size);
+            }
         }
     }
 
@@ -30,8 +33,11 @@ modded class ChatLine {
     }
 
     void CarimUpdateSize() {
-        m_NameWidget.SetTextExactSize(MissionGameplay.Cast(GetGame().GetMission()).carimModelChatSettings.size);
-        m_TextWidget.SetTextExactSize(MissionGameplay.Cast(GetGame().GetMission()).carimModelChatSettings.size);
+        auto carimSettings = MissionGameplay.Cast(GetGame().GetMission()).carimModelChatSettings;
+        if (carimSettings) {
+            m_NameWidget.SetTextExactSize(carimSettings.size);
+            m_TextWidget.SetTextExactSize(carimSettings.size);
+        }
     }
 
     void CarimSetColour(int colour) {
