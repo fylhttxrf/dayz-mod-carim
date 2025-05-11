@@ -42,19 +42,19 @@ Optionally, servers can configure Admin Ids that allow adding party members with
 
 [h2]Configuration[/h2]
 [hr][/hr]
-Configuration is managed in your cfggameplay.json. Different modules can be enabled/disabled independently. The defaults are below (copy these into your cfggameplay.json and change as you want).
+Configuration is managed in your cfggameplay.json. Different modules can be enabled/disabled independently. The color values are signed integers based on the ARGB bytes, so 0xfffafafa is -328966. The defaults are below (copy these into your cfggameplay.json and change as you want).
 [code]
 "CarimData": {
-    "adminIds" = [],
+    "adminIds": [],
     "CarimAutorunData": {
         "enabled": true
     },
     "CarimChatData": {
         "enabled": true,
-        "colorDirect": 0xfffafafa,
-        "colorGlobal": 0xffffd54f,
-        "colorServer": 0xff4fc3f7,
-        "colorAlert": 0xffff8a65
+        "colorDirect": -328966,
+        "colorGlobal": -10929,
+        "colorServer": -11549705,
+        "colorAlert": -30107
     },
     "CarimCompassData": {
         "enabled": true
