@@ -131,6 +131,28 @@ class CarimModelAbcMarkers extends CarimModelAbcDiskJson {
         if (!markers.Contains(mark.carimPlayerId)) {
             return;
         }
+        int closest = -1;
+        int closestDistance = 1000;
+        foreach(int i, auto marker : markers.Get(mark.carimPlayerId)) {
+            auto distance = vector.Distance(mark.GetMarkerPos(), marker.GetMarkerPos());
+
+            if (distance < 50) {
+                closest = i;
+                closestDistance = distance;
+            }
+        }
+
+        if (closest >= 0) {
+            markers.Get(mark.carimPlayerId).RemoveOrdered(closest);
+            Persist();
+            changed = true;
+        }
+    }
+
+    CarimMapMarker GetClose(CarimMapMarker mark) {
+        if (!markers.Contains(mark.carimPlayerId)) {
+            return;
+        }
         foreach(int i, auto marker : markers.Get(mark.carimPlayerId)) {
             auto distance = vector.Distance(mark.GetMarkerPos(), marker.GetMarkerPos());
 

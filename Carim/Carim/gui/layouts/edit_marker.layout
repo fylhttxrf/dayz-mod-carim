@@ -1,0 +1,93 @@
+FrameWidgetClass rootFrame {
+ clipchildren 0
+ position 0.3 0.2
+ size 0 0
+ hexactpos 0
+ vexactpos 0
+ hexactsize 1
+ vexactsize 1
+ {
+  PanelWidgetClass panel {
+   ignorepointer 1
+   position 0 0
+   size 376 172
+   hexactpos 0
+   vexactpos 0
+   hexactsize 1
+   vexactsize 1
+   {
+    EditBoxWidgetClass text {
+     position 8 8
+     size 360 36
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "sample label"
+     "limit visible" 0
+     "Use default text" 1
+     "exact text" 0
+     font "gui/fonts/sdf_MetronLight72"
+    }
+    ButtonWidgetClass previous {
+     position 288 48
+     size 18 36
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "<"
+    }
+    ImageWidgetClass icon {
+     ignorepointer 1
+     position 310 48
+     size 36 36
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     "src alpha" 1
+    }
+    ButtonWidgetClass next {
+     position 350 48
+     size 18 36
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text ">"
+    }
+    ButtonWidgetClass save {
+     position 288 88
+     size 80 36
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "Save"
+     font "gui/fonts/Metron"
+    }
+    ButtonWidgetClass cancel {
+     position 288 128
+     size 80 36
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "Cancel"
+     font "gui/fonts/Metron28"
+    }
+    ImageWidgetClass ColorPicker {
+     ignorepointer 1
+     color 1 0 0 1
+     position 8 48
+     size 36 36
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+    }
+   }
+  }
+ }
+}
