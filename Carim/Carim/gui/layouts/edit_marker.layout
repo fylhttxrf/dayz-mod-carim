@@ -75,12 +75,12 @@ FrameWidgetClass rootFrame {
      hexactsize 1
      vexactsize 1
      text "Cancel"
-     font "gui/fonts/Metron28"
+     font "gui/fonts/Metron"
     }
     ImageWidgetClass color01 {
      visible 1
      ignorepointer 0
-     color 1 0 0 1
+     color 0.957 0.263 0.212 1
      position 8 48
      size 36 36
      hexactpos 1
@@ -91,7 +91,7 @@ FrameWidgetClass rootFrame {
     ImageWidgetClass color02 {
      visible 1
      ignorepointer 0
-     color 1 1 0 1
+     color 0.914 0.118 0.388 1
      position 8 88
      size 36 36
      hexactpos 1
@@ -102,7 +102,7 @@ FrameWidgetClass rootFrame {
     ImageWidgetClass color03 {
      visible 1
      ignorepointer 0
-     color 0 1 0 1
+     color 0.612 0.153 0.69 1
      position 8 128
      size 36 36
      hexactpos 1
@@ -110,10 +110,10 @@ FrameWidgetClass rootFrame {
      hexactsize 1
      vexactsize 1
     }
-        ImageWidgetClass color04 {
+    ImageWidgetClass color04 {
      visible 1
      ignorepointer 0
-     color 1 0 0 1
+     color 0.404 0.227 0.718 1
      position 48 48
      size 36 36
      hexactpos 1
@@ -124,7 +124,7 @@ FrameWidgetClass rootFrame {
     ImageWidgetClass color05 {
      visible 1
      ignorepointer 0
-     color 1 1 0 1
+     color 0.247 0.318 0.71 1
      position 48 88
      size 36 36
      hexactpos 1
@@ -135,7 +135,7 @@ FrameWidgetClass rootFrame {
     ImageWidgetClass color06 {
      visible 1
      ignorepointer 0
-     color 0 1 0 1
+     color 0.129 0.588 0.953 1
      position 48 128
      size 36 36
      hexactpos 1
@@ -143,10 +143,10 @@ FrameWidgetClass rootFrame {
      hexactsize 1
      vexactsize 1
     }
-        ImageWidgetClass color07 {
+    ImageWidgetClass color07 {
      visible 1
      ignorepointer 0
-     color 1 0 0 1
+     color 0.012 0.663 0.957 1
      position 88 48
      size 36 36
      hexactpos 1
@@ -157,7 +157,7 @@ FrameWidgetClass rootFrame {
     ImageWidgetClass color08 {
      visible 1
      ignorepointer 0
-     color 1 1 0 1
+     color 0 0.737 0.831 1
      position 88 88
      size 36 36
      hexactpos 1
@@ -168,7 +168,7 @@ FrameWidgetClass rootFrame {
     ImageWidgetClass color09 {
      visible 1
      ignorepointer 0
-     color 0 1 0 1
+     color 0 0.588 0.533 1
      position 88 128
      size 36 36
      hexactpos 1
@@ -176,10 +176,10 @@ FrameWidgetClass rootFrame {
      hexactsize 1
      vexactsize 1
     }
-        ImageWidgetClass color10 {
+    ImageWidgetClass color10 {
      visible 1
      ignorepointer 0
-     color 1 0 0 1
+     color 0.298 0.686 0.314 1
      position 128 48
      size 36 36
      hexactpos 1
@@ -190,7 +190,7 @@ FrameWidgetClass rootFrame {
     ImageWidgetClass color11 {
      visible 1
      ignorepointer 0
-     color 1 1 0 1
+     color 0.545 0.765 0.29 1
      position 128 88
      size 36 36
      hexactpos 1
@@ -201,7 +201,7 @@ FrameWidgetClass rootFrame {
     ImageWidgetClass color12 {
      visible 1
      ignorepointer 0
-     color 0 1 0 1
+     color 0.804 0.863 0.224 1
      position 128 128
      size 36 36
      hexactpos 1
@@ -209,10 +209,10 @@ FrameWidgetClass rootFrame {
      hexactsize 1
      vexactsize 1
     }
-        ImageWidgetClass color13 {
+    ImageWidgetClass color13 {
      visible 1
      ignorepointer 0
-     color 1 0 0 1
+     color 1 0.922 0.231 1
      position 168 48
      size 36 36
      hexactpos 1
@@ -223,7 +223,7 @@ FrameWidgetClass rootFrame {
     ImageWidgetClass color14 {
      visible 1
      ignorepointer 0
-     color 1 1 0 1
+     color 1 0.757 0.027 1
      position 168 88
      size 36 36
      hexactpos 1
@@ -234,7 +234,7 @@ FrameWidgetClass rootFrame {
     ImageWidgetClass color15 {
      visible 1
      ignorepointer 0
-     color 0 1 0 1
+     color 1 0.596 0 1
      position 168 128
      size 36 36
      hexactpos 1
@@ -242,10 +242,10 @@ FrameWidgetClass rootFrame {
      hexactsize 1
      vexactsize 1
     }
-            ImageWidgetClass color16 {
+    ImageWidgetClass color16 {
      visible 1
      ignorepointer 0
-     color 1 0 0 1
+     color 1 0.341 0.133 1
      position 208 48
      size 36 36
      hexactpos 1
@@ -256,7 +256,7 @@ FrameWidgetClass rootFrame {
     ImageWidgetClass color17 {
      visible 1
      ignorepointer 0
-     color 1 1 0 1
+     color 0.475 0.333 0.282 1
      position 208 88
      size 36 36
      hexactpos 1
@@ -267,7 +267,7 @@ FrameWidgetClass rootFrame {
     ImageWidgetClass color18 {
      visible 1
      ignorepointer 0
-     color 0 1 0 1
+     color 0.62 0.62 0.62 1
      position 208 128
      size 36 36
      hexactpos 1
@@ -275,10 +275,10 @@ FrameWidgetClass rootFrame {
      hexactsize 1
      vexactsize 1
     }
-            ImageWidgetClass color19 {
+    ImageWidgetClass color19 {
      visible 1
      ignorepointer 0
-     color 1 0 0 1
+     color 0.376 0.49 0.545 1
      position 248 48
      size 36 36
      hexactpos 1
@@ -289,7 +289,7 @@ FrameWidgetClass rootFrame {
     ImageWidgetClass color20 {
      visible 1
      ignorepointer 0
-     color 1 1 0 1
+     color 0 0 0 1
      position 248 88
      size 36 36
      hexactpos 1
@@ -300,7 +300,7 @@ FrameWidgetClass rootFrame {
     ImageWidgetClass color21 {
      visible 1
      ignorepointer 0
-     color 0 1 0 1
+     color 1 1 1 1
      position 248 128
      size 36 36
      hexactpos 1
