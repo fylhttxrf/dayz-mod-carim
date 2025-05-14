@@ -1,11 +1,11 @@
 modded class MapHandler {
+    ref CarimMenuEditMarker carimMenuEditMarker;
+
     override bool OnDoubleClick(Widget w, int x, int y, int button) {
         if (!CarimEnabled.Map()) {
             return super.OnDoubleClick(w, x, y, button);
         }
         super.OnDoubleClick(w, x, y, button);
-
-        CarimLogging.Trace(this, "OnDoubleClick " + button.ToString());
 
         vector mousePos, worldPos;
         mousePos[0] = x;
@@ -13,8 +13,10 @@ modded class MapHandler {
         worldPos = MapWidget.Cast(w).ScreenToMap(mousePos);
         worldPos[1] = GetGame().SurfaceY(worldPos[0], worldPos[2]);
 
+        CarimLogging.Trace(this, string.Format("OnDoubleClick %1, mouse(%2) world(%3)", button.ToString(), mousePos, worldPos));
+
         auto mission = MissionGameplay.Cast(GetGame().GetMission());
-        auto marker = CarimMapMarker.CarimNew(worldPos, "", CarimColor.PURPLE_300, CarimMapMarkerTypes.ARROW_3, GetGame().GetPlayer().GetIdentity().GetId());
+        auto marker = CarimMapMarker.CarimNew(worldPos, "", CarimColor.PURPLE_300, CarimMapMarkerTypes.ARROW_3, CarimUtil.GetIdentifier(GetGame().GetPlayer().GetIdentity()));
 
         switch (button) {
             case MouseState.LEFT:
@@ -22,8 +24,19 @@ modded class MapHandler {
                 mission.carimModelMapMarkers.Add(marker);
                 break;
             case MouseState.RIGHT:
-                // Remove marker
-                mission.carimModelMapMarkers.Remove(marker);
+                // Edit marker
+                auto existingMarker = mission.carimModelMapMarkers.GetClosest(marker);
+                if (existingMarker) {
+                    CarimLogging.Debug(this, "Open MenuEditMarker");
+                    if (!carimMenuEditMarker) {
+                        carimMenuEditMarker = new CarimMenuEditMarker(existingMarker, x, y);
+                        m_Root.AddChild(carimMenuEditMarker.root);
+                    }
+                    carimMenuEditMarker.marker = existingMarker;
+                    carimMenuEditMarker.x = x;
+                    carimMenuEditMarker.y = y;
+                    carimMenuEditMarker.Show();
+                }
                 break;
         }
 
@@ -34,24 +47,11 @@ modded class MapHandler {
         if (!CarimEnabled.Map()) {
             return super.OnClick(w, x, y, button);
         }
-        super.OnClick(w, x, y, button);
 
-        CarimLogging.Trace(this, "OnClick " + button.ToString());
+        CarimLogging.Trace(this, "OnClick " + w);
 
-        vector mousePos, worldPos;
-        mousePos[0] = x;
-        mousePos[1] = y;
-        worldPos = MapWidget.Cast(w).ScreenToMap(mousePos);
-        worldPos[1] = GetGame().SurfaceY(worldPos[0], worldPos[2]);
-
-        auto mission = MissionGameplay.Cast(GetGame().GetMission());
-        auto marker = CarimMapMarker.CarimNew(worldPos, "", CarimColor.PURPLE_300, CarimMapMarkerTypes.ARROW_3, GetGame().GetPlayer().GetIdentity().GetId());
-
-        switch (button) {
-            case MouseState.RIGHT:
-                // Edit marker
-                auto existingMarker = mission.carimModelMapMarkers.GetClose(marker);
-                break;
+        if (button == MouseState.LEFT && carimMenuEditMarker && carimMenuEditMarker.visible) {
+            carimMenuEditMarker.OnClick(w);
         }
 
         return true;
