@@ -7,7 +7,7 @@ class CarimManagerPartyUtil {
         foreach(Man man : players) {
             PlayerBase player = PlayerBase.Cast(man);
             if (player && player.GetIdentity()) {
-                idMap.Insert(player.GetIdentity().GetId(), player);
+                idMap.Insert(CarimUtil.GetIdentifier(player.GetIdentity()), player);
             }
         }
 

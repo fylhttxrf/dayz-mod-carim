@@ -48,7 +48,7 @@ class CarimManagerPartyClient extends Managed {
         auto players = GetClientPlayerBases();
         foreach(PlayerBase player : players) {
             if (player && player.GetIdentity() && player.IsAlive()) {
-                string id = player.GetIdentity().GetId();
+                string id = CarimUtil.GetIdentifier(player.GetIdentity());
                 if (positions.markers.Contains(id) && positions.markers.Get(id).Count() > 0) {
                     if (!positions.markers.Get(id).Get(0).carimPlayer) {
                         CarimLogging.Debug(this, "Adding local player to positions " + id);
@@ -105,14 +105,14 @@ class CarimManagerPartyClient extends Managed {
 
     void AddPing(vector position) {
         PlayerBase player = PlayerBase.Cast(GetGame().GetPlayer());
-        auto mark = CarimMapMarker.CarimNew(position, player.GetIdentity().GetName(), CarimColor.CYAN_300, CarimMapMarkerTypes.ARROW_1, player.GetIdentity().GetId());
+        auto mark = CarimMapMarker.CarimNew(position, player.GetIdentity().GetName(), CarimColor.CYAN_300, CarimMapMarkerTypes.ARROW_1, CarimUtil.GetIdentifier(player.GetIdentity()));
         pings.Add(mark);
         SendPings();
     }
 
     void ResetPings() {
         PlayerBase player = PlayerBase.Cast(GetGame().GetPlayer());
-        pings.Clear(player.GetIdentity().GetId());
+        pings.Clear(CarimUtil.GetIdentifier(player.GetIdentity()));
         SendPings();
     }
 

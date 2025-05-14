@@ -10,7 +10,7 @@ class CarimUtil {
     static map<string, string> GetClientPlayerIdentities() {
         map<string, string> identities = new map<string, string>;
         foreach(SyncPlayer player : ClientData.m_PlayerList.m_PlayerList) {
-            identities.Insert(player.m_Identity.GetId(), player.m_Identity.GetName());
+            identities.Insert(GetIdentifier(player.m_Identity), player.m_Identity.GetName());
         }
         return identities;
     }
@@ -28,5 +28,12 @@ class CarimUtil {
             result.Insert(sortingMap.Get(key));
         }
         return result;
+    }
+
+    static string GetIdentifier(PlayerIdentity identity) {
+        if (identity) {
+            return identity.GetPlainId();
+        }
+        return "";
     }
 }

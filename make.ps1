@@ -69,7 +69,7 @@ function Build-Project {
     $outputs = Get-ChildItem "$localMods" | Where-Object { $_.PSISContainer }
 
     foreach ($output in $outputs) {
-        Start-Process $pboProject -Wait -ArgumentList "$projectDrive\$mod", "+M=$localMods\$output", "+E=DAYZSA", "+K=$key", "+T", "+H", "+$", "+Z", "+B", "+C", "-P" 
+        Start-Process $pboProject -Wait -ArgumentList "$projectDrive\$mod", "+M=$localMods\$output", "+E=DAYZSA", "+K=$key", "+T", "+H", "+$", "+B", "+C", "-P" 
     }
 }
 

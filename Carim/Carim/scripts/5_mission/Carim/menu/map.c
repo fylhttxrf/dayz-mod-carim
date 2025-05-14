@@ -22,8 +22,6 @@ class CarimMenuMap extends MapMenu {
     }
 
     override void LoadMapMarkers() {
-        CarimLogging.Trace(this, "LoadMapMarkers");
-
         auto mission = MissionGameplay.Cast(GetGame().GetMission());
         CarimLoadMapMarkers(mission.carimModelMapMarkers);
         CarimLoadMapMarkers(mission.carimModelPartyPings);
