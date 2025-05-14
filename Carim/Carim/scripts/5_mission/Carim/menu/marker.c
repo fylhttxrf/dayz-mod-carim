@@ -92,10 +92,14 @@ class CarimMenuMarker extends UIScriptedMenu {
     }
 
     string CarimGetDistance() {
-        float distance = Math.Round(vector.Distance(carimMarker.GetMarkerPos(), GetGame().GetPlayer().GetPosition()));
-        string distanceString = distance.ToString() + "m";
-        if (distance > 1000) {
-            distanceString = (Math.Round(distance / 100) / 10).ToString() + "km";
+        auto player = GetGame().GetPlayer();
+        string distanceString = "";
+        if (player) {
+            float distance = Math.Round(vector.Distance(carimMarker.GetMarkerPos(), player.GetPosition()));
+            distanceString = distance.ToString() + "m";
+            if (distance > 1000) {
+                distanceString = (Math.Round(distance / 100) / 10).ToString() + "km";
+            }
         }
         return distanceString;
     }

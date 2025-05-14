@@ -4,4 +4,5 @@ ButtonWidgetClass button {
     vexactpos 1
     hexactsize 1
     vexactsize 1
+    style DayZDefaultButtonNoBorder
 }

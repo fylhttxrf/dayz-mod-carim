@@ -14,7 +14,8 @@ class CarimMenuEditMarker extends Managed {
     ButtonWidget deleteButton;
     ButtonWidget cancel;
 
-    // TODO: color picker widgets (buttons so they can have OnClick)
+    ref array<ref ButtonWidget> colorButtons;
+
     void CarimMenuEditMarker(CarimMapMarker iMarker, int iX, int iY) {
         marker = iMarker;
         x = iX;
@@ -32,10 +33,10 @@ class CarimMenuEditMarker extends Managed {
 
         auto panel = root.FindAnyWidget("panel");
 
-        GetColorButtons(panel);
+        colorButtons = GetColorButtons(panel);
     }
 
-    static array<ButtonWidget> GetColorButtons(Widget panel) {
+    static array<ref ButtonWidget> GetColorButtons(Widget panel) {
         int colors[] = {CarimColor.RED_500,
                         CarimColor.PINK_500,
                         CarimColor.PURPLE_500,
@@ -62,13 +63,14 @@ class CarimMenuEditMarker extends Managed {
         int currentY = 48;
 
         ButtonWidget button;
-        array<ButtonWidget> buttons = new array<ButtonWidget>;
+        array<ref ButtonWidget> buttons = new array<ref ButtonWidget>;
 
         foreach(int color : colors) {
             CarimLogging.Trace(null, string.Format("%1 (%2, %3)", color, currentX, currentY));
             button = ButtonWidget.Cast(GetGame().GetWorkspace().CreateWidgets("Carim/Carim/gui/layouts/edit_color_button.layout"));
             button.SetPos(currentX, currentY);
             button.SetColor(color);
+            panel.AddChild(button);
             if (currentX == 248) {
                 currentX = 8;
                 currentY += 40;
@@ -117,10 +119,12 @@ class CarimMenuEditMarker extends Managed {
                 marker.CarimSetMarkerText(text.GetText());
                 marker.CarimSetMarkerIcon(0);
                 marker.CarimSetMarkerColor(icon.GetColor());
+                // TODO: persist
                 Hide();
                 break;
             case deleteButton:
                 CarimLogging.Trace(this, "Delete");
+                Hide();
                 break;
             case previous:
                 CarimLogging.Trace(this, "Previous");
@@ -129,6 +133,12 @@ class CarimMenuEditMarker extends Managed {
                 CarimLogging.Trace(this, "Next");
                 break;
             default:
+                foreach(auto button : colorButtons) {
+                    if (w == button) {
+                        icon.SetColor(button.GetColor());
+                        return true;
+                    }
+                }
                 return false;
         }
         return true;
