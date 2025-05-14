@@ -37,6 +37,7 @@ class CarimMenuEditMarker extends Managed {
     }
 
     static array<ref ButtonWidget> GetColorButtons(Widget panel) {
+        // Needs to be 21 for layout to work
         int colors[] = {CarimColor.RED_500,
                         CarimColor.PINK_500,
                         CarimColor.PURPLE_500,
@@ -109,6 +110,8 @@ class CarimMenuEditMarker extends Managed {
     bool OnClick(Widget w) {
         CarimLogging.Trace(this, "OnClick");
 
+        auto mission = MissionGameplay.Cast(GetGame().GetMission());
+
         switch (w) {
             case cancel:
                 CarimLogging.Trace(this, "Cancel");
@@ -119,11 +122,12 @@ class CarimMenuEditMarker extends Managed {
                 marker.CarimSetMarkerText(text.GetText());
                 marker.CarimSetMarkerIcon(0);
                 marker.CarimSetMarkerColor(icon.GetColor());
-                // TODO: persist
+                mission.carimModelMapMarkers.Persist();
                 Hide();
                 break;
             case deleteButton:
                 CarimLogging.Trace(this, "Delete");
+                mission.carimModelMapMarkers.Remove(marker);
                 Hide();
                 break;
             case previous:
