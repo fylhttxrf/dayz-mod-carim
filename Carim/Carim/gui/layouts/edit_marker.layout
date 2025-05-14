@@ -1,11 +1,12 @@
 FrameWidgetClass rootFrame {
  clipchildren 0
- position 0.3 0.2
+ position 0 0
  size 0 0
- hexactpos 0
- vexactpos 0
- hexactsize 1
- vexactsize 1
+ hexactpos 1
+ vexactpos 1
+ hexactsize 0
+ vexactsize 0
+ priority 200
  {
   PanelWidgetClass panel {
    ignorepointer 1
@@ -15,32 +16,33 @@ FrameWidgetClass rootFrame {
    vexactpos 0
    hexactsize 1
    vexactsize 1
+   style rover_sim_black
    {
     EditBoxWidgetClass text {
      position 8 8
-     size 360 36
+     size 276 36
      hexactpos 1
      vexactpos 1
      hexactsize 1
      vexactsize 1
-     text "sample label"
-     "limit visible" 0
-     "Use default text" 1
-     "exact text" 0
-     font "gui/fonts/sdf_MetronLight72"
+     style Editor
+     text "example label"
+     font "gui/fonts/MetronBook28"
     }
     ButtonWidgetClass previous {
-     position 288 48
+     position 288 8
      size 18 36
      hexactpos 1
      vexactpos 1
      hexactsize 1
      vexactsize 1
+     style MenuDefault
      text "<"
+     font "gui/fonts/MetronBook28"
     }
     ImageWidgetClass icon {
      ignorepointer 1
-     position 310 48
+     position 310 8
      size 36 36
      hexactpos 1
      vexactpos 1
@@ -49,23 +51,37 @@ FrameWidgetClass rootFrame {
      "src alpha" 1
     }
     ButtonWidgetClass next {
-     position 350 48
+     position 350 8
      size 18 36
      hexactpos 1
      vexactpos 1
      hexactsize 1
      vexactsize 1
+     style MenuDefault
      text ">"
+     font "gui/fonts/MetronBook28"
     }
     ButtonWidgetClass save {
+     position 288 48
+     size 80 36
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     style MenuDefault
+     text "Save"
+     font "gui/fonts/MetronBook28"
+    }
+    ButtonWidgetClass deleteButton {
      position 288 88
      size 80 36
      hexactpos 1
      vexactpos 1
      hexactsize 1
      vexactsize 1
-     text "Save"
-     font "gui/fonts/Metron"
+     style MenuDefault
+     text "Delete"
+     font "gui/fonts/MetronBook28"
     }
     ButtonWidgetClass cancel {
      position 288 128
@@ -74,11 +90,11 @@ FrameWidgetClass rootFrame {
      vexactpos 1
      hexactsize 1
      vexactsize 1
+     style MenuDefault
      text "Cancel"
-     font "gui/fonts/Metron"
+     font "gui/fonts/MetronBook28"
     }
-    ImageWidgetClass color01 {
-     visible 1
+    ImageWidgetClass color_RED_500 {
      ignorepointer 0
      color 0.957 0.263 0.212 1
      position 8 48
@@ -88,32 +104,9 @@ FrameWidgetClass rootFrame {
      hexactsize 1
      vexactsize 1
     }
-    ImageWidgetClass color02 {
-     visible 1
+    ImageWidgetClass color_PINK_500 {
      ignorepointer 0
      color 0.914 0.118 0.388 1
-     position 8 88
-     size 36 36
-     hexactpos 1
-     vexactpos 1
-     hexactsize 1
-     vexactsize 1
-    }
-    ImageWidgetClass color03 {
-     visible 1
-     ignorepointer 0
-     color 0.612 0.153 0.69 1
-     position 8 128
-     size 36 36
-     hexactpos 1
-     vexactpos 1
-     hexactsize 1
-     vexactsize 1
-    }
-    ImageWidgetClass color04 {
-     visible 1
-     ignorepointer 0
-     color 0.404 0.227 0.718 1
      position 48 48
      size 36 36
      hexactpos 1
@@ -121,32 +114,9 @@ FrameWidgetClass rootFrame {
      hexactsize 1
      vexactsize 1
     }
-    ImageWidgetClass color05 {
-     visible 1
+    ImageWidgetClass color_PURPLE_500 {
      ignorepointer 0
-     color 0.247 0.318 0.71 1
-     position 48 88
-     size 36 36
-     hexactpos 1
-     vexactpos 1
-     hexactsize 1
-     vexactsize 1
-    }
-    ImageWidgetClass color06 {
-     visible 1
-     ignorepointer 0
-     color 0.129 0.588 0.953 1
-     position 48 128
-     size 36 36
-     hexactpos 1
-     vexactpos 1
-     hexactsize 1
-     vexactsize 1
-    }
-    ImageWidgetClass color07 {
-     visible 1
-     ignorepointer 0
-     color 0.012 0.663 0.957 1
+     color 0.612 0.153 0.69 1
      position 88 48
      size 36 36
      hexactpos 1
@@ -154,32 +124,9 @@ FrameWidgetClass rootFrame {
      hexactsize 1
      vexactsize 1
     }
-    ImageWidgetClass color08 {
-     visible 1
+    ImageWidgetClass color_DEEP_PURPLE_500 {
      ignorepointer 0
-     color 0 0.737 0.831 1
-     position 88 88
-     size 36 36
-     hexactpos 1
-     vexactpos 1
-     hexactsize 1
-     vexactsize 1
-    }
-    ImageWidgetClass color09 {
-     visible 1
-     ignorepointer 0
-     color 0 0.588 0.533 1
-     position 88 128
-     size 36 36
-     hexactpos 1
-     vexactpos 1
-     hexactsize 1
-     vexactsize 1
-    }
-    ImageWidgetClass color10 {
-     visible 1
-     ignorepointer 0
-     color 0.298 0.686 0.314 1
+     color 0.404 0.227 0.718 1
      position 128 48
      size 36 36
      hexactpos 1
@@ -187,8 +134,67 @@ FrameWidgetClass rootFrame {
      hexactsize 1
      vexactsize 1
     }
-    ImageWidgetClass color11 {
-     visible 1
+    ImageWidgetClass color_INDIGO_500 {
+     ignorepointer 0
+     color 0.247 0.318 0.71 1
+     position 168 48
+     size 36 36
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+    }
+    ImageWidgetClass color_BLUE_500 {
+     ignorepointer 0
+     color 0.129 0.588 0.953 1
+     position 208 48
+     size 36 36
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+    }
+    ImageWidgetClass color_LIGHT_BLUE_500 {
+     ignorepointer 0
+     color 0.012 0.663 0.957 1
+     position 248 48
+     size 36 36
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+    }
+    ImageWidgetClass color_CYAN_500 {
+     ignorepointer 0
+     color 0 0.737 0.831 1
+     position 8 88
+     size 36 36
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+    }
+    ImageWidgetClass color_TEAL_500 {
+     ignorepointer 0
+     color 0 0.588 0.533 1
+     position 48 88
+     size 36 36
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+    }
+    ImageWidgetClass color_GREEN_500 {
+     ignorepointer 0
+     color 0.298 0.686 0.314 1
+     position 88 88
+     size 36 36
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+    }
+    ImageWidgetClass color_LIGHT_GREEN_500 {
      ignorepointer 0
      color 0.545 0.765 0.29 1
      position 128 88
@@ -198,32 +204,9 @@ FrameWidgetClass rootFrame {
      hexactsize 1
      vexactsize 1
     }
-    ImageWidgetClass color12 {
-     visible 1
+    ImageWidgetClass color_LIME_500 {
      ignorepointer 0
      color 0.804 0.863 0.224 1
-     position 128 128
-     size 36 36
-     hexactpos 1
-     vexactpos 1
-     hexactsize 1
-     vexactsize 1
-    }
-    ImageWidgetClass color13 {
-     visible 1
-     ignorepointer 0
-     color 1 0.922 0.231 1
-     position 168 48
-     size 36 36
-     hexactpos 1
-     vexactpos 1
-     hexactsize 1
-     vexactsize 1
-    }
-    ImageWidgetClass color14 {
-     visible 1
-     ignorepointer 0
-     color 1 0.757 0.027 1
      position 168 88
      size 36 36
      hexactpos 1
@@ -231,32 +214,9 @@ FrameWidgetClass rootFrame {
      hexactsize 1
      vexactsize 1
     }
-    ImageWidgetClass color15 {
-     visible 1
+    ImageWidgetClass color_YELLOW_500 {
      ignorepointer 0
-     color 1 0.596 0 1
-     position 168 128
-     size 36 36
-     hexactpos 1
-     vexactpos 1
-     hexactsize 1
-     vexactsize 1
-    }
-    ImageWidgetClass color16 {
-     visible 1
-     ignorepointer 0
-     color 1 0.341 0.133 1
-     position 208 48
-     size 36 36
-     hexactpos 1
-     vexactpos 1
-     hexactsize 1
-     vexactsize 1
-    }
-    ImageWidgetClass color17 {
-     visible 1
-     ignorepointer 0
-     color 0.475 0.333 0.282 1
+     color 1 0.922 0.231 1
      position 208 88
      size 36 36
      hexactpos 1
@@ -264,32 +224,9 @@ FrameWidgetClass rootFrame {
      hexactsize 1
      vexactsize 1
     }
-    ImageWidgetClass color18 {
-     visible 1
+    ImageWidgetClass color_AMBER_500 {
      ignorepointer 0
-     color 0.62 0.62 0.62 1
-     position 208 128
-     size 36 36
-     hexactpos 1
-     vexactpos 1
-     hexactsize 1
-     vexactsize 1
-    }
-    ImageWidgetClass color19 {
-     visible 1
-     ignorepointer 0
-     color 0.376 0.49 0.545 1
-     position 248 48
-     size 36 36
-     hexactpos 1
-     vexactpos 1
-     hexactsize 1
-     vexactsize 1
-    }
-    ImageWidgetClass color20 {
-     visible 1
-     ignorepointer 0
-     color 0 0 0 1
+     color 1 0.757 0.027 1
      position 248 88
      size 36 36
      hexactpos 1
@@ -297,8 +234,67 @@ FrameWidgetClass rootFrame {
      hexactsize 1
      vexactsize 1
     }
-    ImageWidgetClass color21 {
-     visible 1
+    ImageWidgetClass color_ORANGE_500 {
+     ignorepointer 0
+     color 1 0.596 0 1
+     position 8 128
+     size 36 36
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+    }
+    ImageWidgetClass color_DEEP_ORANGE_500 {
+     ignorepointer 0
+     color 1 0.341 0.133 1
+     position 48 128
+     size 36 36
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+    }
+    ImageWidgetClass color_BROWN_500 {
+     ignorepointer 0
+     color 0.475 0.333 0.282 1
+     position 88 128
+     size 36 36
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+    }
+    ImageWidgetClass color_GRAY_500 {
+     ignorepointer 0
+     color 0.62 0.62 0.62 1
+     position 128 128
+     size 36 36
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+    }
+    ImageWidgetClass color_BLUE_GRAY_500 {
+     ignorepointer 0
+     color 0.376 0.49 0.545 1
+     position 168 128
+     size 36 36
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+    }
+    ImageWidgetClass color_BLACK {
+     ignorepointer 0
+     color 0 0 0 1
+     position 208 128
+     size 36 36
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+    }
+    ImageWidgetClass color_WHITE {
      ignorepointer 0
      color 1 1 1 1
      position 248 128
