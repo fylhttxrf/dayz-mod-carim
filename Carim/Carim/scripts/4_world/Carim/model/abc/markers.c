@@ -128,19 +128,7 @@ class CarimModelAbcMarkers extends CarimModelAbcDiskJson {
     }
 
     void Remove(CarimMapMarker mark) {
-        if (!markers.Contains(mark.carimPlayerId)) {
-            return;
-        }
-        int closest = -1;
-        int closestDistance = 1000;
-        foreach(int i, auto marker : markers.Get(mark.carimPlayerId)) {
-            auto distance = vector.Distance(mark.GetMarkerPos(), marker.GetMarkerPos());
-
-            if (distance < 50) {
-                closest = i;
-                closestDistance = distance;
-            }
-        }
+        int closest = GetClosestIndex(mark);
 
         if (closest >= 0) {
             markers.Get(mark.carimPlayerId).RemoveOrdered(closest);
@@ -149,20 +137,34 @@ class CarimModelAbcMarkers extends CarimModelAbcDiskJson {
         }
     }
 
-    CarimMapMarker GetClose(CarimMapMarker mark) {
-        if (!markers.Contains(mark.carimPlayerId)) {
-            return;
+    CarimMapMarker GetClosest(CarimMapMarker mark) {
+        int closest = GetClosestIndex(mark);
+
+        if (closest >= 0) {
+            return markers.Get(mark.carimPlayerId).Get(closest);
         }
+
+        return null;
+    }
+
+    int GetClosestIndex(CarimMapMarker mark) {
+        if (!markers.Contains(mark.carimPlayerId)) {
+            return -1;
+        }
+
+        int closest = -1;
+        int closestDistance = 50;
+
         foreach(int i, auto marker : markers.Get(mark.carimPlayerId)) {
             auto distance = vector.Distance(mark.GetMarkerPos(), marker.GetMarkerPos());
 
-            if (distance < 50) {
-                markers.Get(mark.carimPlayerId).RemoveOrdered(i);
-                Persist();
-                changed = true;
-                return;
+            if (distance < closestDistance) {
+                closest = i;
+                closestDistance = distance;
             }
         }
+
+        return closest;
     }
 
     void Clear(string id) {
