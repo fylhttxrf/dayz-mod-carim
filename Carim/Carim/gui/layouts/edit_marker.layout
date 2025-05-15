@@ -1,0 +1,101 @@
+FrameWidgetClass rootFrame {
+ clipchildren 0
+ position 0 0
+ size 0 0
+ hexactpos 1
+ vexactpos 1
+ hexactsize 0
+ vexactsize 0
+ priority 200
+ {
+  PanelWidgetClass panel {
+   position 0 0
+   size 376 172
+   hexactpos 0
+   vexactpos 0
+   hexactsize 1
+   vexactsize 1
+   style rover_sim_black
+   {
+    EditBoxWidgetClass text {
+     position 8 8
+     size 276 36
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     style Editor
+     text "example label"
+     font "gui/fonts/MetronBook28"
+    }
+    ButtonWidgetClass previous {
+     position 288 8
+     size 18 36
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     style MenuDefault
+     text "<"
+     font "gui/fonts/MetronBook28"
+    }
+    ImageWidgetClass icon {
+     ignorepointer 1
+     position 310 8
+     size 36 36
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     mode blend
+     "src alpha" 1
+     "stretch mode" stretch_w_h
+    }
+    ButtonWidgetClass next {
+     position 350 8
+     size 18 36
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     style MenuDefault
+     text ">"
+     font "gui/fonts/MetronBook28"
+    }
+    ButtonWidgetClass save {
+     position 288 48
+     size 80 36
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     style MenuDefault
+     text "Save"
+     font "gui/fonts/MetronBook28"
+    }
+    ButtonWidgetClass deleteButton {
+     position 288 88
+     size 80 36
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     style MenuDefault
+     text "Delete"
+     font "gui/fonts/MetronBook28"
+    }
+    ButtonWidgetClass cancel {
+     position 288 128
+     size 80 36
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     style MenuDefault
+     text "Cancel"
+     font "gui/fonts/MetronBook28"
+    }
+   }
+  }
+ }
+}

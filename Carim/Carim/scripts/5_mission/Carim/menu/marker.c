@@ -1,6 +1,4 @@
 class CarimMenuMarker extends UIScriptedMenu {
-    static const int CARIM_HEALTH_LEVELS[] = {GameConstants.STATE_PRISTINE, GameConstants.STATE_WORN, GameConstants.STATE_DAMAGED, GameConstants.STATE_BADLY_DAMAGED, GameConstants.STATE_RUINED};
-
     ref CarimMapMarker carimMarker;
 
     TextWidget carimNametag;
@@ -86,16 +84,23 @@ class CarimMenuMarker extends UIScriptedMenu {
     void CarimUpdateContent() {
         carimNametag.SetText(carimMarker.GetMarkerText());
         carimDistance.SetText(CarimGetDistance());
-        carimIcon.LoadImageFile(0, MapMarkerTypes.GetMarkerTypeFromID(carimMarker.GetMarkerIcon()));
+        string imageFile = MapMarkerTypes.GetMarkerTypeFromID(carimMarker.GetMarkerIcon());
+        imageFile.Replace("\\DZ", "DZ");
+        carimIcon.LoadImageFile(0, imageFile);
+
         carimIcon.SetColor(carimMarker.GetMarkerColor());
         CarimOnUpdate();
     }
 
     string CarimGetDistance() {
-        float distance = Math.Round(vector.Distance(carimMarker.GetMarkerPos(), GetGame().GetPlayer().GetPosition()));
-        string distanceString = distance.ToString() + "m";
-        if (distance > 1000) {
-            distanceString = (Math.Round(distance / 100) / 10).ToString() + "km";
+        auto player = GetGame().GetPlayer();
+        string distanceString = "";
+        if (player) {
+            float distance = Math.Round(vector.Distance(carimMarker.GetMarkerPos(), player.GetPosition()));
+            distanceString = distance.ToString() + "m";
+            if (distance > 1000) {
+                distanceString = (Math.Round(distance / 100) / 10).ToString() + "km";
+            }
         }
         return distanceString;
     }
