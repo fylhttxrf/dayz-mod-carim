@@ -1,6 +1,5 @@
 enum CarimMapMarkerTypes {
-    START = -44000,
-    ARROW_1,
+    ARROW_1 = 200,
     ARROW_2,
     ARROW_3,
     HEALTH_0,

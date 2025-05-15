@@ -5,6 +5,9 @@ modded class MapHandler {
         if (!CarimEnabled.Map()) {
             return super.OnDoubleClick(w, x, y, button);
         }
+        if (carimMenuEditMarker && carimMenuEditMarker.visible) {
+            return true;
+        }
         super.OnDoubleClick(w, x, y, button);
 
         vector mousePos, worldPos;
@@ -16,7 +19,7 @@ modded class MapHandler {
         CarimLogging.Trace(this, string.Format("OnDoubleClick %1, mouse(%2) world(%3)", button.ToString(), mousePos, worldPos));
 
         auto mission = MissionGameplay.Cast(GetGame().GetMission());
-        auto marker = CarimMapMarker.CarimNew(worldPos, "", CarimColor.PURPLE_300, CarimMapMarkerTypes.ARROW_3, CarimUtil.GetIdentifier(GetGame().GetPlayer().GetIdentity()));
+        auto marker = CarimMapMarker.CarimNew(worldPos, "", CarimColor.PURPLE_300, eMapMarkerTypes.MARKERTYPE_MAP_BORDER_CROSS, CarimUtil.GetIdentifier(GetGame().GetPlayer().GetIdentity()));
 
         switch (button) {
             case MouseState.LEFT:
@@ -47,6 +50,7 @@ modded class MapHandler {
         if (!CarimEnabled.Map()) {
             return super.OnClick(w, x, y, button);
         }
+        super.OnClick(w, x, y, button);
 
         CarimLogging.Trace(this, "OnClick " + w);
 

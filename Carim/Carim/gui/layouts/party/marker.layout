@@ -62,6 +62,7 @@ FrameWidgetClass rootFrame {
    scaled 1
    mode blend
    "src alpha" 1
+   "stretch mode" stretch_w_h
   }
  }
 }

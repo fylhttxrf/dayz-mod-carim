@@ -86,7 +86,10 @@ class CarimMenuMarker extends UIScriptedMenu {
     void CarimUpdateContent() {
         carimNametag.SetText(carimMarker.GetMarkerText());
         carimDistance.SetText(CarimGetDistance());
-        carimIcon.LoadImageFile(0, MapMarkerTypes.GetMarkerTypeFromID(carimMarker.GetMarkerIcon()));
+        string imageFile = MapMarkerTypes.GetMarkerTypeFromID(carimMarker.GetMarkerIcon());
+        imageFile.Replace("\\DZ", "DZ");
+        carimIcon.LoadImageFile(0, imageFile);
+
         carimIcon.SetColor(carimMarker.GetMarkerColor());
         CarimOnUpdate();
     }

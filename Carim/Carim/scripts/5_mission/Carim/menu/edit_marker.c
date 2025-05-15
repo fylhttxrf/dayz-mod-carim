@@ -3,6 +3,7 @@ class CarimMenuEditMarker extends Managed {
     int x;
     int y;
     bool visible;
+    int currentIcon;
 
     Widget root;
     EditBoxWidget text;
@@ -20,6 +21,7 @@ class CarimMenuEditMarker extends Managed {
         marker = iMarker;
         x = iX;
         y = iY;
+        currentIcon = marker.GetMarkerIcon();
 
         root = GetGame().GetWorkspace().CreateWidgets("Carim/Carim/gui/layouts/edit_marker.layout");
         text = EditBoxWidget.Cast(root.FindAnyWidget("text"));
@@ -99,7 +101,9 @@ class CarimMenuEditMarker extends Managed {
             CarimLogging.Trace(this, "Refresh");
 
             text.SetText(marker.GetMarkerText());
-            icon.LoadImageFile(0, MapMarkerTypes.GetMarkerTypeFromID(marker.GetMarkerIcon()));
+            string imageFile = MapMarkerTypes.GetMarkerTypeFromID(marker.GetMarkerIcon());
+            imageFile.Replace("\\DZ", "DZ");
+            icon.LoadImageFile(0, imageFile);
             icon.SetColor(marker.GetMarkerColor());
 
             root.SetPos(x, y);
@@ -112,6 +116,8 @@ class CarimMenuEditMarker extends Managed {
 
         auto mission = MissionGameplay.Cast(GetGame().GetMission());
 
+        string imageFile;
+
         switch (w) {
             case cancel:
                 CarimLogging.Trace(this, "Cancel");
@@ -120,7 +126,7 @@ class CarimMenuEditMarker extends Managed {
             case save:
                 CarimLogging.Trace(this, "Save");
                 marker.CarimSetMarkerText(text.GetText());
-                marker.CarimSetMarkerIcon(0);
+                marker.CarimSetMarkerIcon(currentIcon);
                 marker.CarimSetMarkerColor(icon.GetColor());
                 mission.carimModelMapMarkers.Persist();
                 Hide();
@@ -131,10 +137,18 @@ class CarimMenuEditMarker extends Managed {
                 Hide();
                 break;
             case previous:
-                CarimLogging.Trace(this, "Previous");
+                CarimLogging.Trace(this, "Previous " + currentIcon.ToString());
+                currentIcon = (currentIcon - 1) % eMapMarkerTypes.MARKERTYPE_MAX;
+                imageFile = MapMarkerTypes.GetMarkerTypeFromID(currentIcon);
+                imageFile.Replace("\\DZ", "DZ");
+                icon.LoadImageFile(0, imageFile);
                 break;
             case next:
-                CarimLogging.Trace(this, "Next");
+                CarimLogging.Trace(this, "Next " + currentIcon.ToString());
+                currentIcon = (currentIcon + 1) % eMapMarkerTypes.MARKERTYPE_MAX;
+                imageFile = MapMarkerTypes.GetMarkerTypeFromID(currentIcon);
+                imageFile.Replace("\\DZ", "DZ");
+                icon.LoadImageFile(0, imageFile);
                 break;
             default:
                 foreach(auto button : colorButtons) {

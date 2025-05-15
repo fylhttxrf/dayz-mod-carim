@@ -9,7 +9,6 @@ FrameWidgetClass rootFrame {
  priority 200
  {
   PanelWidgetClass panel {
-   ignorepointer 1
    position 0 0
    size 376 172
    hexactpos 0
@@ -48,7 +47,9 @@ FrameWidgetClass rootFrame {
      vexactpos 1
      hexactsize 1
      vexactsize 1
+     mode blend
      "src alpha" 1
+     "stretch mode" stretch_w_h
     }
     ButtonWidgetClass next {
      position 350 8
