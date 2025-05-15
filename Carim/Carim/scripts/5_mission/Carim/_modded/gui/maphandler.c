@@ -1,6 +1,13 @@
 modded class MapHandler {
     ref CarimMenuEditMarker carimMenuEditMarker;
 
+    override bool OnMouseButtonDown(Widget w, int x, int y, int button) {
+        if (carimMenuEditMarker && carimMenuEditMarker.visible) {
+            return true;
+        }
+        return super.OnMouseButtonDown(w, x, y, button);
+    }
+
     override bool OnDoubleClick(Widget w, int x, int y, int button) {
         if (!CarimEnabled.Map()) {
             return super.OnDoubleClick(w, x, y, button);
