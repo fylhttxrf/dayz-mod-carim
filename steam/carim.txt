@@ -89,6 +89,12 @@ The original source is at https://github.com/CarimDayZ/dayz-mod-carim
 To support this open source project, you can donate at https://paypal.me/cnofafva
 To learn more visit https://discord.gg/kdPnVu4
 
+[h2]Acknowledgements[/h2]
+[hr][/hr]
+[list]
+    [*] Thank you to Karma's Wasteland for testing and providing valuable feedback.
+[/list]
+
 [h3]Deprecated mods (unlisted from workshop)[/h3]
 [olist]
     [*] CarimParty https://steamcommunity.com/sharedfiles/filedetails/?id=3468068823
