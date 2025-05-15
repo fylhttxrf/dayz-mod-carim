@@ -62,8 +62,16 @@ class CarimMenuEditMarker extends Managed {
                         CarimColor.BLACK,
                         CarimColor.WHITE};
 
-        int currentX = 8;
-        int currentY = 48;
+        float currentX = 8;
+        float currentY = 48;
+
+        float panelWidth;
+        float panelHeight;
+        panel.GetSize(panelWidth, panelHeight);
+
+        // Figure out the scaling based on the size defined in the layout
+        float scaleX = panelWidth / 376;
+        float scaleY = panelHeight / 172;
 
         ButtonWidget button;
         array<ref ButtonWidget> buttons = new array<ref ButtonWidget>;
@@ -71,7 +79,7 @@ class CarimMenuEditMarker extends Managed {
         foreach(int color : colors) {
             CarimLogging.Trace(null, string.Format("%1 (%2, %3)", color, currentX, currentY));
             button = ButtonWidget.Cast(GetGame().GetWorkspace().CreateWidgets("Carim/Carim/gui/layouts/edit_color_button.layout"));
-            button.SetPos(currentX, currentY);
+            button.SetPos(currentX * scaleX, currentY * scaleY);
             button.SetColor(color);
             panel.AddChild(button);
             if (currentX == 248) {
