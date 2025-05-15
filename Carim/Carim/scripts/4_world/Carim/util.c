@@ -32,7 +32,9 @@ class CarimUtil {
 
     static string GetIdentifier(PlayerIdentity identity) {
         if (identity) {
-            return identity.GetPlainId();
+            // TODO: change to GetPlainId()
+            // Need a way to manage incompatible settings with change
+            return identity.GetId();
         }
         return "";
     }

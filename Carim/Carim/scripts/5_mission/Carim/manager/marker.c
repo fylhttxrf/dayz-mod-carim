@@ -69,14 +69,14 @@ class CarimManagerMarker extends Managed {
     int Sync(CarimModelAbcMarkers markers, int index) {
         foreach(array<ref CarimMapMarker> markerArray : markers.markers) {
             foreach(CarimMapMarker marker : markerArray) {
-                // CarimLogging.Debug(this, string.Format("Adding %1: <%2, %3, %4> at index %5", markers.ClassName(), marker.carimPlayerId, marker.GetMarkerText(), marker.GetMarkerPos(), index));
+                CarimLogging.Debug(this, string.Format("Adding %1: <%2, %3, %4> at index %5", markers.ClassName(), marker.carimPlayerId, marker.GetMarkerText(), marker.GetMarkerPos(), index));
                 if (menus.Count() <= index) {
-                    // CarimLogging.Trace(this, "Creating new");
+                    CarimLogging.Trace(this, "Creating new");
                     auto menu = new CarimMenuMarker(marker);
                     menu.Init();
                     menus.Insert(menu);
                 } else {
-                    // CarimLogging.Trace(this, "Using existing");
+                    CarimLogging.Trace(this, "Using existing");
                     menus.Get(index).carimMarker = marker;
                 }
                 ++index;
