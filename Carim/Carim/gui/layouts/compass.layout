@@ -40,7 +40,7 @@ FrameWidgetClass rootFrame {
                     "flip u" 0
                     "flip v" 0
                 }
-                GridSpacerWidgetClass GridSpacerWidget0 {
+                GridSpacerWidgetClass spacer {
                     ignorepointer 1
                     color 0.956 0.263 0.212 0.8
                     size 4 0.2

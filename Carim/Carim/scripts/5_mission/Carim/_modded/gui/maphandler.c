@@ -26,7 +26,7 @@ modded class MapHandler {
         CarimLogging.Trace(this, string.Format("OnDoubleClick %1, mouse(%2) world(%3)", button.ToString(), mousePos, worldPos));
 
         auto mission = MissionGameplay.Cast(GetGame().GetMission());
-        auto marker = CarimMapMarker.CarimNew(worldPos, "", CarimColor.PURPLE_300, eMapMarkerTypes.MARKERTYPE_MAP_BORDER_CROSS, CarimUtil.GetIdentifier(GetGame().GetPlayer().GetIdentity()));
+        auto marker = CarimMapMarker.CarimNew(worldPos, "", CfgGameplayHandler.GetCarimMapColorIconDefault(), eMapMarkerTypes.MARKERTYPE_MAP_BORDER_CROSS, CarimUtil.GetIdentifier(GetGame().GetPlayer().GetIdentity()));
 
         switch (button) {
             case MouseState.LEFT:

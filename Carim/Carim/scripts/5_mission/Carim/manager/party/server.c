@@ -20,7 +20,7 @@ class CarimManagerPartyServer extends Managed {
     void RegisterMarkers(string id, CarimModelPartyPings playerMarkers) {
         if (playerMarkers.markers.Contains(id)) {
             foreach(CarimMapMarker marker : playerMarkers.markers.Get(id)) {
-                marker.CarimSetMarkerColor(CarimColor.TEAL_300);
+                marker.CarimSetMarkerColor(CfgGameplayHandler.GetCarimPartyColorPingIconServer());
                 marker.CarimSetMarkerIcon(CarimMapMarkerTypes.ARROW_2);
             }
             markers.Replace(id, playerMarkers.markers.Get(id));

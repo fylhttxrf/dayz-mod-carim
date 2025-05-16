@@ -1,6 +1,7 @@
 class CarimMenuCompass extends UIScriptedMenu {
     Widget carimFrame;
     ImageWidget carimImage;
+    GridSpacerWidget carimSpacer;
     bool carimIsVisible = true;
 
     override Widget Init() {
@@ -8,6 +9,9 @@ class CarimMenuCompass extends UIScriptedMenu {
             layoutRoot = GetGame().GetWorkspace().CreateWidgets("Carim/Carim/gui/layouts/compass.layout");
             carimFrame = layoutRoot.FindAnyWidget("FrameCompass");
             carimImage = ImageWidget.Cast(layoutRoot.FindAnyWidget("ImageCompass"));
+            carimSpacer = GridSpacerWidget.Cast(layoutRoot.FindAnyWidget("spacer"));
+
+            carimSpacer.SetColor(CfgGameplayHandler.GetCarimCompassColor());
         }
         return layoutRoot;
     }

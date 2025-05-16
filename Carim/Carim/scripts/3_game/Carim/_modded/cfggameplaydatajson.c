@@ -36,22 +36,22 @@ class ITEM_CarimChatData extends ITEM_DataBase {
     int colorGlobal = CarimColor.AMBER_500;
     int colorServer = CarimColor.LIGHT_BLUE_500;
     int colorAlert = CarimColor.DEEP_ORANGE_500;
-    int colorAdmin = CarimColor.RED_500;
-    bool enableKillfeed = false;
+    int colorAdmin = CarimColor.RED_500; // TODO
+    bool enableKillfeed = false;         // TODO
 }
 
 class ITEM_CarimCompassData extends ITEM_DataBase {
     bool enabled = true;
-    bool requireNavItem = false;
+    bool requireNavItem = false; // TODO
     int color = CarimColor.RED_500;
 }
 
 class ITEM_CarimMapData extends ITEM_DataBase {
     bool enabled = true;
-    int colorText = CarimColor.WHITE;
+    int colorText = CarimColor.WHITE; // TODO
     int colorIconDefault = CarimColor.RED_500;
-    int distanceShowLessThan = -1;
-    int distanceShowGreaterThan = -1;
+    int distanceShowLessThan = -1;    // TODO
+    int distanceShowGreaterThan = -1; // TODO
 }
 
 class ITEM_CarimPartyData extends ITEM_DataBase {
@@ -60,11 +60,11 @@ class ITEM_CarimPartyData extends ITEM_DataBase {
     int maxPings = 3;
     int colorPingIconLocal = CarimColor.YELLOW_500;
     int colorPingIconServer = CarimColor.ORANGE_500;
-    int colorPingTextLocal = CarimColor.WHITE;
-    int colorPingTextServer = CarimColor.WHITE;
-    int colorPlayerText = CarimColor.WHITE;
-    int distancePingShowLessThan = -1;
-    int distancePingShowGreaterThan = -1;
-    int distancePlayerShowLessThan = -1;
-    int distancePlayerShowGreaterThan = -1;
+    int colorPingTextLocal = CarimColor.WHITE;  // TODO
+    int colorPingTextServer = CarimColor.WHITE; // TODO
+    int colorPlayerText = CarimColor.WHITE;     // TODO
+    int distancePingShowLessThan = -1;          // TODO
+    int distancePingShowGreaterThan = -1;       // TODO
+    int distancePlayerShowLessThan = -1;        // TODO
+    int distancePlayerShowGreaterThan = -1;     // TODO
 }
