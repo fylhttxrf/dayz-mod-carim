@@ -42,7 +42,7 @@ Optionally, servers can configure Admin Ids that allow adding party members with
 
 [h2]Configuration[/h2]
 [hr][/hr]
-Configuration is managed in your cfggameplay.json. Different modules can be enabled/disabled independently. The color values are signed integers based on the ARGB bytes, so 0xfffafafa is -328966. The defaults are below (copy these into your cfggameplay.json and change as you want).
+Configuration is managed in your cfggameplay.json. Different modules can be enabled/disabled independently. The color values are signed integers based on the ARGB bytes, so 0xfffafafa is -328966. You can [url=https://argb-int-calculator.netlify.app/]use a tool to figure out the values[/url]. The defaults are below (copy these into your cfggameplay.json and change as you want).
 [code]
 "CarimData": {
     "adminIds": [],
@@ -80,7 +80,7 @@ To enable the map without needing any items, you can edit those existing setting
 },
 [/code]
 
-Finally, be sure to enable the use of this config file in your serverDZ.cfg with [code]enableCfgGameplayFile=1;[/code].
+Finally, be sure to enable the use of this config file in your serverDZ.cfg with [code]enableCfgGameplayFile=1;[/code]
 
 [h2]Information[/h2]
 [hr][/hr]
