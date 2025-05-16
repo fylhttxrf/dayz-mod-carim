@@ -8,6 +8,10 @@ modded class CfgGameplayHandler {
         return m_Data.CarimData.adminIds;
     }
 
+    static bool GetCarimUseSteamId() {
+        return m_Data.CarimData.useSteamId;
+    }
+
     // Autorun
     static bool GetCarimAutorunEnabled() {
         return m_Data.CarimData.CarimAutorunData.enabled;
@@ -34,6 +38,14 @@ modded class CfgGameplayHandler {
         return m_Data.CarimData.CarimChatData.colorAlert;
     }
 
+    static int GetCarimChatColorAdmin() {
+        return m_Data.CarimData.CarimChatData.colorAdmin;
+    }
+
+    static bool GetCarimChatEnableKillfeed() {
+        return m_Data.CarimData.CarimChatData.enableKillfeed;
+    }
+
     // Compass
     static bool GetCarimCompassEnabled() {
         return m_Data.CarimData.CarimCompassData.enabled;
@@ -43,9 +55,29 @@ modded class CfgGameplayHandler {
         return m_Data.CarimData.CarimCompassData.requireNavItem;
     }
 
+    static int GetCarimCompassColor() {
+        return m_Data.CarimData.CarimCompassData.color;
+    }
+
     // Map
     static bool GetCarimMapEnabled() {
         return m_Data.CarimData.CarimMapData.enabled;
+    }
+
+    static int GetCarimMapColorText() {
+        return m_Data.CarimData.CarimMapData.colorText;
+    }
+
+    static int GetCarimMapColorIconDefault() {
+        return m_Data.CarimData.CarimMapData.colorIconDefault;
+    }
+
+    static int GetCarimMapDistanceShowLessThan() {
+        return m_Data.CarimData.CarimMapData.distanceShowLessThan;
+    }
+
+    static int GetCarimMapDistanceShowGreaterThan() {
+        return m_Data.CarimData.CarimMapData.distanceShowGreaterThan;
     }
 
     // Party
@@ -59,5 +91,41 @@ modded class CfgGameplayHandler {
 
     static int GetCarimPartyMaxPings() {
         return m_Data.CarimData.CarimPartyData.maxPings;
+    }
+
+    static int GetCarimPartyColorPingIconLocal() {
+        return m_Data.CarimData.CarimPartyData.colorPingIconLocal;
+    }
+
+    static int GetCarimPartyColorPingIconServer() {
+        return m_Data.CarimData.CarimPartyData.colorPingIconServer;
+    }
+
+    static int GetCarimPartyColorPingTextLocal() {
+        return m_Data.CarimData.CarimPartyData.colorPingTextLocal;
+    }
+
+    static int GetCarimPartyColorPingTextServer() {
+        return m_Data.CarimData.CarimPartyData.colorPingTextServer;
+    }
+
+    static int GetCarimPartyColorPlayerText() {
+        return m_Data.CarimData.CarimPartyData.colorPlayerText;
+    }
+
+    static int GetCarimPartyDistancePingShowLessThan() {
+        return m_Data.CarimData.CarimPartyData.distancePingShowLessThan;
+    }
+
+    static int GetCarimPartyDistancePingShowGreaterThan() {
+        return m_Data.CarimData.CarimPartyData.distancePingShowGreaterThan;
+    }
+
+    static int GetCarimPartyDistancePlayerShowLessThan() {
+        return m_Data.CarimData.CarimPartyData.distancePlayerShowLessThan;
+    }
+
+    static int GetCarimPartyDistancePlayerShowGreaterThan() {
+        return m_Data.CarimData.CarimPartyData.distancePlayerShowGreaterThan;
     }
 }
