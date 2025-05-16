@@ -31,6 +31,11 @@ class CarimEnabled {
         if (!initialized && CfgGameplayHandler.GetCarimInitialized()) {
             CarimLogging.Info(null, "Carim configuration loaded");
 
+            if (CarimLogging.WillLog(CarimLoggingLevel.DEBUG)) {
+                string error;
+                JsonFileLoader<ITEM_CarimData>.SaveFile("$profile:CarimReadOnlyCfgGameplay.json", CfgGameplayHandler.m_Data.CarimData, error);
+            }
+
             autorun = CfgGameplayHandler.GetCarimAutorunEnabled();
             chat = CfgGameplayHandler.GetCarimChatEnabled();
             compass = CfgGameplayHandler.GetCarimCompassEnabled();
