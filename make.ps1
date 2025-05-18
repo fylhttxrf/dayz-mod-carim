@@ -69,13 +69,17 @@ function Build-Project {
     $outputs = Get-ChildItem "$localMods" | Where-Object { $_.PSISContainer }
 
     foreach ($output in $outputs) {
-        Start-Process $pboProject -Wait -ArgumentList "$projectDrive\$mod", "+M=$localMods\$output", "+E=DAYZSA", "+K=$key", "+T", "+H", "+$", "+B", "+C", "-P" 
+        $process = (Start-Process $pboProject -PassThru -Wait -ArgumentList "$projectDrive\$mod\$output".Replace('@', ''), "+M=$localMods\$output", "+E=DAYZSA", "+K=$key", "+T", "+H", "+$", "+B", "+C", "-P")
+        if ($process.ExitCode) {
+            throw "Build failed"
+        }
     }
 }
 
 function Diag-Project {
-    Start-Process -FilePath "$clientDir\DayZDiag_x64.exe" -WorkingDirectory "$clientDir" -ArgumentList "-mod=$localMods\@$mod -profiles=$missions\profiles\server -doLogs -server -config=$missions\serverDZ.cfg -limitFPS=1000"
-    Start-Process -FilePath "$clientDir\DayZDiag_x64.exe" -WorkingDirectory "$clientDir" -ArgumentList "-mod=$localMods\@$mod -profiles=$missions\profiles\client -doLogs -name=cnofafva -connect=127.0.0.1 -port=2302"
+    $mods = "$localMods\@$mod;$localMods\@${mod}MapStyle"
+    Start-Process -FilePath "$clientDir\DayZDiag_x64.exe" -WorkingDirectory "$clientDir" -ArgumentList "-mod=$mods -profiles=$missions\profiles\server -doLogs -server -config=$missions\serverDZ.cfg -limitFPS=1000"
+    Start-Process -FilePath "$clientDir\DayZDiag_x64.exe" -WorkingDirectory "$clientDir" -ArgumentList "-mod=$mods -profiles=$missions\profiles\client -doLogs -name=cnofafva -connect=127.0.0.1 -port=2302"
 }
 
 function Run-Server {
