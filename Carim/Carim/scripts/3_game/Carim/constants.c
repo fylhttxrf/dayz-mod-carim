@@ -12,18 +12,18 @@ class CarimColor {
     static const int TEAL_300 = 0xff4db6ac;
     static const int PURPLE_300 = 0xffba68c8;
 
-    static const int RED_500 = 0xfff44336;
+    static const int RED_500 = 0xfff44336; // {0.957, 0.263, 0.212, 1}
     static const int PINK_500 = 0xffe91e63;
     static const int PURPLE_500 = 0xff9c27b0;
     static const int DEEP_PURPLE_500 = 0xff673ab7;
     static const int INDIGO_500 = 0xff3f51b5;
-    static const int BLUE_500 = 0xff2196f3;
+    static const int BLUE_500 = 0xff2196f3; //  {0.129, 0.588, 0.953, 1}
     static const int LIGHT_BLUE_500 = 0xff03a9f4;
     static const int CYAN_500 = 0xff00bcd4;
     static const int TEAL_500 = 0xff009688;
-    static const int GREEN_500 = 0xff4caf50;
+    static const int GREEN_500 = 0xff4caf50; // {0.298, 0.686, 0.314, 1}
     static const int LIGHT_GREEN_500 = 0xff8bc34a;
-    static const int LIME_500 = 0xffcddc39;
+    static const int LIME_500 = 0xffcddc39; // {0.804, 0.863, 0.224, 1.0}
     static const int YELLOW_500 = 0xffffeb3b;
     static const int AMBER_500 = 0xffffc107;
     static const int ORANGE_500 = 0xffff9800;

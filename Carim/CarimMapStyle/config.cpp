@@ -951,16 +951,16 @@ class CfgWorlds {
 class CfgLocationTypes {
     class Name {
         texture = "#(argb,1,1,1)color(0.15,0.15,0.12,0.80)";
-        color[] = {0.984, 0.831, 0.541, 1};
+        color[] = {0.298, 0.686, 0.314, 1};
     };
 
     class NameIcon {
         texture = "#(argb,1,1,1)color(0.15,0.15,0.25,0.50)";
-        color[] = {0.984, 0.831, 0.541, 1};
+        color[] = {0.298, 0.686, 0.314, 1};
     };
 
     class MilitaryBase : Name {
-        color[] = {0.970, 0.239, 0.314, 1};
+        color[] = {0.957, 0.263, 0.212, 1};
     };
 
     class MilitaryOutpost : MilitaryBase {
@@ -968,41 +968,41 @@ class CfgLocationTypes {
     };
 
     class BorderCrossing : NameIcon {
-        color[] = {0.541, 0.921, 0.984, 0.9};
+        color[] = {0.804, 0.863, 0.224, 1.0};
         size = 7;
     };
 
     class Camp : NameIcon {
-        color[] = {0.698, 0.980, 0.619, 1};
+        color[] = {0.804, 0.863, 0.224, 1.0};
         textSize = 0.042;
         importance = 3;
     };
 
     class Capital : Name {
-        color[] = {0.262, 0.749, 0.941, 1};
+        color[] = {0.129, 0.588, 0.953, 1};
     };
 
     class City : Name {
-        color[] = {0.262, 0.749, 0.941, 1};
+        color[] = {0.129, 0.588, 0.953, 1};
     };
 
     class Hill : NameIcon {
-        color[] = {0.698, 0.980, 0.619, 1};
+        color[] = {0.804, 0.863, 0.224, 1.0};
         textSize = 0.042;
         importance = 6;
     };
 
     class IndustrialSite : NameIcon {
-        color[] = {0.541, 0.921, 0.984, 0.9};
+        color[] = {0.804, 0.863, 0.224, 1.0};
     };
 
     class Local : Name {
-        color[] = {0.262, 0.749, 0.941, 1};
+        color[] = {0.129, 0.588, 0.953, 1};
         importance = 2;
     };
 
     class LocalOffice : NameIcon {
-        color[] = {0.541, 0.921, 0.984, 0.9};
+        color[] = {0.804, 0.863, 0.224, 1.0};
     };
 
     class Marine : Name {
@@ -1011,7 +1011,7 @@ class CfgLocationTypes {
     };
 
     class RailroadStation : NameIcon {
-        color[] = {0.541, 0.921, 0.984, 0.9};
+        color[] = {0.804, 0.863, 0.224, 1.0};
     };
 
     class RockArea : NameIcon {
@@ -1024,13 +1024,13 @@ class CfgLocationTypes {
     };
 
     class ViewPoint : NameIcon {
-        color[] = {0.698, 0.980, 0.619, 1};
+        color[] = {0.804, 0.863, 0.224, 1.0};
         textSize = 0.042;
         importance = 6;
     };
 
     class Village : Name {
-        color[] = {0.262, 0.749, 0.941, 1};
+        color[] = {0.129, 0.588, 0.953, 1};
         textSize = 0.046;
         importance = 4;
     };
