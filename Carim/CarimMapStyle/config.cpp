@@ -1015,7 +1015,7 @@ class CfgLocationTypes {
     };
 
     class RockArea : NameIcon {
-        color[] = {0.541, 0.921, 0.984, 0.9};
+        color[] = {0.0, 0.0, 0.0, 0.0};
     };
 
     class Ruin : NameIcon {
@@ -1053,6 +1053,7 @@ class MapDefaults {
     colorSea[] = {0.0, 0.0, 0.0, 0.0};
     colorForest[] = {0.0, 0.0, 0.0, 0.0};
     colorForestBorder[] = {0.0, 0.0, 0.0, 0.0};
+    colorRocks[] = {0.0, 0.0, 0.0, 0.0};
     colorRocksBorder[] = {0.0, 0.0, 0.0, 0.0};
     colorCountlines[] = {0.0, 0.0, 0.0, 0.0};
     colorGrid[] = {0.1, 0.1, 0.1, 0.2};
@@ -1069,24 +1070,19 @@ class MapDefaults {
     };
 
     class Bush {
-        color[] = {0.302, 0.647, 0.208, 0.25};
-        importance = "0.2 * 10 * 0.05";
-        coefMin = 0.2;
-        coefMax = 2;
+        importance = 0;
     };
 
     class SmallTree {
-        color[] = {0.302, 0.647, 0.208, 0.25};
-        importance = "0.6 * 8 * 0.05";
-        coefMin = 0.2;
-        coefMax = 2;
+        importance = 0;
     };
 
     class Tree {
-        color[] = {0.302, 0.647, 0.208, 0.25};
-        importance = "0.6 * 8 * 0.05";
-        coefMin = 0.2;
-        coefMax = 2;
+        importance = 0;
+    };
+
+    class Rock {
+        importance = 0;
     };
 
     class Waterpump {
@@ -1122,12 +1118,5 @@ class MapDefaults {
         importance = "2 * 20 * 0.05";
         coefMin = 0.2;
         coefMax = 2;
-    };
-
-    class Rocks {
-        color[] = {0.1, 0.1, 0.1, 0.6};
-        importance = "0.5 * 12 * 0.05";
-        coefMin = 0.25;
-        coefMax = 4;
     };
 };
