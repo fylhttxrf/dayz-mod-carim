@@ -1,10 +1,11 @@
-param([switch]$Setup = $false, [switch]$Build = $false, [switch]$Workbench = $false, [switch]$Diag = $false, [switch]$Server = $false)
+param([switch]$Setup = $false, [switch]$Build = $false, [switch]$Workbench = $false, [switch]$Diag = $false, [switch]$Server = $false, [switch]$Exp = $false)
 
 $mod = "Carim"
 $key = "S:\Drive\DayZKeys\schana.biprivatekey"
 $dayZExtract = "C:\Program Files\Wardog\DayZ Extract\DayZExtract.exe"
 $pboProject = "C:\Program Files (x86)\Mikero\DePboTools\bin\pboProject.exe"
 $steamRoot = "S:\SteamLibrary\steamapps\common"
+$expDir = "$steamRoot\DayZ Exp"
 $clientDir = "$steamRoot\DayZ"
 $serverDir = "$steamRoot\DayZServer"
 $toolsDir = "$steamRoot\DayZ Tools"
@@ -77,9 +78,14 @@ function Build-Project {
 }
 
 function Diag-Project {
-    $mods = "$localMods\@$mod;$localMods\@${mod}MapStyle"
-    Start-Process -FilePath "$clientDir\DayZDiag_x64.exe" -WorkingDirectory "$clientDir" -ArgumentList "-mod=$mods -profiles=$missions\profiles\server -doLogs -server -config=$missions\serverDZ.cfg -limitFPS=1000"
-    Start-Process -FilePath "$clientDir\DayZDiag_x64.exe" -WorkingDirectory "$clientDir" -ArgumentList "-mod=$mods -profiles=$missions\profiles\client -doLogs -name=cnofafva -connect=127.0.0.1 -port=2302"
+    $mods = "$workshopMods\@$mod;$workshopMods\@${mod}MapStyle"
+    $exe = "$clientDir\DayZDiag_x64.exe"
+    if ($Exp) {
+        $exe = "$expDir\DayZDiag_x64.exe"
+    }
+    
+    Start-Process -FilePath "$exe" -WorkingDirectory "$clientDir" -ArgumentList "-mod=$mods -profiles=$missions\profiles\server -doLogs -server -config=$missions\serverDZ.cfg -limitFPS=1000"
+    Start-Process -FilePath "$exe" -WorkingDirectory "$clientDir" -ArgumentList "-mod=$mods -profiles=$missions\profiles\client -doLogs -name=cnofafva -connect=127.0.0.1 -port=2302"
 }
 
 function Run-Server {

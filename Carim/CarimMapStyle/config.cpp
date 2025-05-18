@@ -1019,12 +1019,13 @@ class CfgLocationTypes {
     };
 
     class Ruin : NameIcon {
+        color[] = {0.298, 0.686, 0.314, 1};
         textSize = 0.035;
         importance = 3;
     };
 
     class ViewPoint : NameIcon {
-        color[] = {0.804, 0.863, 0.224, 1.0};
+        color[] = {0.298, 0.686, 0.314, 1};
         textSize = 0.042;
         importance = 6;
     };
