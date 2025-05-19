@@ -8,6 +8,7 @@ $pboProject = "C:\Program Files (x86)\Mikero\DePboTools\bin\pboProject.exe"
 $steamRoot = "S:\SteamLibrary\steamapps\common"
 $expClientDir = "$steamRoot\DayZ Exp"
 $expServerDir = "$steamRoot\DayZ Server Exp"
+$expToolsDir = "$steamRoot\DayZ Experimental Tools"
 $clientDir = "$steamRoot\DayZ"
 $serverDir = "$steamRoot\DayZServer"
 $toolsDir = "$steamRoot\DayZ Tools"
@@ -89,7 +90,11 @@ function Setup-Project {
 }
 
 function Start-Workbench {
-    Start-Process -FilePath workbenchApp.exe -WorkingDirectory "$toolsDir\Bin\Workbench" -ArgumentList "-mod=$projectDrive\$mod\$mod"
+    $workingDir = $toolsDir
+    if ($Exp) {
+        $workingDir = $expToolsDir
+    }
+    Start-Process -FilePath workbenchApp.exe -WorkingDirectory "$workingDir\Bin\Workbench" -ArgumentList "-mod=$projectDrive\$mod\$mod"
 }
 
 function Build-Project {

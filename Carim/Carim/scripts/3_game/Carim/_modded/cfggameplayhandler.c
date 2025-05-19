@@ -72,12 +72,12 @@ modded class CfgGameplayHandler {
         return m_Data.CarimData.CarimMapData.colorIconDefault;
     }
 
-    static int GetCarimMapDistanceShowLessThan() {
-        return m_Data.CarimData.CarimMapData.distanceShowLessThan;
+    static int GetCarimMapDistanceHideLessThan() {
+        return m_Data.CarimData.CarimMapData.distanceHideLessThan;
     }
 
-    static int GetCarimMapDistanceShowGreaterThan() {
-        return m_Data.CarimData.CarimMapData.distanceShowGreaterThan;
+    static int GetCarimMapDistanceHideGreaterThan() {
+        return m_Data.CarimData.CarimMapData.distanceHideGreaterThan;
     }
 
     // Party
@@ -113,19 +113,19 @@ modded class CfgGameplayHandler {
         return m_Data.CarimData.CarimPartyData.colorPlayerText;
     }
 
-    static int GetCarimPartyDistancePingShowLessThan() {
-        return m_Data.CarimData.CarimPartyData.distancePingShowLessThan;
+    static int GetCarimPartyDistancePingHideLessThan() {
+        return m_Data.CarimData.CarimPartyData.distancePingHideLessThan;
     }
 
-    static int GetCarimPartyDistancePingShowGreaterThan() {
-        return m_Data.CarimData.CarimPartyData.distancePingShowGreaterThan;
+    static int GetCarimPartyDistancePingHideGreaterThan() {
+        return m_Data.CarimData.CarimPartyData.distancePingHideGreaterThan;
     }
 
-    static int GetCarimPartyDistancePlayerShowLessThan() {
-        return m_Data.CarimData.CarimPartyData.distancePlayerShowLessThan;
+    static int GetCarimPartyDistancePlayerHideLessThan() {
+        return m_Data.CarimData.CarimPartyData.distancePlayerHideLessThan;
     }
 
-    static int GetCarimPartyDistancePlayerShowGreaterThan() {
-        return m_Data.CarimData.CarimPartyData.distancePlayerShowGreaterThan;
+    static int GetCarimPartyDistancePlayerHideGreaterThan() {
+        return m_Data.CarimData.CarimPartyData.distancePlayerHideGreaterThan;
     }
 }
