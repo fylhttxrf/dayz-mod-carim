@@ -69,7 +69,7 @@ class CarimManagerMarker extends Managed {
             hideGreaterThan = CfgGameplayHandler.GetCarimPartyDistancePlayerHideGreaterThan();
             index = Sync(positions, index, textColor, hideLessThan, hideGreaterThan);
 
-            SyncList(positions);
+            SyncList(positions, textColor, hideLessThan, hideGreaterThan);
         }
         if (CarimEnabled.Map()) {
             textColor = CfgGameplayHandler.GetCarimMapColorText();
@@ -107,7 +107,7 @@ class CarimManagerMarker extends Managed {
         return index;
     }
 
-    void SyncList(CarimModelAbcMarkers markers) {
+    void SyncList(CarimModelAbcMarkers markers, int textColor, int hideLessThan, int hideGreaterThan) {
         auto sortedIds = CarimUtil.GetSortedIdsByLowerName(registrations.registrations);
         int index = 0;
         foreach(auto id : sortedIds) {
@@ -118,7 +118,7 @@ class CarimManagerMarker extends Managed {
                     CarimLogging.Debug(this, string.Format("Adding %1: <%2, %3, %4> at index %5", markers.ClassName(), marker.carimPlayerId, marker.GetMarkerText(), marker.GetMarkerPos(), index));
                     if (listMenus.Count() <= index) {
                         CarimLogging.Trace(this, "Creating new");
-                        auto menu = new CarimMenuPartyList(marker);
+                        auto menu = new CarimMenuPartyList(marker, textColor, hideLessThan, hideGreaterThan);
                         menu.Init();
                         menu.carimListIndex = index;
                         listMenus.Insert(menu);

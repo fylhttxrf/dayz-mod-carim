@@ -74,7 +74,7 @@ class CarimMenuMarker extends UIScriptedMenu {
         Mission mission = GetGame().GetMission();
         IngameHud hud = IngameHud.Cast(mission.GetHud());
         bool hudHid = hud && hud.GetHudVisibility().IsContextFlagActive(IngameHudVisibility.HUD_HIDE_FLAGS);
-        layoutRoot.Show(!hudHid && CarimVisibleOnScreen() && CarimVisibleDistance());
+        layoutRoot.Show(!hudHid && CarimVisibleOnScreen());
     }
 
     bool CarimVisibleOnScreen() {
@@ -84,16 +84,16 @@ class CarimMenuMarker extends UIScriptedMenu {
         } else if (pos[2] < 0) {
             return false;
         }
-        return true;
+        return CarimVisibleDistance();
     }
 
     bool CarimVisibleDistance() {
         bool canSeeBasedOnDistance = true;
         auto distance = CarimGetDistance();
-        if (hideLessThan >= 0 && distance <= hideLessThan) {
+        if (carimHideLessThan >= 0 && distance <= carimHideLessThan) {
             canSeeBasedOnDistance = false;
         }
-        if (hideGreaterThan >= 0 && distance >= hideGreaterThan) {
+        if (carimHideGreaterThan >= 0 && distance >= carimHideGreaterThan) {
             canSeeBasedOnDistance = false;
         }
         return canSeeBasedOnDistance;
@@ -107,8 +107,8 @@ class CarimMenuMarker extends UIScriptedMenu {
         carimIcon.LoadImageFile(0, imageFile);
 
         carimIcon.SetColor(carimMarker.GetMarkerColor());
-        carimNametag.SetColor(textColor);
-        carimDistance.SetColor(textColor);
+        carimNametag.SetColor(carimTextColor);
+        carimDistance.SetColor(carimTextColor);
         CarimOnUpdate();
     }
 

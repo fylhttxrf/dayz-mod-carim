@@ -48,10 +48,10 @@ class ITEM_CarimCompassData extends ITEM_DataBase {
 
 class ITEM_CarimMapData extends ITEM_DataBase {
     bool enabled = true;
-    int colorText = CarimColor.WHITE; // TODO
+    int colorText = CarimColor.WHITE;
     int colorIconDefault = CarimColor.RED_500;
-    int distanceHideLessThan = -1;    // TODO
-    int distanceHideGreaterThan = -1; // TODO
+    int distanceHideLessThan = -1;
+    int distanceHideGreaterThan = -1;
 }
 
 class ITEM_CarimPartyData extends ITEM_DataBase {
@@ -60,11 +60,11 @@ class ITEM_CarimPartyData extends ITEM_DataBase {
     int maxPings = 3;
     int colorPingIconLocal = CarimColor.YELLOW_500;
     int colorPingIconServer = CarimColor.ORANGE_500;
-    int colorPingTextLocal = CarimColor.WHITE;  // TODO
-    int colorPingTextServer = CarimColor.WHITE; // TODO
-    int colorPlayerText = CarimColor.WHITE;     // TODO
-    int distancePingHideLessThan = -1;          // TODO
-    int distancePingHideGreaterThan = -1;       // TODO
-    int distancePlayerHideLessThan = -1;        // TODO
-    int distancePlayerHideGreaterThan = -1;     // TODO
+    int colorPingTextLocal = CarimColor.WHITE;
+    int colorPingTextServer = CarimColor.WHITE;
+    int colorPlayerText = CarimColor.WHITE;
+    int distancePingHideLessThan = -1;
+    int distancePingHideGreaterThan = -1;
+    int distancePlayerHideLessThan = -1;
+    int distancePlayerHideGreaterThan = -1;
 }
