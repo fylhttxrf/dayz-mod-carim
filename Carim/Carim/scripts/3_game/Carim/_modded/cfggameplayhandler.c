@@ -42,6 +42,10 @@ modded class CfgGameplayHandler {
         return m_Data.CarimData.CarimChatData.colorAdmin;
     }
 
+    static int GetCarimChatColorParty() {
+        return m_Data.CarimData.CarimChatData.colorParty;
+    }
+
     static bool GetCarimChatEnableKillfeed() {
         return m_Data.CarimData.CarimChatData.enableKillfeed;
     }

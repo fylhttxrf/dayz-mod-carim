@@ -25,13 +25,27 @@ class CarimMenuCompass extends UIScriptedMenu {
             if (hud && hud.GetHudVisibility().IsContextFlagActive(IngameHudVisibility.HUD_HIDE_FLAGS)) {
                 layoutRoot.Show(false);
             } else {
-                if (carimIsVisible) {
+                if (carimIsVisible && CarimHasNavItem()) {
                     CarimSetCompassPos();
                     layoutRoot.Update();
                 }
-                layoutRoot.Show(carimIsVisible);
+                layoutRoot.Show(carimIsVisible && CarimHasNavItem());
             }
         }
+    }
+
+    bool CarimHasNavItem() {
+        if (!CfgGameplayHandler.GetCarimCompassRequireNavItem()) {
+            return true;
+        }
+        auto player = PlayerBase.Cast(GetGame().GetPlayer());
+        if (player) {
+            auto mapNavigationBehaviour = player.GetMapNavigationBehaviour();
+            if (mapNavigationBehaviour) {
+                return mapNavigationBehaviour.GetNavigationType() > 0;
+            }
+        }
+        return false;
     }
 
     void CarimSetCompassPos() {

@@ -36,13 +36,14 @@ class ITEM_CarimChatData extends ITEM_DataBase {
     int colorGlobal = CarimColor.AMBER_500;
     int colorServer = CarimColor.LIGHT_BLUE_500;
     int colorAlert = CarimColor.DEEP_ORANGE_500;
-    int colorAdmin = CarimColor.RED_500; // TODO
-    bool enableKillfeed = false;         // TODO
+    int colorAdmin = CarimColor.RED_500;   // TODO
+    int colorParty = CarimColor.GREEN_500; // TODO
+    bool enableKillfeed = false;           // TODO
 }
 
 class ITEM_CarimCompassData extends ITEM_DataBase {
     bool enabled = true;
-    bool requireNavItem = false; // TODO
+    bool requireNavItem = false;
     int color = CarimColor.RED_500;
 }
 
