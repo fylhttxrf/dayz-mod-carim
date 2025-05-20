@@ -68,4 +68,8 @@ class ITEM_CarimPartyData extends ITEM_DataBase {
     int distancePingHideGreaterThan = -1;
     int distancePlayerHideLessThan = -1;
     int distancePlayerHideGreaterThan = -1;
+    bool showDistancePing = true;          // TODO
+    bool showDistancePlayer = true;        // TODO
+    bool requirePingLineOfSight = false;   // TODO
+    bool requirePlayerLineOfSight = false; // TODO
 }

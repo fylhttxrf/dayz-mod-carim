@@ -42,6 +42,12 @@ class CarimMenuMap extends MapMenu {
         // setting this flag to false makes sure they aren't
         // synced to the map item
         m_WasChanged = false;
+
+        bool isClosedWithShortcut = CfgGameplayHandler.GetMapIgnoreMapOwnership() && GetUApi().GetInputByID(UAMapToggle).LocalPress();
+        if (isClosedWithShortcut && m_MapMenuHandler.carimMenuEditMarker && m_MapMenuHandler.carimMenuEditMarker.visible) {
+            return;
+        }
+
         super.CloseMapMenu();
     }
 }
