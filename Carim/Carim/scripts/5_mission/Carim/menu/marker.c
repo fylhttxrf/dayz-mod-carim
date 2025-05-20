@@ -1,5 +1,8 @@
 class CarimMenuMarker extends UIScriptedMenu {
     ref CarimMapMarker carimMarker;
+    int carimTextColor;
+    int carimHideLessThan;
+    int carimHideGreaterThan;
 
     TextWidget carimNametag;
     TextWidget carimDistance;
@@ -7,8 +10,11 @@ class CarimMenuMarker extends UIScriptedMenu {
 
     float carimLastUpdated = 0.0;
 
-    void CarimMenuMarker(CarimMapMarker marker) {
+    void CarimMenuMarker(CarimMapMarker marker, int textColor, int hideLessThan, int hideGreaterThan) {
         carimMarker = marker;
+        carimTextColor = textColor;
+        carimHideLessThan = hideLessThan;
+        carimHideGreaterThan = hideGreaterThan;
     }
 
     void ~CarimMenuMarker() {
@@ -78,29 +84,49 @@ class CarimMenuMarker extends UIScriptedMenu {
         } else if (pos[2] < 0) {
             return false;
         }
-        return true;
+        return CarimVisibleDistance();
+    }
+
+    bool CarimVisibleDistance() {
+        bool canSeeBasedOnDistance = true;
+        auto distance = CarimGetDistance();
+        if (carimHideLessThan >= 0 && distance <= carimHideLessThan) {
+            canSeeBasedOnDistance = false;
+        }
+        if (carimHideGreaterThan >= 0 && distance >= carimHideGreaterThan) {
+            canSeeBasedOnDistance = false;
+        }
+        return canSeeBasedOnDistance;
     }
 
     void CarimUpdateContent() {
         carimNametag.SetText(carimMarker.GetMarkerText());
-        carimDistance.SetText(CarimGetDistance());
+        carimDistance.SetText(CarimFormatDistance(CarimGetDistance()));
         string imageFile = MapMarkerTypes.GetMarkerTypeFromID(carimMarker.GetMarkerIcon());
         imageFile.Replace("\\DZ", "DZ");
         carimIcon.LoadImageFile(0, imageFile);
 
         carimIcon.SetColor(carimMarker.GetMarkerColor());
+        carimNametag.SetColor(carimTextColor);
+        carimDistance.SetColor(carimTextColor);
         CarimOnUpdate();
     }
 
-    string CarimGetDistance() {
+    float CarimGetDistance() {
         auto player = GetGame().GetPlayer();
-        string distanceString = "";
         if (player) {
-            float distance = Math.Round(vector.Distance(carimMarker.GetMarkerPos(), player.GetPosition()));
-            distanceString = distance.ToString() + "m";
-            if (distance > 1000) {
-                distanceString = (Math.Round(distance / 100) / 10).ToString() + "km";
-            }
+            return Math.Round(vector.Distance(carimMarker.GetMarkerPos(), player.GetPosition()));
+        }
+        return -1;
+    }
+
+    string CarimFormatDistance(float distance) {
+        if (distance < 0) {
+            return "";
+        }
+        string distanceString = distance.ToString() + "m";
+        if (distance > 1000) {
+            distanceString = (Math.Round(distance / 100) / 10).ToString() + "km";
         }
         return distanceString;
     }

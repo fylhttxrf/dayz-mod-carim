@@ -11,6 +11,7 @@ class ITEM_CarimData extends ITEM_DataBase {
 
     bool initialized = false;
     ref array<string> adminIds;
+    bool useSteamId = false;
 
     override bool ValidateServer() {
         // Use initialize to determine if the data has been loaded
@@ -32,22 +33,39 @@ class ITEM_CarimAutorunData extends ITEM_DataBase {
 class ITEM_CarimChatData extends ITEM_DataBase {
     bool enabled = true;
     int colorDirect = CarimColor.GREY_50;
-    int colorGlobal = CarimColor.AMBER_300;
-    int colorServer = CarimColor.LIGHT_BLUE_300;
-    int colorAlert = CarimColor.DEEP_ORANGE_300;
+    int colorGlobal = CarimColor.AMBER_500;
+    int colorServer = CarimColor.LIGHT_BLUE_500;
+    int colorAlert = CarimColor.DEEP_ORANGE_500;
+    int colorAdmin = CarimColor.RED_500;   // TODO
+    int colorParty = CarimColor.GREEN_500; // TODO
+    bool enableKillfeed = false;           // TODO
 }
 
 class ITEM_CarimCompassData extends ITEM_DataBase {
     bool enabled = true;
     bool requireNavItem = false;
+    int color = CarimColor.RED_500;
 }
 
 class ITEM_CarimMapData extends ITEM_DataBase {
     bool enabled = true;
+    int colorText = CarimColor.WHITE;
+    int colorIconDefault = CarimColor.RED_500;
+    int distanceHideLessThan = -1;
+    int distanceHideGreaterThan = -1;
 }
 
 class ITEM_CarimPartyData extends ITEM_DataBase {
     bool enabled = true;
     int maxPartySize = -1;
     int maxPings = 3;
+    int colorPingIconLocal = CarimColor.YELLOW_500;
+    int colorPingIconServer = CarimColor.ORANGE_500;
+    int colorPingTextLocal = CarimColor.WHITE;
+    int colorPingTextServer = CarimColor.WHITE;
+    int colorPlayerText = CarimColor.WHITE;
+    int distancePingHideLessThan = -1;
+    int distancePingHideGreaterThan = -1;
+    int distancePlayerHideLessThan = -1;
+    int distancePlayerHideGreaterThan = -1;
 }

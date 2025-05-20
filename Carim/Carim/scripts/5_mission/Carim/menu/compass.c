@@ -1,6 +1,7 @@
 class CarimMenuCompass extends UIScriptedMenu {
     Widget carimFrame;
     ImageWidget carimImage;
+    GridSpacerWidget carimSpacer;
     bool carimIsVisible = true;
 
     override Widget Init() {
@@ -8,6 +9,9 @@ class CarimMenuCompass extends UIScriptedMenu {
             layoutRoot = GetGame().GetWorkspace().CreateWidgets("Carim/Carim/gui/layouts/compass.layout");
             carimFrame = layoutRoot.FindAnyWidget("FrameCompass");
             carimImage = ImageWidget.Cast(layoutRoot.FindAnyWidget("ImageCompass"));
+            carimSpacer = GridSpacerWidget.Cast(layoutRoot.FindAnyWidget("spacer"));
+
+            carimSpacer.SetColor(CfgGameplayHandler.GetCarimCompassColor());
         }
         return layoutRoot;
     }
@@ -21,13 +25,27 @@ class CarimMenuCompass extends UIScriptedMenu {
             if (hud && hud.GetHudVisibility().IsContextFlagActive(IngameHudVisibility.HUD_HIDE_FLAGS)) {
                 layoutRoot.Show(false);
             } else {
-                if (carimIsVisible) {
+                if (carimIsVisible && CarimHasNavItem()) {
                     CarimSetCompassPos();
                     layoutRoot.Update();
                 }
-                layoutRoot.Show(carimIsVisible);
+                layoutRoot.Show(carimIsVisible && CarimHasNavItem());
             }
         }
+    }
+
+    bool CarimHasNavItem() {
+        if (!CfgGameplayHandler.GetCarimCompassRequireNavItem()) {
+            return true;
+        }
+        auto player = PlayerBase.Cast(GetGame().GetPlayer());
+        if (player) {
+            auto mapNavigationBehaviour = player.GetMapNavigationBehaviour();
+            if (mapNavigationBehaviour) {
+                return mapNavigationBehaviour.GetNavigationType() > 0;
+            }
+        }
+        return false;
     }
 
     void CarimSetCompassPos() {
