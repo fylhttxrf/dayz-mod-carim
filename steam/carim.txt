@@ -46,28 +46,50 @@ Configuration is managed in your cfggameplay.json. Different modules can be enab
 [code]
 "CarimData": {
     "adminIds": [],
+    "useSteamId": 0,
     "CarimAutorunData": {
         "enabled": true
     },
     "CarimChatData": {
         "enabled": true,
         "colorDirect": -328966,
-        "colorGlobal": -10929,
-        "colorServer": -11549705,
-        "colorAlert": -30107
+        "colorGlobal": -16121,
+        "colorServer": -16537100,
+        "colorAlert": -43230
     },
     "CarimCompassData": {
-        "enabled": true
+        "enabled": true,
+        "requireNavItem": false,
+        "color": -769226
     },
     "CarimMapData": {
-        "enabled": true
+        "enabled": true,
+        "colorText": -1,
+        "colorIconDefault": -769226,
+        "distanceHideLessThan": -1,
+        "distanceHideGreaterThan": -1,
+        "showDistance": true,
+        "requireLineOfSight": false
     },
     "CarimPartyData": {
         "enabled": true,
         "maxPartySize": -1,
-        "maxPings": 3
+        "maxPings": 3,
+        "colorPingIconLocal": -5317,
+        "colorPingIconServer": -26624,
+        "colorPingTextLocal": -1,
+        "colorPingTextServer": -1,
+        "colorPlayerText": -1,
+        "distancePingHideLessThan": -1,
+        "distancePingHideGreaterThan": -1,
+        "distancePlayerHideLessThan": -1,
+        "distancePlayerHideGreaterThan": -1,
+        "showDistancePing": true,
+        "showDistancePlayer": true,
+        "requirePingLineOfSight": false,
+        "requirePlayerLineOfSight": false
     }
-},
+}
 [/code]
 
 To enable the map without needing any items, you can edit those existing settings to
