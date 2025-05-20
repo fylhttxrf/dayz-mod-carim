@@ -44,7 +44,7 @@ class CarimMenuMap extends MapMenu {
         m_WasChanged = false;
 
         bool isClosedWithShortcut = CfgGameplayHandler.GetMapIgnoreMapOwnership() && GetUApi().GetInputByID(UAMapToggle).LocalPress();
-        if (isClosedWithShortcut && m_MapMenuHandler.carimMenuEditMarker && m_MapMenuHandler.carimMenuEditMarker.visible) {
+        if (isClosedWithShortcut && m_MapMenuHandler && m_MapMenuHandler.carimMenuEditMarker && m_MapMenuHandler.carimMenuEditMarker.visible) {
             return;
         }
 

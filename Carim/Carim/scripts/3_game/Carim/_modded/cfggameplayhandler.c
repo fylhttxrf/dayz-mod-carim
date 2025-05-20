@@ -84,6 +84,14 @@ modded class CfgGameplayHandler {
         return m_Data.CarimData.CarimMapData.distanceHideGreaterThan;
     }
 
+    static bool GetCarimMapShowDistance() {
+        return m_Data.CarimData.CarimMapData.showDistance;
+    }
+
+    static bool GetCarimMapRequireLineOfSight() {
+        return m_Data.CarimData.CarimMapData.requireLineOfSight;
+    }
+
     // Party
     static bool GetCarimPartyEnabled() {
         return m_Data.CarimData.CarimPartyData.enabled;
@@ -131,5 +139,21 @@ modded class CfgGameplayHandler {
 
     static int GetCarimPartyDistancePlayerHideGreaterThan() {
         return m_Data.CarimData.CarimPartyData.distancePlayerHideGreaterThan;
+    }
+
+    static bool GetCarimPartyShowDistancePing() {
+        return m_Data.CarimData.CarimPartyData.showDistancePing;
+    }
+
+    static bool GetCarimPartyShowDistancePlayer() {
+        return m_Data.CarimData.CarimPartyData.showDistancePlayer;
+    }
+
+    static bool GetCarimPartyRequirePingLineOfSight() {
+        return m_Data.CarimData.CarimPartyData.requirePingLineOfSight;
+    }
+
+    static bool GetCarimPartyRequirePlayerLineOfSight() {
+        return m_Data.CarimData.CarimPartyData.requirePlayerLineOfSight;
     }
 }

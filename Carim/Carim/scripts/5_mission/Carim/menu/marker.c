@@ -3,6 +3,8 @@ class CarimMenuMarker extends UIScriptedMenu {
     int carimTextColor;
     int carimHideLessThan;
     int carimHideGreaterThan;
+    bool carimShowDistance;
+    bool carimRequireLineOfSight;
 
     TextWidget carimNametag;
     TextWidget carimDistance;
@@ -10,11 +12,13 @@ class CarimMenuMarker extends UIScriptedMenu {
 
     float carimLastUpdated = 0.0;
 
-    void CarimMenuMarker(CarimMapMarker marker, int textColor, int hideLessThan, int hideGreaterThan) {
+    void CarimMenuMarker(CarimMapMarker marker, int textColor, int hideLessThan, int hideGreaterThan, bool showDistance, bool requireLineOfSight) {
         carimMarker = marker;
         carimTextColor = textColor;
         carimHideLessThan = hideLessThan;
         carimHideGreaterThan = hideGreaterThan;
+        carimShowDistance = showDistance;
+        carimRequireLineOfSight = requireLineOfSight;
     }
 
     void ~CarimMenuMarker() {
@@ -43,9 +47,9 @@ class CarimMenuMarker extends UIScriptedMenu {
 
         if (layoutRoot) {
             CarimSetRootPosition();
-            CarimSetVisibility();
 
             if (carimLastUpdated > CARIM_60_FPS_INTERVAL_SEC) {
+                CarimSetVisibility();
                 CarimUpdateContent();
                 carimLastUpdated = 0.0;
             } else {
@@ -74,6 +78,7 @@ class CarimMenuMarker extends UIScriptedMenu {
         Mission mission = GetGame().GetMission();
         IngameHud hud = IngameHud.Cast(mission.GetHud());
         bool hudHid = hud && hud.GetHudVisibility().IsContextFlagActive(IngameHudVisibility.HUD_HIDE_FLAGS);
+        carimDistance.Show(carimShowDistance);
         layoutRoot.Show(!hudHid && CarimVisibleOnScreen());
     }
 
@@ -84,6 +89,23 @@ class CarimMenuMarker extends UIScriptedMenu {
         } else if (pos[2] < 0) {
             return false;
         }
+
+        if (carimRequireLineOfSight) {
+            auto player = GetGame().GetPlayer();
+            if (player) {
+                vector from = GetGame().GetCurrentCameraPosition();
+                vector to = carimMarker.GetMarkerPos();
+                vector contactPos;
+                vector contactDir;
+                int contactComponent;
+                bool hit = DayZPhysics.RaycastRV(from, to, contactPos, contactDir, contactComponent, NULL, NULL, player, false, false, ObjIntersectIFire);
+                // Check if contactPos is within 1m of marker position, and count that as not hit
+                if (hit && vector.Distance(to, contactPos) > 1) {
+                    return false;
+                }
+            }
+        }
+
         return CarimVisibleDistance();
     }
 

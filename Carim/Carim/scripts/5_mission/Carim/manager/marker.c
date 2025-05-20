@@ -52,22 +52,28 @@ class CarimManagerMarker extends Managed {
         int textColor;
         int hideLessThan;
         int hideGreaterThan;
+        bool showDistance;
+        bool requireLineOfSight;
         if (CarimEnabled.Party()) {
             // Local pings
             textColor = CfgGameplayHandler.GetCarimPartyColorPingTextLocal();
             hideLessThan = CfgGameplayHandler.GetCarimPartyDistancePingHideLessThan();
             hideGreaterThan = CfgGameplayHandler.GetCarimPartyDistancePingHideGreaterThan();
-            index = Sync(pings, index, textColor, hideLessThan, hideGreaterThan);
+            showDistance = CfgGameplayHandler.GetCarimPartyShowDistancePing();
+            requireLineOfSight = CfgGameplayHandler.GetCarimPartyRequirePingLineOfSight();
+            index = Sync(pings, index, textColor, hideLessThan, hideGreaterThan, showDistance, requireLineOfSight);
 
             // Server pings
             textColor = CfgGameplayHandler.GetCarimPartyColorPingTextServer();
-            index = Sync(serverMarkers, index, textColor, hideLessThan, hideGreaterThan);
+            index = Sync(serverMarkers, index, textColor, hideLessThan, hideGreaterThan, showDistance, requireLineOfSight);
 
             // Positions
             textColor = CfgGameplayHandler.GetCarimPartyColorPlayerText();
             hideLessThan = CfgGameplayHandler.GetCarimPartyDistancePlayerHideLessThan();
             hideGreaterThan = CfgGameplayHandler.GetCarimPartyDistancePlayerHideGreaterThan();
-            index = Sync(positions, index, textColor, hideLessThan, hideGreaterThan);
+            showDistance = CfgGameplayHandler.GetCarimPartyShowDistancePlayer();
+            requireLineOfSight = CfgGameplayHandler.GetCarimPartyRequirePlayerLineOfSight();
+            index = Sync(positions, index, textColor, hideLessThan, hideGreaterThan, showDistance, requireLineOfSight);
 
             SyncList(positions, textColor, hideLessThan, hideGreaterThan);
         }
@@ -75,7 +81,9 @@ class CarimManagerMarker extends Managed {
             textColor = CfgGameplayHandler.GetCarimMapColorText();
             hideLessThan = CfgGameplayHandler.GetCarimMapDistanceHideLessThan();
             hideGreaterThan = CfgGameplayHandler.GetCarimMapDistanceHideGreaterThan();
-            index = Sync(marks, index, textColor, hideLessThan, hideGreaterThan);
+            showDistance = CfgGameplayHandler.GetCarimMapShowDistance();
+            requireLineOfSight = CfgGameplayHandler.GetCarimMapRequireLineOfSight();
+            index = Sync(marks, index, textColor, hideLessThan, hideGreaterThan, showDistance, requireLineOfSight);
         }
 
         for (int i = menus.Count() - 1; i >= index; --i) {
@@ -85,13 +93,13 @@ class CarimManagerMarker extends Managed {
         menus.Resize(index);
     }
 
-    int Sync(CarimModelAbcMarkers markers, int index, int textColor, int hideLessThan, int hideGreaterThan) {
+    int Sync(CarimModelAbcMarkers markers, int index, int textColor, int hideLessThan, int hideGreaterThan, bool showDistance, bool requireLineOfSight) {
         foreach(array<ref CarimMapMarker> markerArray : markers.markers) {
             foreach(CarimMapMarker marker : markerArray) {
                 CarimLogging.Debug(this, string.Format("Adding %1: <%2, %3, %4> at index %5", markers.ClassName(), marker.carimPlayerId, marker.GetMarkerText(), marker.GetMarkerPos(), index));
                 if (menus.Count() <= index) {
                     CarimLogging.Trace(this, "Creating new");
-                    auto menu = new CarimMenuMarker(marker, textColor, hideLessThan, hideGreaterThan);
+                    auto menu = new CarimMenuMarker(marker, textColor, hideLessThan, hideGreaterThan, showDistance, requireLineOfSight);
                     menu.Init();
                     menus.Insert(menu);
                 } else {
@@ -118,7 +126,7 @@ class CarimManagerMarker extends Managed {
                     CarimLogging.Debug(this, string.Format("Adding %1: <%2, %3, %4> at index %5", markers.ClassName(), marker.carimPlayerId, marker.GetMarkerText(), marker.GetMarkerPos(), index));
                     if (listMenus.Count() <= index) {
                         CarimLogging.Trace(this, "Creating new");
-                        auto menu = new CarimMenuPartyList(marker, textColor, hideLessThan, hideGreaterThan);
+                        auto menu = new CarimMenuPartyList(marker, textColor, hideLessThan, hideGreaterThan, true, false);
                         menu.Init();
                         menu.carimListIndex = index;
                         listMenus.Insert(menu);

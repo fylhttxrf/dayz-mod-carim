@@ -53,6 +53,8 @@ class ITEM_CarimMapData extends ITEM_DataBase {
     int colorIconDefault = CarimColor.RED_500;
     int distanceHideLessThan = -1;
     int distanceHideGreaterThan = -1;
+    bool showDistance = true;
+    bool requireLineOfSight = false;
 }
 
 class ITEM_CarimPartyData extends ITEM_DataBase {
@@ -68,8 +70,8 @@ class ITEM_CarimPartyData extends ITEM_DataBase {
     int distancePingHideGreaterThan = -1;
     int distancePlayerHideLessThan = -1;
     int distancePlayerHideGreaterThan = -1;
-    bool showDistancePing = true;          // TODO
-    bool showDistancePlayer = true;        // TODO
-    bool requirePingLineOfSight = false;   // TODO
-    bool requirePlayerLineOfSight = false; // TODO
+    bool showDistancePing = true;
+    bool showDistancePlayer = true;
+    bool requirePingLineOfSight = false;
+    bool requirePlayerLineOfSight = false;
 }
