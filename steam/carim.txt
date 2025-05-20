@@ -46,7 +46,7 @@ Configuration is managed in your cfggameplay.json. Different modules can be enab
 [code]
 "CarimData": {
     "adminIds": [],
-    "useSteamId": 0,
+    "useSteamId": false,
     "CarimAutorunData": {
         "enabled": true
     },
