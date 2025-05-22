@@ -146,7 +146,7 @@ class CarimMenuEditMarker extends Managed {
                 break;
             case previous:
                 CarimLogging.Trace(this, "Previous " + currentIcon.ToString());
-                currentIcon = (currentIcon - 1) % eMapMarkerTypes.MARKERTYPE_MAX;
+                currentIcon = (currentIcon - 1 + eMapMarkerTypes.MARKERTYPE_MAX) % eMapMarkerTypes.MARKERTYPE_MAX;
                 imageFile = MapMarkerTypes.GetMarkerTypeFromID(currentIcon);
                 imageFile.Replace("\\DZ", "DZ");
                 icon.LoadImageFile(0, imageFile);
