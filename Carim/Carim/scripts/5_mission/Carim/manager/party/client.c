@@ -122,6 +122,14 @@ class CarimManagerPartyClient extends Managed {
     }
 
     void AddPlayerToParty(string id) {
+        PlayerIdentity localIdentity = GetGame().GetPlayer().GetIdentity();
+
+        if (CfgGameplayHandler.GetCarimUseSteamId()) {
+            if ( localIdentity.GetPlainId() == id ) return;
+        } else {
+            if ( localIdentity.GetId() == id ) return;
+        }
+
         registrations.Add(id, CarimUtil.GetClientPlayerIdentities().Get(id));
         PeriodicSend();
     }
