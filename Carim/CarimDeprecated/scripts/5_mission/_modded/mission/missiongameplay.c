@@ -2,7 +2,7 @@
 #define CARIM_DEPRECATED_SINGLE_NOTIFICATION
 
 modded class MissionGameplay {
-    protected float carimDeprecatedLastUpdated = 0.0;
+    protected float carimDeprecatedLastUpdated = 420.0;
 
     override void OnUpdate(float timeslice) {
         super.OnUpdate(timeslice);
