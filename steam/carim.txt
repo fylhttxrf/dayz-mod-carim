@@ -30,6 +30,8 @@ Provides a compass at the top of the display with the press of a configurable ke
 [hr][/hr]
 Provides an in-game map for saving markers and viewing party members. Open with the vanilla configurable key (default: 'M'). Double-click to add a marker, double-right-click to edit and remove.
 
+To apply a nicer style than vanilla with additional locations, you can use [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3483791557]the CarimMapStyle mod[/url].
+
 [h2]Party[/h2]
 [hr][/hr]
 Allows creation of parties and displaying of nametags of party members. There is no party size limit.
