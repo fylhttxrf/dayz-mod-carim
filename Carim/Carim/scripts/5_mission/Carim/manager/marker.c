@@ -104,10 +104,7 @@ class CarimManagerMarker extends Managed {
                     menus.Insert(menu);
                 } else {
                     CarimLogging.Trace(this, "Using existing");
-                    menus.Get(index).carimMarker = marker;
-                    menus.Get(index).carimTextColor = textColor;
-                    menus.Get(index).carimHideLessThan = hideLessThan;
-                    menus.Get(index).carimHideGreaterThan = hideGreaterThan;
+                    menus.Get(index).CarimSetAttributes(marker, textColor, hideLessThan, hideGreaterThan, showDistance, requireLineOfSight);
                 }
                 ++index;
             }
@@ -132,7 +129,7 @@ class CarimManagerMarker extends Managed {
                         listMenus.Insert(menu);
                     } else {
                         CarimLogging.Trace(this, "Using existing");
-                        listMenus.Get(index).carimMarker = marker;
+                        listMenus.Get(index).CarimSetAttributes(marker, textColor, hideLessThan, hideGreaterThan, true, false);
                         listMenus.Get(index).carimListIndex = index;
                     }
                     ++index;

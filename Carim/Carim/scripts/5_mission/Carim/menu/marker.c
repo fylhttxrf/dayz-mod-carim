@@ -1,16 +1,16 @@
 class CarimMenuMarker extends UIScriptedMenu {
-    ref CarimMapMarker carimMarker;
-    int carimTextColor;
-    int carimHideLessThan;
-    int carimHideGreaterThan;
-    bool carimShowDistance;
-    bool carimRequireLineOfSight;
+    protected ref CarimMapMarker carimMarker;
+    protected int carimTextColor;
+    protected int carimHideLessThan;
+    protected int carimHideGreaterThan;
+    protected bool carimShowDistance;
+    protected bool carimRequireLineOfSight;
 
-    TextWidget carimNametag;
-    TextWidget carimDistance;
-    ImageWidget carimIcon;
+    protected TextWidget carimNametag;
+    protected TextWidget carimDistance;
+    protected ImageWidget carimIcon;
 
-    float carimLastUpdated = 0.0;
+    protected float carimLastUpdated = 0.0;
 
     void CarimMenuMarker(CarimMapMarker marker, int textColor, int hideLessThan, int hideGreaterThan, bool showDistance, bool requireLineOfSight) {
         carimMarker = marker;
@@ -25,6 +25,15 @@ class CarimMenuMarker extends UIScriptedMenu {
         if (layoutRoot) {
             layoutRoot.Unlink();
         }
+    }
+
+    void CarimSetAttributes(CarimMapMarker marker, int textColor, int hideLessThan, int hideGreaterThan, bool showDistance, bool requireLineOfSight) {
+        carimMarker = marker;
+        carimTextColor = textColor;
+        carimHideLessThan = hideLessThan;
+        carimHideGreaterThan = hideGreaterThan;
+        carimShowDistance = showDistance;
+        carimRequireLineOfSight = requireLineOfSight;
     }
 
     string CarimGetLayout() {
