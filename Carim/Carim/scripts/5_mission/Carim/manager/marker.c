@@ -38,12 +38,26 @@ class CarimManagerMarker extends Managed {
             }
         }
 
-        if (pings.changed || serverMarkers.changed || positions.changed || marks.changed) {
+        bool needsSync = false;
+        needsSync = needsSync || (pings && pings.changed);
+        needsSync = needsSync || (serverMarkers && serverMarkers.changed);
+        needsSync = needsSync || (positions && positions.changed);
+        needsSync = needsSync || (marks && marks.changed);
+
+        if (needsSync) {
             SyncMenus();
-            pings.changed = false;
-            serverMarkers.changed = false;
-            positions.changed = false;
-            marks.changed = false;
+            if (pings) {
+                pings.changed = false;
+            }
+            if (serverMarkers) {
+                serverMarkers.changed = false;
+            }
+            if (positions) {
+                positions.changed = false;
+            }
+            if (marks) {
+                marks.changed = false;
+            }
         }
     }
 
