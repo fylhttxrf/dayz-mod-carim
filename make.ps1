@@ -94,7 +94,7 @@ function Start-Workbench {
     if ($Exp) {
         $workingDir = $expToolsDir
     }
-    Start-Process -FilePath workbenchApp.exe -WorkingDirectory "$workingDir\Bin\Workbench" -ArgumentList "-mod=$projectDrive\$mod\$mod"
+    Start-Process -FilePath workbenchApp.exe -WorkingDirectory "$workingDir\Bin\Workbench" -ArgumentList "-mod=$projectDrive\$mod\$mod;$projectDrive\$mod\${mod}Deprecated;"
 }
 
 function Build-Project {
