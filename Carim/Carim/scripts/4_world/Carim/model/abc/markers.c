@@ -12,6 +12,8 @@ enum CarimMapMarkerTypes {
 class CarimMapMarker extends MapMarker {
     string carimPlayerId;
     int carimHealthLevel = -1;
+    bool carimVisible3d = true;
+    int carimHideGreaterThan = -1;
 
     [NonSerialized()] PlayerBase carimPlayer;
 
@@ -87,6 +89,8 @@ class CarimMapMarker extends MapMarker {
         m_Text = other.m_Text;
         carimPlayerId = other.carimPlayerId;
         carimHealthLevel = other.carimHealthLevel;
+        carimVisible3d = other.carimVisible3d;
+        carimHideGreaterThan = other.carimHideGreaterThan;
     }
 
     void CarimSetMarkerText(string text) {

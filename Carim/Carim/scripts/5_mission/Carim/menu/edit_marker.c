@@ -15,6 +15,10 @@ class CarimMenuEditMarker extends Managed {
     ButtonWidget deleteButton;
     ButtonWidget cancel;
 
+    CheckBoxWidget visible3d;
+    SliderWidget distance;
+    TextWidget distanceLabel;
+
     ref array<ref ButtonWidget> colorButtons;
 
     void CarimMenuEditMarker(CarimMapMarker iMarker, int iX, int iY) {
@@ -33,9 +37,99 @@ class CarimMenuEditMarker extends Managed {
         deleteButton = ButtonWidget.Cast(root.FindAnyWidget("deleteButton"));
         cancel = ButtonWidget.Cast(root.FindAnyWidget("cancel"));
 
+        visible3d = CheckBoxWidget.Cast(root.FindAnyWidget("visible3d"));
+        distance = SliderWidget.Cast(root.FindAnyWidget("distance"));
+        distanceLabel = TextWidget.Cast(root.FindAnyWidget("distanceLabel"));
+
         auto panel = root.FindAnyWidget("panel");
 
         colorButtons = GetColorButtons(panel);
+    }
+
+    void Show() {
+        visible = true;
+        Refresh();
+    }
+
+    void Hide() {
+        visible = false;
+        Refresh();
+    }
+
+    void Refresh() {
+        if (root) {
+            CarimLogging.Trace(this, "Refresh");
+
+            text.SetText(marker.GetMarkerText());
+            string imageFile = MapMarkerTypes.GetMarkerTypeFromID(marker.GetMarkerIcon());
+            imageFile.Replace("\\DZ", "DZ");
+            icon.LoadImageFile(0, imageFile);
+            icon.SetColor(marker.GetMarkerColor());
+
+            root.SetPos(x, y);
+            root.Show(visible);
+        }
+    }
+
+    bool OnChange(Widget w) {
+        // TODO: call into here from handler
+        if (w == distance) {
+            distanceLabel.SetText(distance.GetCurrent().ToString());
+            return true;
+        }
+
+        return false;
+    }
+
+    bool OnClick(Widget w) {
+        CarimLogging.Trace(this, "OnClick");
+
+        auto mission = MissionGameplay.Cast(GetGame().GetMission());
+
+        string imageFile;
+
+        switch (w) {
+            case cancel:
+                CarimLogging.Trace(this, "Cancel");
+                Hide();
+                break;
+            case save:
+                CarimLogging.Trace(this, "Save");
+                marker.CarimSetMarkerText(text.GetText());
+                marker.CarimSetMarkerIcon(currentIcon);
+                marker.CarimSetMarkerColor(icon.GetColor());
+                mission.carimModelMapMarkers.Persist();
+                Hide();
+                break;
+            case deleteButton:
+                CarimLogging.Trace(this, "Delete");
+                mission.carimModelMapMarkers.Remove(marker);
+                Hide();
+                break;
+            case previous:
+                CarimLogging.Trace(this, "Previous " + currentIcon.ToString());
+                currentIcon = (currentIcon - 1) % eMapMarkerTypes.MARKERTYPE_MAX;
+                imageFile = MapMarkerTypes.GetMarkerTypeFromID(currentIcon);
+                imageFile.Replace("\\DZ", "DZ");
+                icon.LoadImageFile(0, imageFile);
+                break;
+            case next:
+                CarimLogging.Trace(this, "Next " + currentIcon.ToString());
+                currentIcon = (currentIcon + 1) % eMapMarkerTypes.MARKERTYPE_MAX;
+                imageFile = MapMarkerTypes.GetMarkerTypeFromID(currentIcon);
+                imageFile.Replace("\\DZ", "DZ");
+                icon.LoadImageFile(0, imageFile);
+                break;
+            default:
+                foreach(auto button : colorButtons) {
+                    if (w == button) {
+                        icon.SetColor(button.GetColor());
+                        return true;
+                    }
+                }
+                return false;
+        }
+        return true;
     }
 
     static array<ref ButtonWidget> GetColorButtons(Widget panel) {
@@ -92,81 +186,5 @@ class CarimMenuEditMarker extends Managed {
         }
 
         return buttons;
-    }
-
-    void Show() {
-        visible = true;
-        Refresh();
-    }
-
-    void Hide() {
-        visible = false;
-        Refresh();
-    }
-
-    void Refresh() {
-        if (root) {
-            CarimLogging.Trace(this, "Refresh");
-
-            text.SetText(marker.GetMarkerText());
-            string imageFile = MapMarkerTypes.GetMarkerTypeFromID(marker.GetMarkerIcon());
-            imageFile.Replace("\\DZ", "DZ");
-            icon.LoadImageFile(0, imageFile);
-            icon.SetColor(marker.GetMarkerColor());
-
-            root.SetPos(x, y);
-            root.Show(visible);
-        }
-    }
-
-    bool OnClick(Widget w) {
-        CarimLogging.Trace(this, "OnClick");
-
-        auto mission = MissionGameplay.Cast(GetGame().GetMission());
-
-        string imageFile;
-
-        switch (w) {
-            case cancel:
-                CarimLogging.Trace(this, "Cancel");
-                Hide();
-                break;
-            case save:
-                CarimLogging.Trace(this, "Save");
-                marker.CarimSetMarkerText(text.GetText());
-                marker.CarimSetMarkerIcon(currentIcon);
-                marker.CarimSetMarkerColor(icon.GetColor());
-                mission.carimModelMapMarkers.Persist();
-                Hide();
-                break;
-            case deleteButton:
-                CarimLogging.Trace(this, "Delete");
-                mission.carimModelMapMarkers.Remove(marker);
-                Hide();
-                break;
-            case previous:
-                CarimLogging.Trace(this, "Previous " + currentIcon.ToString());
-                currentIcon = (currentIcon - 1) % eMapMarkerTypes.MARKERTYPE_MAX;
-                imageFile = MapMarkerTypes.GetMarkerTypeFromID(currentIcon);
-                imageFile.Replace("\\DZ", "DZ");
-                icon.LoadImageFile(0, imageFile);
-                break;
-            case next:
-                CarimLogging.Trace(this, "Next " + currentIcon.ToString());
-                currentIcon = (currentIcon + 1) % eMapMarkerTypes.MARKERTYPE_MAX;
-                imageFile = MapMarkerTypes.GetMarkerTypeFromID(currentIcon);
-                imageFile.Replace("\\DZ", "DZ");
-                icon.LoadImageFile(0, imageFile);
-                break;
-            default:
-                foreach(auto button : colorButtons) {
-                    if (w == button) {
-                        icon.SetColor(button.GetColor());
-                        return true;
-                    }
-                }
-                return false;
-        }
-        return true;
     }
 }

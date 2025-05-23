@@ -10,7 +10,7 @@ FrameWidgetClass rootFrame {
  {
   PanelWidgetClass panel {
    position 0 0
-   size 376 172
+   size 376 212
    hexactpos 0
    vexactpos 0
    hexactsize 1
@@ -19,17 +19,17 @@ FrameWidgetClass rootFrame {
    {
     EditBoxWidgetClass text {
      position 8 8
-     size 276 36
+     size 360 36
      hexactpos 1
      vexactpos 1
      hexactsize 1
      vexactsize 1
      style Editor
      text "example label"
-     font "gui/fonts/MetronBook28"
+     font "gui/fonts/sdf_MetronLight72"
     }
     ButtonWidgetClass previous {
-     position 288 8
+     position 288 48
      size 18 36
      hexactpos 1
      vexactpos 1
@@ -37,11 +37,10 @@ FrameWidgetClass rootFrame {
      vexactsize 1
      style MenuDefault
      text "<"
-     font "gui/fonts/MetronBook28"
     }
     ImageWidgetClass icon {
      ignorepointer 1
-     position 310 8
+     position 310 48
      size 36 36
      hexactpos 1
      vexactpos 1
@@ -52,7 +51,7 @@ FrameWidgetClass rootFrame {
      "stretch mode" stretch_w_h
     }
     ButtonWidgetClass next {
-     position 350 8
+     position 350 48
      size 18 36
      hexactpos 1
      vexactpos 1
@@ -60,20 +59,8 @@ FrameWidgetClass rootFrame {
      vexactsize 1
      style MenuDefault
      text ">"
-     font "gui/fonts/MetronBook28"
     }
     ButtonWidgetClass save {
-     position 288 48
-     size 80 36
-     hexactpos 1
-     vexactpos 1
-     hexactsize 1
-     vexactsize 1
-     style MenuDefault
-     text "Save"
-     font "gui/fonts/MetronBook28"
-    }
-    ButtonWidgetClass deleteButton {
      position 288 88
      size 80 36
      hexactpos 1
@@ -81,10 +68,9 @@ FrameWidgetClass rootFrame {
      hexactsize 1
      vexactsize 1
      style MenuDefault
-     text "Delete"
-     font "gui/fonts/MetronBook28"
+     text "Save"
     }
-    ButtonWidgetClass cancel {
+    ButtonWidgetClass deleteButton {
      position 288 128
      size 80 36
      hexactpos 1
@@ -92,8 +78,56 @@ FrameWidgetClass rootFrame {
      hexactsize 1
      vexactsize 1
      style MenuDefault
+     text "Delete"
+    }
+    ButtonWidgetClass cancel {
+     position 288 168
+     size 80 36
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     style MenuDefault
      text "Cancel"
-     font "gui/fonts/MetronBook28"
+    }
+    CheckBoxWidgetClass visible3d {
+     position 8 168
+     size 64 36
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     style Default
+     text "3D"
+     checked 0
+    }
+    SliderWidgetClass distance {
+     position 76 168
+     size 208 36
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     scaled 1
+     style Editor
+     maximum 10000
+     step 10
+     current 5000
+     "draw marker" 1
+     {
+      TextWidgetClass distanceLabel {
+       ignorepointer 1
+       position 0 0
+       size 1 1
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       text "asdf"
+       "text halign" center
+       "text valign" center
+      }
+     }
     }
    }
   }
