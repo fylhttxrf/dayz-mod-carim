@@ -44,11 +44,33 @@ Optionally, servers can configure Admin Ids that allow adding party members with
 
 [h2]Configuration[/h2]
 [hr][/hr]
-Configuration is managed in your cfggameplay.json. Different modules can be enabled/disabled independently. The color values are signed integers based on the ARGB bytes, so 0xfffafafa is -328966. You can [url=https://argb-int-calculator.netlify.app/]use a tool to figure out the values[/url]. The defaults are below (copy these into your cfggameplay.json and change as you want).
+Configuration is managed in your cfggameplay.json. Different modules can be enabled/disabled independently. The defaults are below (copy these into your cfggameplay.json and change as you want). You only need to add the values if you want to change from the defaults.
+
+Be sure to enable the use of this config file in your serverDZ.cfg with
+[code]enableCfgGameplayFile=1;[/code]
+
+Put them in your cfggameplay.json at the top level, like
+[code]
+{
+    "version": 122,
+    "GeneralData": {
+        ...
+    },
+    "PlayerData": {
+        ...
+    },
+    "CarimData": {
+        ...
+    },
+    ...
+}
+[/code]
+
+[h3]Defaults[/h3]
+The color values are signed integers based on the ARGB bytes, so 0xfffafafa is -328966. You can [url=https://argb-int-calculator.netlify.app/]use a tool to figure out the values[/url].
 [code]
 "CarimData": {
     "adminIds": [],
-    "useSteamId": false,
     "CarimAutorunData": {
         "enabled": true
     },
@@ -94,6 +116,7 @@ Configuration is managed in your cfggameplay.json. Different modules can be enab
 }
 [/code]
 
+[h3]Map specific configuration[/h3]
 To enable the map without needing any items, you can edit those existing settings to
 [code]
 "MapData": {
@@ -104,7 +127,12 @@ To enable the map without needing any items, you can edit those existing setting
 },
 [/code]
 
-Finally, be sure to enable the use of this config file in your serverDZ.cfg with [code]enableCfgGameplayFile=1;[/code]
+Also, make sure the map can opened by disabling the 3d map
+[code]
+"UIData": {
+    "use3DMap": false
+}
+[/code]
 
 [h2]Information[/h2]
 [hr][/hr]
@@ -118,14 +146,3 @@ To learn more visit https://discord.gg/kdPnVu4
 [list]
     [*] Thank you to Karma's Wasteland for testing and providing valuable feedback.
 [/list]
-
-[h3]Deprecated mods (unlisted from workshop)[/h3]
-[olist]
-    [*] CarimParty https://steamcommunity.com/sharedfiles/filedetails/?id=3468068823
-    [*] CarimCompass https://steamcommunity.com/sharedfiles/filedetails/?id=3468068260
-    [*] CarimChat https://steamcommunity.com/sharedfiles/filedetails/?id=3468067683
-    [*] CarimAutorun https://steamcommunity.com/sharedfiles/filedetails/?id=3468066705
-    [*] SchanaModGlobalChat https://steamcommunity.com/sharedfiles/filedetails/?id=2115602332
-    [*] SchanaModParty https://steamcommunity.com/sharedfiles/filedetails/?id=2075831381
-    [*] SchanaModCompass https://steamcommunity.com/sharedfiles/filedetails/?id=2067834152
-[/olist]
