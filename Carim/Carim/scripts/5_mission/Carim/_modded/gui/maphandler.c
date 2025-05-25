@@ -3,7 +3,11 @@ modded class MapHandler {
 
     override bool OnMouseButtonDown(Widget w, int x, int y, int button) {
         if (carimMenuEditMarker && carimMenuEditMarker.visible) {
-            return true;
+            if (w == m_Root) {
+                carimMenuEditMarker.Hide();
+            } else {
+                return true;
+            }
         }
         return super.OnMouseButtonDown(w, x, y, button);
     }
