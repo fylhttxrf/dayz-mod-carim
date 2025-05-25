@@ -5,8 +5,9 @@ modded class MapHandler {
         if (carimMenuEditMarker && carimMenuEditMarker.visible) {
             if (w == m_Root) {
                 carimMenuEditMarker.Hide();
+            } else {
+                return true;
             }
-            return true;
         }
         return super.OnMouseButtonDown(w, x, y, button);
     }
