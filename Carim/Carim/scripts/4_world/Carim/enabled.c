@@ -3,6 +3,7 @@ class CarimEnabled {
     static bool chat;
     static bool compass;
     static bool cmap;
+    static bool nametag;
     static bool party;
 
     static bool initialized;
@@ -23,6 +24,10 @@ class CarimEnabled {
         return cmap;
     }
 
+    static bool Nametag() {
+        return nametag;
+    }
+
     static bool Party() {
         return party;
     }
@@ -40,6 +45,7 @@ class CarimEnabled {
             chat = CfgGameplayHandler.GetCarimChatEnabled();
             compass = CfgGameplayHandler.GetCarimCompassEnabled();
             cmap = CfgGameplayHandler.GetCarimMapEnabled();
+            nametag = CfgGameplayHandler.GetCarimNametagEnabled();
             party = CfgGameplayHandler.GetCarimPartyEnabled();
 
             initialized = true;

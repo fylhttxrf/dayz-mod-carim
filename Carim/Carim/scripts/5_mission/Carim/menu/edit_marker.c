@@ -1,4 +1,7 @@
 class CarimMenuEditMarker extends Managed {
+    // This value should correspond to what's in the edit_marker.layout
+    static const int MAX_DISTANCE = 6000;
+
     ref CarimMapMarker marker;
     int x;
     int y;
@@ -69,24 +72,27 @@ class CarimMenuEditMarker extends Managed {
             visible3d.SetChecked(marker.carimVisible3d);
             if (marker.carimHideGreaterThan >= 0) {
                 distance.SetCurrent(marker.carimHideGreaterThan);
-                distanceLabel.SetText(marker.carimHideGreaterThan.ToString() + "m");
             } else {
-                distance.SetCurrent(10000);
-                distanceLabel.SetText("unlimited");
+                distance.SetCurrent(MAX_DISTANCE);
             }
+            UpdateDistanceLabel();
 
             root.SetPos(x, y);
             root.Show(visible);
         }
     }
 
+    void UpdateDistanceLabel() {
+        if (distance.GetCurrent() >= MAX_DISTANCE) {
+            distanceLabel.SetText("unlimited");
+        } else {
+            distanceLabel.SetText(distance.GetCurrent().ToString() + "m");
+        }
+    }
+
     bool OnChange(Widget w) {
         if (w == distance) {
-            if (distance.GetCurrent() >= 10000) {
-                distanceLabel.SetText("unlimited");
-            } else {
-                distanceLabel.SetText(distance.GetCurrent().ToString() + "m");
-            }
+            UpdateDistanceLabel();
             return true;
         }
 
@@ -111,7 +117,7 @@ class CarimMenuEditMarker extends Managed {
                 marker.CarimSetMarkerIcon(currentIcon);
                 marker.CarimSetMarkerColor(icon.GetColor());
                 marker.CarimSetMarkerVisible3d(visible3d.IsChecked());
-                if (distance.GetCurrent() >= 10000) {
+                if (distance.GetCurrent() >= MAX_DISTANCE) {
                     marker.CarimSetMarkerHideGreaterThan(-1);
                 } else {
                     marker.CarimSetMarkerHideGreaterThan(distance.GetCurrent());

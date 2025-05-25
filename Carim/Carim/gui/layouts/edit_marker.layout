@@ -110,9 +110,9 @@ FrameWidgetClass rootFrame {
      vexactsize 1
      scaled 1
      style Editor
-     maximum 10000
+     maximum 6000
      step 10
-     current 10000
+     current 6000
      "draw marker" 1
      {
       TextWidgetClass distanceLabel {

@@ -7,6 +7,7 @@ class ITEM_CarimData extends ITEM_DataBase {
     ref ITEM_CarimChatData CarimChatData = new ITEM_CarimChatData;
     ref ITEM_CarimCompassData CarimCompassData = new ITEM_CarimCompassData;
     ref ITEM_CarimMapData CarimMapData = new ITEM_CarimMapData;
+    ref ITEM_CarimNametagData CarimNametagData = new ITEM_CarimNametagData;
     ref ITEM_CarimPartyData CarimPartyData = new ITEM_CarimPartyData;
 
     bool initialized = false;
@@ -55,6 +56,56 @@ class ITEM_CarimMapData extends ITEM_DataBase {
     int distanceHideGreaterThan = -1;
     bool showDistance = true;
     bool requireLineOfSight = false;
+    ref array<string> icons = {
+        "\\DZ\\gear\\navigation\\data\\map_bunker_ca.paa",
+        "\\DZ\\gear\\navigation\\data\\map_bush_ca.paa",
+        "\\DZ\\gear\\navigation\\data\\map_busstop_ca.paa",
+        "\\DZ\\gear\\navigation\\data\\map_chapel_ca.paa",
+        "\\DZ\\gear\\navigation\\data\\map_church_ca.paa",
+        "\\DZ\\gear\\navigation\\data\\map_cross_ca.paa",
+        "\\DZ\\gear\\navigation\\data\\map_fountain_ca.paa",
+        "\\DZ\\gear\\navigation\\data\\map_fuelstation_ca.paa",
+        "\\DZ\\gear\\navigation\\data\\map_hospital_ca.paa",
+        "\\DZ\\gear\\navigation\\data\\map_lighthouse_ca.paa",
+        "\\DZ\\gear\\navigation\\data\\map_quay_ca.paa",
+        "\\DZ\\gear\\navigation\\data\\map_rock_ca.paa",
+        "\\DZ\\gear\\navigation\\data\\map_ruin_ca.paa",
+        "\\DZ\\gear\\navigation\\data\\map_shipwreck_ca.paa",
+        "\\DZ\\gear\\navigation\\data\\map_smalltree_ca.paa",
+        "\\DZ\\gear\\navigation\\data\\map_stack_ca.paa",
+        "\\DZ\\gear\\navigation\\data\\map_tree_ca.paa",
+        "\\DZ\\gear\\navigation\\data\\map_viewtower_ca.paa",
+        "\\DZ\\gear\\navigation\\data\\map_waterspring_ca.paa",
+        "\\DZ\\gear\\navigation\\data\\map_watertower_ca.paa",
+    }; // TODO
+    ref array<ITEM_CarimMapServerMarkerData> serverMarkers = new array<ITEM_CarimMapServerMarkerData>; // TODO
+}
+
+class ITEM_CarimMapServerMarkerData extends ITEM_DataBase {
+    string text;
+    vector position;
+    int icon = 0;
+    int color = CarimColor.RED_500;
+    int textColor = CarimColor.WHITE;
+    bool visible3d = true;
+    int distanceHideGreaterThan = -1;
+    bool requireLineOfSight = false;
+}
+
+class ITEM_CarimNametagData {
+    bool enabled = true;
+    ref array<ITEM_CarimNametagZoneData> zones = new array<ITEM_CarimNametagZoneData>; // TODO
+}
+
+class ITEM_CarimNametagZoneData {
+    vector center;
+    int radius;
+    int colorText = CarimColor.WHITE;
+    bool showHealth = true;
+    int icon = 0;
+    bool showDistance = true;
+    bool requireLineOfSight = false;
+    int distanceHideGreaterThan = -1;
 }
 
 class ITEM_CarimPartyData extends ITEM_DataBase {

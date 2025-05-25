@@ -92,6 +92,25 @@ modded class CfgGameplayHandler {
         return m_Data.CarimData.CarimMapData.requireLineOfSight;
     }
 
+    static array<string> GetCarimMapIcons() {
+        return m_Data.CarimData.CarimMapData.icons;
+    }
+
+    static array<ITEM_CarimMapServerMarkerData> GetCarimMapServerMarkers() {
+        // TODO: don't return the raw ITEM_ object
+        return m_Data.CarimData.CarimMapData.serverMarkers;
+    }
+
+    // Nametag
+    static bool GetCarimNametagEnabled() {
+        return m_Data.CarimData.CarimNametagData.enabled;
+    }
+
+    static array<ITEM_CarimNametagZoneData> GetCarimNametagZones() {
+        // TODO: don't return the raw ITEM_ object
+        return m_Data.CarimData.CarimNametagData.zones;
+    }
+
     // Party
     static bool GetCarimPartyEnabled() {
         return m_Data.CarimData.CarimPartyData.enabled;
