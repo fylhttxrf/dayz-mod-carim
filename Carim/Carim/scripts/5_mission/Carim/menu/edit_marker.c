@@ -66,15 +66,27 @@ class CarimMenuEditMarker extends Managed {
             icon.LoadImageFile(0, imageFile);
             icon.SetColor(marker.GetMarkerColor());
 
+            visible3d.SetChecked(marker.carimVisible3d);
+            if (marker.carimHideGreaterThan >= 0) {
+                distance.SetCurrent(marker.carimHideGreaterThan);
+                distanceLabel.SetText(marker.carimHideGreaterThan.ToString() + "m");
+            } else {
+                distance.SetCurrent(10000);
+                distanceLabel.SetText("unlimited");
+            }
+
             root.SetPos(x, y);
             root.Show(visible);
         }
     }
 
     bool OnChange(Widget w) {
-        // TODO: call into here from handler
         if (w == distance) {
-            distanceLabel.SetText(distance.GetCurrent().ToString());
+            if (distance.GetCurrent() >= 10000) {
+                distanceLabel.SetText("unlimited");
+            } else {
+                distanceLabel.SetText(distance.GetCurrent().ToString() + "m");
+            }
             return true;
         }
 
@@ -98,6 +110,12 @@ class CarimMenuEditMarker extends Managed {
                 marker.CarimSetMarkerText(text.GetText());
                 marker.CarimSetMarkerIcon(currentIcon);
                 marker.CarimSetMarkerColor(icon.GetColor());
+                marker.CarimSetMarkerVisible3d(visible3d.IsChecked());
+                if (distance.GetCurrent() >= 10000) {
+                    marker.CarimSetMarkerHideGreaterThan(-1);
+                } else {
+                    marker.CarimSetMarkerHideGreaterThan(distance.GetCurrent());
+                }
                 mission.carimModelMapMarkers.Persist();
                 Hide();
                 break;
@@ -108,7 +126,7 @@ class CarimMenuEditMarker extends Managed {
                 break;
             case previous:
                 CarimLogging.Trace(this, "Previous " + currentIcon.ToString());
-                currentIcon = (currentIcon - 1) % eMapMarkerTypes.MARKERTYPE_MAX;
+                currentIcon = (currentIcon - 1 + eMapMarkerTypes.MARKERTYPE_MAX) % eMapMarkerTypes.MARKERTYPE_MAX;
                 imageFile = MapMarkerTypes.GetMarkerTypeFromID(currentIcon);
                 imageFile.Replace("\\DZ", "DZ");
                 icon.LoadImageFile(0, imageFile);
@@ -165,7 +183,7 @@ class CarimMenuEditMarker extends Managed {
 
         // Figure out the scaling based on the size defined in the layout
         float scaleX = panelWidth / 376;
-        float scaleY = panelHeight / 172;
+        float scaleY = panelHeight / 212;
 
         ButtonWidget button;
         array<ref ButtonWidget> buttons = new array<ref ButtonWidget>;

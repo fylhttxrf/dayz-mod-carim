@@ -71,4 +71,17 @@ modded class MapHandler {
 
         return true;
     }
+
+    override bool OnChange(Widget w, int x, int y, bool finished) {
+        if (!CarimEnabled.Map()) {
+            return super.OnChange(w, x, y, finished);
+        }
+        super.OnChange(w, x, y, finished);
+
+        if (carimMenuEditMarker && carimMenuEditMarker.visible) {
+            carimMenuEditMarker.OnChange(w);
+        }
+
+        return true;
+    }
 }

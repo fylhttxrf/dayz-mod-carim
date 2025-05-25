@@ -105,6 +105,14 @@ class CarimMapMarker extends MapMarker {
         m_Color = color;
     }
 
+    void CarimSetMarkerVisible3d(bool visible) {
+        carimVisible3d = visible;
+    }
+
+    void CarimSetMarkerHideGreaterThan(int hideGreaterThan) {
+        carimHideGreaterThan = hideGreaterThan;
+    }
+
     string CarimRepr() {
         return string.Format("%1<%2, %3>", ClassName(), carimPlayerId, GetMarkerPos(), CarimGetHealthLevel());
     }
