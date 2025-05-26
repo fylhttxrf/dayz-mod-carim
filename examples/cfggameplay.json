@@ -1,0 +1,174 @@
+{
+    "version": 122,
+    "GeneralData": {
+        "disableBaseDamage": false,
+        "disableContainerDamage": false,
+        "disableRespawnDialog": false,
+        "disableRespawnInUnconsciousness": false
+    },
+    "PlayerData": {
+        "disablePersonalLight": false,
+        "StaminaData": {
+            "sprintStaminaModifierErc": 0,
+            "sprintStaminaModifierCro": 0,
+            "staminaWeightLimitThreshold": 60000,
+            "staminaMax": 100,
+            "staminaKgToStaminaPercentPenalty": 0,
+            "staminaMinCap": 100,
+            "sprintSwimmingStaminaModifier": 0,
+            "sprintLadderStaminaModifier": 0,
+            "meleeStaminaModifier": 0,
+            "obstacleTraversalStaminaModifier": 0,
+            "holdBreathStaminaModifier": 0
+        },
+        "ShockHandlingData": {
+            "shockRefillSpeedConscious": 5.0,
+            "shockRefillSpeedUnconscious": 1.0,
+            "allowRefillSpeedModifier": true
+        },
+        "MovementData": {
+            "timeToStrafeJog": 0.1,
+            "rotationSpeedJog": 0.3,
+            "timeToSprint": 0.45,
+            "timeToStrafeSprint": 0.3,
+            "rotationSpeedSprint": 0.15,
+            "allowStaminaAffectInertia": true
+        },
+        "DrowningData": {
+            "staminaDepletionSpeed": 10.0,
+            "healthDepletionSpeed": 10.0,
+            "shockDepletionSpeed": 10.0
+        }
+    },
+    "WorldsData": {
+        "lightingConfig": 0,
+        "objectSpawnersArr": [],
+        "environmentMinTemps": [
+            -3,
+            -2,
+            0,
+            4,
+            9,
+            14,
+            18,
+            17,
+            13,
+            11,
+            9,
+            0
+        ],
+        "environmentMaxTemps": [
+            3,
+            5,
+            7,
+            14,
+            19,
+            24,
+            26,
+            25,
+            18,
+            14,
+            10,
+            5
+        ],
+        "wetnessWeightModifiers": [
+            1.0,
+            1.0,
+            1.33,
+            1.66,
+            2.0
+        ]
+    },
+    "BaseBuildingData": {
+        "HologramData": {
+            "disableIsCollidingBBoxCheck": false,
+            "disableIsCollidingPlayerCheck": false,
+            "disableIsClippingRoofCheck": false,
+            "disableIsBaseViableCheck": false,
+            "disableIsCollidingGPlotCheck": false,
+            "disableIsCollidingAngleCheck": false,
+            "disableIsPlacementPermittedCheck": false,
+            "disableHeightPlacementCheck": false,
+            "disableIsUnderwaterCheck": false,
+            "disableIsInTerrainCheck": false,
+            "disableColdAreaBuildingCheck": false,
+            "disallowedTypesInUnderground": [
+                "FenceKit",
+                "TerritoryFlagKit",
+                "WatchtowerKit"
+            ]
+        },
+        "ConstructionData": {
+            "disablePerformRoofCheck": false,
+            "disableIsCollidingCheck": false,
+            "disableDistanceCheck": false
+        }
+    },
+    "UIData": {
+        "use3DMap": false,
+        "HitIndicationData": {
+            "hitDirectionOverrideEnabled": false,
+            "hitDirectionBehaviour": 1,
+            "hitDirectionStyle": 0,
+            "hitDirectionIndicatorColorStr": "0xffbb0a1e",
+            "hitDirectionMaxDuration": 2.0,
+            "hitDirectionBreakPointRelative": 0.2,
+            "hitDirectionScatter": 10.0,
+            "hitIndicationPostProcessEnabled": true
+        }
+    },
+    "MapData": {
+        "ignoreMapOwnership": true,
+        "ignoreNavItemsOwnership": true,
+        "displayPlayerPosition": true,
+        "displayNavInfo": true
+    },
+    "VehicleData": {
+        "boatDecayMultiplier": 1
+    },
+    "CarimData": {
+        "adminIds": [
+            "zTKwmDQf58g_uIytKXy7b9_6krslfdayMjuyAhh1Tjs="
+        ],
+        "CarimMapData": {
+            "enabled": true,
+            "icons": [
+                "\\DZ\\animals\\Data\\mapicon_animals_ca.paa"
+            ],
+            "serverMarkers": [
+                {
+                    "text": "server marker using custom icon",
+                    "position": [
+                        5345,
+                        110,
+                        3262
+                    ],
+                    "icon": 40,
+                    "color": -5317,
+                    "textColor": -769226,
+                    "visible3d": true,
+                    "distanceHideGreaterThan": -1,
+                    "requireLineOfSight": false
+                }
+            ]
+        },
+        "CarimNametagData": {
+            "enabled": true,
+            "zones": [
+                {
+                    "center": [
+                        5345,
+                        110,
+                        3262
+                    ],
+                    "radius": 10000,
+                    "colorText": -769226,
+                    "showHealth": false,
+                    "showDistance": false,
+                    "requireLineOfSight": true,
+                    "distanceHideGreaterThan": 20
+                }
+            ]
+        }
+    }
+}

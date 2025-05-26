@@ -96,8 +96,7 @@ modded class CfgGameplayHandler {
         return m_Data.CarimData.CarimMapData.icons;
     }
 
-    static array<ITEM_CarimMapServerMarkerData> GetCarimMapServerMarkers() {
-        // TODO: don't return the raw ITEM_ object
+    static array<ref CarimMapServerMarkerData> GetCarimMapServerMarkers() {
         return m_Data.CarimData.CarimMapData.serverMarkers;
     }
 
@@ -106,8 +105,7 @@ modded class CfgGameplayHandler {
         return m_Data.CarimData.CarimNametagData.enabled;
     }
 
-    static array<ITEM_CarimNametagZoneData> GetCarimNametagZones() {
-        // TODO: don't return the raw ITEM_ object
+    static array<ref CarimNametagZoneData> GetCarimNametagZones() {
         return m_Data.CarimData.CarimNametagData.zones;
     }
 

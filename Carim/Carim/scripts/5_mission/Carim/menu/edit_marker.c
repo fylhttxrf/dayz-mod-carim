@@ -68,6 +68,7 @@ class CarimMenuEditMarker extends Managed {
             imageFile.Replace("\\DZ", "DZ");
             icon.LoadImageFile(0, imageFile);
             icon.SetColor(marker.GetMarkerColor());
+            currentIcon = marker.GetMarkerIcon();
 
             visible3d.SetChecked(marker.carimVisible3d);
             if (marker.carimHideGreaterThan >= 0) {
@@ -106,6 +107,8 @@ class CarimMenuEditMarker extends Managed {
 
         string imageFile;
 
+        int maxIconIndex = eMapMarkerTypes.MARKERTYPE_MAX + MapMarkerTypes.carimAdditionalIndex;
+
         switch (w) {
             case cancel:
                 CarimLogging.Trace(this, "Cancel");
@@ -132,14 +135,14 @@ class CarimMenuEditMarker extends Managed {
                 break;
             case previous:
                 CarimLogging.Trace(this, "Previous " + currentIcon.ToString());
-                currentIcon = (currentIcon - 1 + eMapMarkerTypes.MARKERTYPE_MAX) % eMapMarkerTypes.MARKERTYPE_MAX;
+                currentIcon = (currentIcon - 1 + maxIconIndex) % maxIconIndex;
                 imageFile = MapMarkerTypes.GetMarkerTypeFromID(currentIcon);
                 imageFile.Replace("\\DZ", "DZ");
                 icon.LoadImageFile(0, imageFile);
                 break;
             case next:
                 CarimLogging.Trace(this, "Next " + currentIcon.ToString());
-                currentIcon = (currentIcon + 1) % eMapMarkerTypes.MARKERTYPE_MAX;
+                currentIcon = (currentIcon + 1) % maxIconIndex;
                 imageFile = MapMarkerTypes.GetMarkerTypeFromID(currentIcon);
                 imageFile.Replace("\\DZ", "DZ");
                 icon.LoadImageFile(0, imageFile);

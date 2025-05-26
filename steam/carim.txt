@@ -32,6 +32,10 @@ Provides an in-game map for saving markers and viewing party members. Open with 
 
 To apply a nicer style than vanilla with additional locations, you can use [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3483791557]the CarimMapStyle mod[/url].
 
+[h2]Nametags[/h2]
+[hr][/hr]
+Provides ability to configure zones to display player nametags by specifying a position and radius.
+
 [h2]Party[/h2]
 [hr][/hr]
 Allows creation of parties and displaying of nametags of party members. There is no party size limit.

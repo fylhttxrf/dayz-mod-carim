@@ -18,8 +18,8 @@ modded class MissionGameplay {
     override void OnInit() {
         super.OnInit();
 
-        MapMarkerTypes.CarimInit();
         CarimInit();
+        MapMarkerTypes.CarimInit();
     }
 
     void CarimInit() {
