@@ -65,10 +65,10 @@ class CarimMapServerMarkerData {
     vector position;
     int icon = 0;
     int color = CarimColor.RED_500;
-    int textColor = CarimColor.WHITE;
+    int textColor = CarimColor.WHITE; // TODO
     bool visible3d = true;
     int distanceHideGreaterThan = -1;
-    bool requireLineOfSight = false;
+    bool requireLineOfSight = false; // TODO
 }
 
 class ITEM_CarimNametagData extends ITEM_DataBase {

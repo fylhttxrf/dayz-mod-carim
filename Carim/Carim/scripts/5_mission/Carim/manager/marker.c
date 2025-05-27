@@ -1,6 +1,8 @@
 class CarimManagerMarker extends Managed {
     // Local
     ref CarimModelMapMarkers marks;
+    ref CarimModelStaticMarkers staticMarks;
+    ref CarimModelStaticOverrideMarkers staticOverrides;
     ref CarimModelPartyPings pings;
 
     // Server
@@ -12,11 +14,13 @@ class CarimManagerMarker extends Managed {
     ref array<ref CarimMenuMarker> menus = new array<ref CarimMenuMarker>;
     ref array<ref CarimMenuPartyList> listMenus = new array<ref CarimMenuPartyList>;
 
-    void CarimManagerMarker(CarimModelPartyPings iPings, CarimModelMapMarkers iMarks, CarimModelPartyMarkers iServerMarkers, CarimModelPartyPositions iPositions, CarimModelPartyRegistrations iRegistrations) {
+    void CarimManagerMarker(CarimModelPartyPings iPings, CarimModelMapMarkers iMarks, CarimModelPartyMarkers iServerMarkers, CarimModelPartyPositions iPositions, CarimModelStaticMarkers iStaticMarkers, CarimModelStaticOverrideMarkers iStaticOverrideMarkers, CarimModelPartyRegistrations iRegistrations) {
         pings = iPings;
         marks = iMarks;
         serverMarkers = iServerMarkers;
         positions = iPositions;
+        staticMarks = iStaticMarkers;
+        staticOverrides = iStaticOverrideMarkers;
         registrations = iRegistrations;
 
         GetGame().GetCallQueue(CALL_CATEGORY_GUI).CallLater(this.SyncMenus, 10000, true);
@@ -68,6 +72,18 @@ class CarimManagerMarker extends Managed {
         int hideGreaterThan;
         bool showDistance;
         bool requireLineOfSight;
+        if (CarimEnabled.Map()) {
+            // Local markers
+            textColor = CfgGameplayHandler.GetCarimMapColorText();
+            hideLessThan = CfgGameplayHandler.GetCarimMapDistanceHideLessThan();
+            hideGreaterThan = CfgGameplayHandler.GetCarimMapDistanceHideGreaterThan();
+            showDistance = CfgGameplayHandler.GetCarimMapShowDistance();
+            requireLineOfSight = CfgGameplayHandler.GetCarimMapRequireLineOfSight();
+            index = Sync(marks, index, textColor, hideLessThan, hideGreaterThan, showDistance, requireLineOfSight);
+            // Server configured markers
+            index = Sync(staticMarks, index, textColor, hideLessThan, hideGreaterThan, showDistance, requireLineOfSight);
+            index = Sync(staticOverrides, index, textColor, hideLessThan, hideGreaterThan, showDistance, requireLineOfSight);
+        }
         if (CarimEnabled.Party()) {
             // Local pings
             textColor = CfgGameplayHandler.GetCarimPartyColorPingTextLocal();
@@ -90,14 +106,6 @@ class CarimManagerMarker extends Managed {
             index = Sync(positions, index, textColor, hideLessThan, hideGreaterThan, showDistance, requireLineOfSight);
 
             SyncList(positions, textColor, hideLessThan, hideGreaterThan);
-        }
-        if (CarimEnabled.Map()) {
-            textColor = CfgGameplayHandler.GetCarimMapColorText();
-            hideLessThan = CfgGameplayHandler.GetCarimMapDistanceHideLessThan();
-            hideGreaterThan = CfgGameplayHandler.GetCarimMapDistanceHideGreaterThan();
-            showDistance = CfgGameplayHandler.GetCarimMapShowDistance();
-            requireLineOfSight = CfgGameplayHandler.GetCarimMapRequireLineOfSight();
-            index = Sync(marks, index, textColor, hideLessThan, hideGreaterThan, showDistance, requireLineOfSight);
         }
 
         for (int i = menus.Count() - 1; i >= index; --i) {

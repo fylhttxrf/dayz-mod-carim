@@ -27,6 +27,8 @@ class CarimMenuMap extends MapMenu {
         CarimLoadMapMarkers(mission.carimModelPartyPings);
         CarimLoadMapMarkers(mission.carimModelPartyMarkers);
         CarimLoadMapMarkers(mission.carimModelPartyPositions);
+        CarimLoadMapMarkers(mission.carimModelStaticMarkers);
+        CarimLoadMapMarkers(mission.carimModelStaticOverrideMarkers);
     }
 
     void CarimLoadMapMarkers(CarimModelAbcMarkers markers) {
