@@ -24,6 +24,10 @@ class CarimModelAbcSerializers extends Managed {
                 auto data4 = CarimModelPartyRegistrations.Cast(target);
                 return JsonFileLoader<CarimModelPartyRegistrations>.LoadFile(data4.Path(), data4, error);
                 break;
+            case "CarimModelStaticOverrideMarkers":
+                auto data5 = CarimModelStaticOverrideMarkers.Cast(target);
+                return JsonFileLoader<CarimModelStaticOverrideMarkers>.LoadFile(data5.Path(), data5, error);
+                break;
         }
         error = "Unknown serializer type";
         return false;
@@ -50,6 +54,10 @@ class CarimModelAbcSerializers extends Managed {
             case "CarimModelPartyRegistrations":
                 auto data4 = CarimModelPartyRegistrations.Cast(target);
                 return JsonFileLoader<CarimModelPartyRegistrations>.SaveFile(data4.Path(), data4, error);
+                break;
+            case "CarimModelStaticOverrideMarkers":
+                auto data5 = CarimModelStaticOverrideMarkers.Cast(target);
+                return JsonFileLoader<CarimModelStaticOverrideMarkers>.SaveFile(data5.Path(), data5, error);
                 break;
         }
         error = "Unknown serializer type";

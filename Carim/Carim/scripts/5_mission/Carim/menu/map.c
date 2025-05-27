@@ -27,14 +27,25 @@ class CarimMenuMap extends MapMenu {
         CarimLoadMapMarkers(mission.carimModelPartyPings);
         CarimLoadMapMarkers(mission.carimModelPartyMarkers);
         CarimLoadMapMarkers(mission.carimModelPartyPositions);
-        CarimLoadMapMarkers(mission.carimModelStaticMarkers);
-        CarimLoadMapMarkers(mission.carimModelStaticOverrideMarkers);
+        CarimLoadMapMarkersWithOverrides(mission.carimModelStaticMarkers, mission.carimModelStaticOverrideMarkers);
     }
 
     void CarimLoadMapMarkers(CarimModelAbcMarkers markers) {
+        CarimLoadMapMarkersWithOverrides(markers, null);
+    }
+
+    void CarimLoadMapMarkersWithOverrides(CarimModelAbcMarkers markers, CarimModelAbcMarkers overrides) {
         foreach(array<ref CarimMapMarker> markerArray : markers.markers) {
             foreach(CarimMapMarker marker : markerArray) {
-                m_MapWidgetInstance.AddUserMark(marker.GetMarkerPos(), marker.GetMarkerText(), marker.GetMarkerColor(), MapMarkerTypes.GetMarkerTypeFromID(marker.GetMarkerIcon()));
+                auto markerToAdd = marker;
+                // Check if override is present
+                if (overrides) {
+                    auto potentialOverride = overrides.GetClosest(marker);
+                    if (potentialOverride && potentialOverride.GetMarkerPos() == marker.GetMarkerPos()) {
+                        markerToAdd = potentialOverride;
+                    }
+                }
+                m_MapWidgetInstance.AddUserMark(markerToAdd.GetMarkerPos(), markerToAdd.GetMarkerText(), markerToAdd.GetMarkerColor(), MapMarkerTypes.GetMarkerTypeFromID(markerToAdd.GetMarkerIcon()));
             }
         }
     }

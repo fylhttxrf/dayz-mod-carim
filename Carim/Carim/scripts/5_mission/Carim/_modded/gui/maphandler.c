@@ -39,13 +39,38 @@ modded class MapHandler {
                 break;
             case MouseState.RIGHT:
                 // Edit marker
+                CarimLogging.Trace(this, "Searching for marker to edit");
+                CarimModelAbcMarkers markerGroup = mission.carimModelMapMarkers;
                 auto existingMarker = mission.carimModelMapMarkers.GetClosest(marker);
+                if (!existingMarker) {
+                    CarimLogging.Trace(this, "Map marker not found, searching static markers");
+                    marker.carimPlayerId = CarimUtil.GetServerIdentifier();
+                    existingMarker = mission.carimModelStaticMarkers.GetClosest(marker);
+                    if (existingMarker) {
+                        CarimLogging.Trace(this, "Static marker found, checking if override is present");
+                        // Check if override is present
+                        auto potentialOverride = mission.carimModelStaticMarkers.overrides.GetClosest(marker);
+                        if (potentialOverride && potentialOverride.GetMarkerPos() == existingMarker.GetMarkerPos()) {
+                            CarimLogging.Trace(this, "Override present");
+                            existingMarker = potentialOverride;
+                        } else {
+                            CarimLogging.Trace(this, "Override not found; creating new");
+                            auto copyValuesFrom = existingMarker;
+                            existingMarker = new CarimMapMarker("0 0 0", "", 0, 0);
+                            existingMarker.CarimCopyValues(copyValuesFrom);
+                        }
+                        markerGroup = mission.carimModelStaticMarkers.overrides;
+                    }
+                } else {
+                    CarimLogging.Trace(this, "Found map marker");
+                }
                 if (existingMarker) {
                     CarimLogging.Debug(this, "Open MenuEditMarker");
                     if (!carimMenuEditMarker) {
-                        carimMenuEditMarker = new CarimMenuEditMarker(existingMarker, x, y);
+                        carimMenuEditMarker = new CarimMenuEditMarker(markerGroup, existingMarker, x, y);
                         m_Root.AddChild(carimMenuEditMarker.root);
                     }
+                    carimMenuEditMarker.markerGroup = markerGroup;
                     carimMenuEditMarker.marker = existingMarker;
                     carimMenuEditMarker.x = x;
                     carimMenuEditMarker.y = y;

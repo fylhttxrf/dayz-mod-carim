@@ -2,6 +2,7 @@ class CarimMenuEditMarker extends Managed {
     // This value should correspond to what's in the edit_marker.layout
     static const int MAX_DISTANCE = 6000;
 
+    ref CarimModelAbcMarkers markerGroup;
     ref CarimMapMarker marker;
     int x;
     int y;
@@ -24,7 +25,8 @@ class CarimMenuEditMarker extends Managed {
 
     ref array<ref ButtonWidget> colorButtons;
 
-    void CarimMenuEditMarker(CarimMapMarker iMarker, int iX, int iY) {
+    void CarimMenuEditMarker(CarimModelAbcMarkers iMarkerGroup, CarimMapMarker iMarker, int iX, int iY) {
+        markerGroup = iMarkerGroup;
         marker = iMarker;
         x = iX;
         y = iY;
@@ -103,8 +105,6 @@ class CarimMenuEditMarker extends Managed {
     bool OnClick(Widget w) {
         CarimLogging.Trace(this, "OnClick");
 
-        auto mission = MissionGameplay.Cast(GetGame().GetMission());
-
         string imageFile;
 
         int maxIconIndex = eMapMarkerTypes.MARKERTYPE_MAX + MapMarkerTypes.carimAdditionalIndex;
@@ -125,12 +125,19 @@ class CarimMenuEditMarker extends Managed {
                 } else {
                     marker.CarimSetMarkerHideGreaterThan(distance.GetCurrent());
                 }
-                mission.carimModelMapMarkers.Persist();
+
+                // Check if marker needs added
+                auto existingMarker = markerGroup.GetClosest(marker);
+                if (!existingMarker || existingMarker.GetMarkerPos() != marker.GetMarkerPos()) {
+                    markerGroup.Add(marker);
+                } else {
+                    markerGroup.Persist();
+                }
                 Hide();
                 break;
             case deleteButton:
                 CarimLogging.Trace(this, "Delete");
-                mission.carimModelMapMarkers.Remove(marker);
+                markerGroup.Remove(marker);
                 Hide();
                 break;
             case previous:
