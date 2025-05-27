@@ -1,4 +1,11 @@
 class CarimUtil {
+    static string GetServerIdentifier() {
+        string address;
+        int port;
+        GetGame().GetHostAddress(address, port);
+        return string.Format("%1:%2", address, port);
+    }
+
     static bool CheckInput(string inputName) {
         UAInput inp = GetUApi().GetInputByName(inputName);
         if (inp && inp.LocalPress()) {
@@ -39,5 +46,13 @@ class CarimUtil {
             }
         }
         return "";
+    }
+
+    static array<PlayerBase> GetClientPlayerBases() {
+        array<PlayerBase> players = new array<PlayerBase>;
+        foreach(Man m : ClientData.m_PlayerBaseList) {
+            players.Insert(PlayerBase.Cast(m));
+        }
+        return players;
     }
 }

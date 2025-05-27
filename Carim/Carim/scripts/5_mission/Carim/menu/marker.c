@@ -88,7 +88,7 @@ class CarimMenuMarker extends UIScriptedMenu {
         IngameHud hud = IngameHud.Cast(mission.GetHud());
         bool hudHid = hud && hud.GetHudVisibility().IsContextFlagActive(IngameHudVisibility.HUD_HIDE_FLAGS);
         carimDistance.Show(carimShowDistance);
-        layoutRoot.Show(!hudHid && CarimVisibleOnScreen());
+        layoutRoot.Show(!hudHid && CarimVisibleOnScreen() && carimMarker.carimVisible3d);
     }
 
     bool CarimVisibleOnScreen() {
@@ -125,6 +125,9 @@ class CarimMenuMarker extends UIScriptedMenu {
             canSeeBasedOnDistance = false;
         }
         if (carimHideGreaterThan >= 0 && distance >= carimHideGreaterThan) {
+            canSeeBasedOnDistance = false;
+        }
+        if (carimMarker.carimHideGreaterThan >= 0 && distance >= carimMarker.carimHideGreaterThan) {
             canSeeBasedOnDistance = false;
         }
         return canSeeBasedOnDistance;

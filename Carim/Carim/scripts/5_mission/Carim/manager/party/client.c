@@ -45,7 +45,7 @@ class CarimManagerPartyClient extends Managed {
     }
 
     void UpdatePositionsWithLocalPlayers() {
-        auto players = GetClientPlayerBases();
+        auto players = CarimUtil.GetClientPlayerBases();
         foreach(PlayerBase player : players) {
             if (player && player.GetIdentity() && player.IsAlive()) {
                 string id = CarimUtil.GetIdentifier(player.GetIdentity());
@@ -142,13 +142,5 @@ class CarimManagerPartyClient extends Managed {
             return contactPos;
         }
         return vector.Zero;
-    }
-
-    static array<PlayerBase> GetClientPlayerBases() {
-        array<PlayerBase> players = new array<PlayerBase>;
-        foreach(Man m : ClientData.m_PlayerBaseList) {
-            players.Insert(PlayerBase.Cast(m));
-        }
-        return players;
     }
 }

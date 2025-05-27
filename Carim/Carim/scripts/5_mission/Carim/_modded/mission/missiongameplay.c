@@ -13,13 +13,16 @@ modded class MissionGameplay {
     ref CarimModelPartyMarkers carimModelPartyMarkers;
     ref CarimModelPartyPositions carimModelPartyPositions;
 
+    ref CarimModelStaticMarkers carimModelStaticMarkers;
+    ref CarimModelStaticOverrideMarkers carimModelStaticOverrideMarkers;
+
     ref CarimModelPartyRegistrations carimModelPartyRegistrations;
 
     override void OnInit() {
         super.OnInit();
 
-        MapMarkerTypes.CarimInit();
         CarimInit();
+        MapMarkerTypes.CarimInit();
     }
 
     void CarimInit() {
@@ -63,7 +66,11 @@ modded class MissionGameplay {
 
         if (!carimManagerMarker) {
             // Manager
-            carimManagerMarker = new CarimManagerMarker(carimModelPartyPings, carimModelMapMarkers, carimModelPartyMarkers, carimModelPartyPositions, carimModelPartyRegistrations);
+            carimModelStaticOverrideMarkers = new CarimModelStaticOverrideMarkers;
+            carimModelStaticOverrideMarkers.Load();
+            carimModelStaticMarkers = CarimModelStaticMarkers.GetFromConfig(carimModelStaticOverrideMarkers);
+
+            carimManagerMarker = new CarimManagerMarker(carimModelPartyPings, carimModelMapMarkers, carimModelPartyMarkers, carimModelPartyPositions, carimModelStaticMarkers, carimModelPartyRegistrations);
         }
     }
 

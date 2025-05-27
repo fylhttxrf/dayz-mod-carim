@@ -7,11 +7,12 @@ class ITEM_CarimData extends ITEM_DataBase {
     ref ITEM_CarimChatData CarimChatData = new ITEM_CarimChatData;
     ref ITEM_CarimCompassData CarimCompassData = new ITEM_CarimCompassData;
     ref ITEM_CarimMapData CarimMapData = new ITEM_CarimMapData;
+    ref ITEM_CarimNametagData CarimNametagData = new ITEM_CarimNametagData;
     ref ITEM_CarimPartyData CarimPartyData = new ITEM_CarimPartyData;
 
     bool initialized = false;
     ref array<string> adminIds;
-    bool useSteamId = false;
+    bool useSteamId = false; // TODO
 
     override bool ValidateServer() {
         // Use initialize to determine if the data has been loaded
@@ -55,6 +56,31 @@ class ITEM_CarimMapData extends ITEM_DataBase {
     int distanceHideGreaterThan = -1;
     bool showDistance = true;
     bool requireLineOfSight = false;
+    ref array<string> icons = {};
+    ref array<ref CarimMapServerMarkerData> serverMarkers = {};
+}
+
+class CarimMapServerMarkerData {
+    string text;
+    vector position;
+    int icon;
+    int color;
+    bool visible3d;
+    int distanceHideGreaterThan;
+}
+
+class ITEM_CarimNametagData extends ITEM_DataBase {
+    bool enabled = true;
+    ref array<ref CarimNametagZoneData> zones = {};
+}
+
+class CarimNametagZoneData {
+    vector center;
+    int radius;
+    int colorText;
+    bool showDistance;
+    bool requireLineOfSight;
+    int distanceHideGreaterThan;
 }
 
 class ITEM_CarimPartyData extends ITEM_DataBase {
