@@ -157,7 +157,11 @@ class CarimManagerMarker extends Managed {
                         markerToAdd = potentialOverride;
                     }
                 }
+#ifdef DIAG_DEVELOPER
                 CarimLogging.Debug(this, string.Format("Adding %1: <%2, %3, %4> at index %5", markers.ClassName(), markerToAdd.carimPlayerId, markerToAdd.GetMarkerText(), markerToAdd.GetMarkerPos(), index));
+#else
+                CarimLogging.Debug(this, string.Format("Adding marker at index %1", index));
+#endif
                 if (menus.Count() <= index) {
                     CarimLogging.Trace(this, "Creating new");
                     auto menu = new CarimMenuMarker(markerToAdd, textColor, hideLessThan, hideGreaterThan, showDistance, requireLineOfSight);
