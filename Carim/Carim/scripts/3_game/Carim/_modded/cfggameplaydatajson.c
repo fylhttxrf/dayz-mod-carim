@@ -57,30 +57,30 @@ class ITEM_CarimMapData extends ITEM_DataBase {
     bool showDistance = true;
     bool requireLineOfSight = false;
     ref array<string> icons = {};
-    ref array<ref CarimMapServerMarkerData> serverMarkers;
+    ref array<ref CarimMapServerMarkerData> serverMarkers = {};
 }
 
 class CarimMapServerMarkerData {
     string text;
     vector position;
-    int icon = 0;
-    int color = CarimColor.RED_500;
-    bool visible3d = true;
-    int distanceHideGreaterThan = -1;
+    int icon;
+    int color;
+    bool visible3d;
+    int distanceHideGreaterThan;
 }
 
 class ITEM_CarimNametagData extends ITEM_DataBase {
     bool enabled = true;
-    ref array<ref CarimNametagZoneData> zones;
+    ref array<ref CarimNametagZoneData> zones = {};
 }
 
 class CarimNametagZoneData {
     vector center;
     int radius;
-    int colorText = CarimColor.WHITE;
-    bool showDistance = true;
-    bool requireLineOfSight = true;
-    int distanceHideGreaterThan = 40;
+    int colorText;
+    bool showDistance;
+    bool requireLineOfSight;
+    int distanceHideGreaterThan;
 }
 
 class ITEM_CarimPartyData extends ITEM_DataBase {

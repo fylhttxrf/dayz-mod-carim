@@ -118,11 +118,13 @@ function Diag-Project {
 }
 
 function Run-Server {
+    $mods = "$localMods\@$mod;$localMods\@${mod}MapStyle"
+
     $workingDir = $serverDir
     if ($Exp) {
         $workingDir = $expServerDir
     }
-    Start-Process -FilePath "$workingDir\DayZServer_x64.exe" -WorkingDirectory "$workingDir" -ArgumentList "-mod=$workshopMods\@CF;$workshopMods\@TraderPlus;$localMods\@SchanaModParty;$localMods\@SchanaModGlobalChat -profiles=$missions\profiles\server -doLogs -config=$missions\serverDZ.cfg -limitFPS=1000"
+    Start-Process -FilePath "$workingDir\DayZServer_x64.exe" -WorkingDirectory "$workingDir" -ArgumentList "-mod=$mods -profiles=$missions\profiles\server -doLogs -config=$missions\serverDZ.cfg -limitFPS=1000"
 }
 
 function Check-Result {
