@@ -47,4 +47,12 @@ class CarimUtil {
         }
         return "";
     }
+
+    static array<PlayerBase> GetClientPlayerBases() {
+        array<PlayerBase> players = new array<PlayerBase>;
+        foreach(Man m : ClientData.m_PlayerBaseList) {
+            players.Insert(PlayerBase.Cast(m));
+        }
+        return players;
+    }
 }

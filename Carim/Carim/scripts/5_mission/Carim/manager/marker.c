@@ -4,6 +4,8 @@ class CarimManagerMarker extends Managed {
     ref CarimModelStaticMarkers staticMarks;
     ref CarimModelPartyPings pings;
 
+    ref CarimModelPartyPositions nametags;
+
     // Server
     ref CarimModelPartyMarkers serverMarkers;
     ref CarimModelPartyPositions positions;
@@ -103,6 +105,34 @@ class CarimManagerMarker extends Managed {
             index = Sync(positions, index, textColor, hideLessThan, hideGreaterThan, showDistance, requireLineOfSight);
 
             SyncList(positions, textColor, hideLessThan, hideGreaterThan);
+        }
+        if (CarimEnabled.Nametag()) {
+            nametags = new CarimModelPartyPositions;
+            auto zones = CfgGameplayHandler.GetCarimNametagZones();
+            auto players = CarimUtil.GetClientPlayerBases();
+            foreach(auto player : players) {
+                bool includeInNametags = false;
+                foreach(auto checkZone : zones) {
+                    if (vector.Distance(player.GetPosition(), checkZone.center) < checkZone.radius) {
+                        includeInNametags = true;
+                    }
+                }
+                if (includeInNametags) {
+                    CarimMapMarker newMarker = new CarimMapMarker("0 0 0", player.GetIdentity().GetName(), 0, 0);
+                    newMarker.carimPlayerId = CarimUtil.GetIdentifier(player.GetIdentity());
+                    newMarker.carimPlayer = player;
+                    nametags.Add(newMarker);
+                }
+            }
+            foreach(auto zone : zones) {
+                textColor = zone.colorText;
+                hideLessThan = -1;
+                hideGreaterThan = zone.distanceHideGreaterThan;
+                showDistance = zone.showDistance;
+                requireLineOfSight = zone.requireLineOfSight;
+
+                index = Sync(nametags, index, textColor, hideLessThan, hideGreaterThan, showDistance, requireLineOfSight);
+            }
         }
 
         for (int i = menus.Count() - 1; i >= index; --i) {
