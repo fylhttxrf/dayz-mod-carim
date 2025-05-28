@@ -138,6 +138,7 @@ The color values are signed integers based on the ARGB bytes, so `0xfffafafa` is
     },
     "CarimCompassData": {
         "enabled": true,
+        "showOnSpawn": true,
         "requireNavItem": false,
         "color": -769226
     },
